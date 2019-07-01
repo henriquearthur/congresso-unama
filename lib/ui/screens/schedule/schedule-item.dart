@@ -38,6 +38,14 @@ class ScheduleItem extends StatelessWidget {
                 )
               ],
             ),
+            Chip(
+              backgroundColor: Colors.blue,
+              padding: EdgeInsets.only(left: 2.0, right: 2.0),
+              label: Text(
+                '3º Congresso Nacional das Engenharias',
+                style: TextStyle(fontSize: 10.0),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Row(
@@ -82,7 +90,7 @@ class ScheduleItem extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

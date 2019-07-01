@@ -2,6 +2,34 @@ import 'package:congresso_unama/ui/screens/schedule/schedule-day.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleScreen extends StatelessWidget {
+  void _filterSchedule(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                  leading: new Icon(Icons.location_city),
+                  title: new Text('Arquitetura e Urbanismo'),
+                  onTap: () => {},
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.build),
+                  title: new Text('Engenharias'),
+                  onTap: () => {},
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.computer),
+                  title: new Text('Informática'),
+                  onTap: () => {},
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,6 +64,11 @@ class ScheduleScreen extends StatelessWidget {
             ScheduleDay(),
             ScheduleDay(),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.filter_list),
+          backgroundColor: Colors.green,
+          onPressed: () => _filterSchedule(context),
         ),
       ),
     );

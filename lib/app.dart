@@ -18,10 +18,21 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _selectedIndex = 0;
+  Color _currentColor = Colors.green;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+
+      if (index == 0) {
+        _currentColor = Colors.cyan;
+      } else if (index == 1) {
+        _currentColor = Colors.green;
+      } else if (index == 2) {
+        _currentColor = Colors.orange;
+      } else if (index == 3) {
+        _currentColor = Colors.red[300];
+      }
     });
   }
 
@@ -52,6 +63,7 @@ class _AppState extends State<App> {
               elevation: 0.0,
               currentIndex: _selectedIndex,
               onTap: _onItemTapped,
+              selectedItemColor: _currentColor,
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
