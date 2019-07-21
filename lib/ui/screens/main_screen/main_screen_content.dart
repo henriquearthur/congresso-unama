@@ -1,9 +1,9 @@
-import 'package:congresso_unama/ui/screens/explore/architecture-screen.dart';
-import 'package:congresso_unama/ui/screens/explore/computing-screen.dart';
-import 'package:congresso_unama/ui/screens/explore/engineering-screen.dart';
+import 'package:congresso_unama/ui/screens/main_screen/explore/architecture_explore.dart';
+import 'package:congresso_unama/ui/screens/main_screen/explore/computing_explore.dart';
+import 'package:congresso_unama/ui/screens/main_screen/explore/engineering_explore.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,7 +33,7 @@ class MainScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return ArchitectureScreen();
+                          return ArchitectureExplore();
                         }));
                       },
                       child: Hero(
@@ -56,7 +56,7 @@ class MainScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return EngineeringScreen();
+                          return EngineeringExplore();
                         }));
                       },
                       child: Hero(
@@ -79,7 +79,7 @@ class MainScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return ComputingScreen();
+                          return ComputingExplore();
                         }));
                       },
                       child: Hero(

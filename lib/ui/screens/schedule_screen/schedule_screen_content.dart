@@ -1,7 +1,7 @@
-import 'package:congresso_unama/ui/screens/schedule/schedule-day.dart';
+import 'package:congresso_unama/ui/screens/schedule_screen/schedule_day.dart';
 import 'package:flutter/material.dart';
 
-class ScheduleScreen extends StatelessWidget {
+class ScheduleScreenContent extends StatelessWidget {
   void _filterSchedule(context) {
     showModalBottomSheet(
         context: context,

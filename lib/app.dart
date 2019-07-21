@@ -1,28 +1,43 @@
-import 'package:congresso_unama/ui/screens/location/location-screen.dart';
-import 'package:congresso_unama/ui/screens/main/main-screen.dart';
-import 'package:congresso_unama/ui/screens/schedule/schedule-screen.dart';
-import 'package:congresso_unama/ui/screens/undergrads/undergrads-screen.dart';
+import 'package:congresso_unama/ui/destination/destination.dart';
+import 'package:congresso_unama/ui/destination/destination_view.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
-  final List<Widget> screensList = <Widget>[
-    MainScreen(),
-    ScheduleScreen(),
-    UndergradsScreen(),
-    LocationScreen(),
-  ];
-
   @override
   _AppState createState() => _AppState();
 }
 
-class _AppState extends State<App> {
-  int _selectedIndex = 0;
+class _AppState extends State<App> with TickerProviderStateMixin<App> {
+  List<AnimationController> _faders;
+  List<Key> _destinationKeys;
+
+  int _currentIndex = 0;
   Color _currentColor = Colors.green;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _faders =
+        allDestinations.map<AnimationController>((Destination destination) {
+      return AnimationController(
+          vsync: this, duration: Duration(milliseconds: 200));
+    }).toList();
+    _faders[_currentIndex].value = 1.0;
+    _destinationKeys =
+        List<Key>.generate(allDestinations.length, (int index) => GlobalKey())
+            .toList();
+  }
+
+  @override
+  void dispose() {
+    for (AnimationController controller in _faders) controller.dispose();
+    super.dispose();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _currentIndex = index;
 
       if (index == 0) {
         _currentColor = Colors.cyan;
@@ -53,7 +68,31 @@ class _AppState extends State<App> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: widget.screensList.elementAt(_selectedIndex),
+        body: Stack(
+          fit: StackFit.expand,
+          children: allDestinations.map((Destination destination) {
+            final Widget view = FadeTransition(
+              opacity: _faders[destination.index]
+                  .drive(CurveTween(curve: Curves.fastOutSlowIn)),
+              child: KeyedSubtree(
+                key: _destinationKeys[destination.index],
+                child: DestinationView(
+                  destination: destination,
+                ),
+              ),
+            );
+            if (destination.index == _currentIndex) {
+              _faders[destination.index].forward();
+              return view;
+            } else {
+              _faders[destination.index].reverse();
+              if (_faders[destination.index].isAnimating) {
+                return IgnorePointer(child: view);
+              }
+              return Offstage(child: view);
+            }
+          }).toList(),
+        ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ClipRRect(
@@ -61,27 +100,15 @@ class _AppState extends State<App> {
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               elevation: 0.0,
-              currentIndex: _selectedIndex,
+              currentIndex: _currentIndex,
               onTap: _onItemTapped,
               selectedItemColor: _currentColor,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+              items: allDestinations.map((Destination destination) {
+                return BottomNavigationBarItem(
+                  icon: Icon(destination.icon),
                   title: SizedBox.shrink(),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today),
-                  title: SizedBox.shrink(),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
-                  title: SizedBox.shrink(),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.location_on),
-                  title: SizedBox.shrink(),
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ),
         ),

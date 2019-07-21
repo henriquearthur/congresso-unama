@@ -1,7 +1,7 @@
-import 'package:congresso_unama/ui/screens/explore/speaker-item.dart';
+import 'package:congresso_unama/ui/screens/main_screen/explore/speaker_item.dart';
 import 'package:flutter/material.dart';
 
-class ArchitectureScreen extends StatelessWidget {
+class ArchitectureExplore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
