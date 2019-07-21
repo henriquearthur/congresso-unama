@@ -32,7 +32,8 @@ class MainScreenContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
                           return ArchitectureExplore();
                         }));
                       },
@@ -55,7 +56,8 @@ class MainScreenContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
                           return EngineeringExplore();
                         }));
                       },
@@ -78,7 +80,8 @@ class MainScreenContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
                           return ComputingExplore();
                         }));
                       },
