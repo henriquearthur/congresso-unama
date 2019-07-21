@@ -1,5 +1,6 @@
 import 'package:congresso_unama/ui/screens/schedule_screen/schedule_day.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ScheduleScreenContent extends StatelessWidget {
   void _filterSchedule(context) {
@@ -46,15 +47,9 @@ class ScheduleScreenContent extends StatelessWidget {
           bottom: TabBar(
             labelColor: Colors.black,
             tabs: [
-              Tab(
-                text: "Dia 25",
-              ),
-              Tab(
-                text: "Dia 26",
-              ),
-              Tab(
-                text: "Dia 27",
-              ),
+              Tab(text: "Dia 25"),
+              Tab(text: "Dia 26"),
+              Tab(text: "Dia 27"),
             ],
           ),
         ),

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "864917267221",
+    "firebase_url": "https://congresso-unama.firebaseio.com",
+    "project_id": "congresso-unama",
+    "storage_bucket": "congresso-unama.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864917267221:android:ceea7a16c1a8536f",
+        "android_client_info": {
+          "package_name": "com.hnrq.congresso_unama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864917267221-vivdgilasjl1sv7vuco5prnl24u3cba4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG4IHDx29bO1jyyvrJzq5hoVAHK730wXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864917267221-vivdgilasjl1sv7vuco5prnl24u3cba4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
