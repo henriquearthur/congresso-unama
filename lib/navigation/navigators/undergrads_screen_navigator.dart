@@ -1,10 +1,16 @@
-import 'package:congresso_unama/ui/screens/location_screen/location_screen_content.dart';
+import 'package:congresso_unama/ui/screens/undergrads_screen/undergrads_default_screen.dart';
 import 'package:flutter/material.dart';
 
-class LocationScreen extends StatelessWidget {
+class UndergradsScreenNavigator extends StatelessWidget {
+  final Key navigatorKey;
+
+  const UndergradsScreenNavigator({Key key, this.navigatorKey})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      key: navigatorKey,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
@@ -13,7 +19,7 @@ class LocationScreen extends StatelessWidget {
 
             switch (settings.name) {
               case '/':
-                screen = LocationScreenContent();
+                screen = UndergradsDefaultScreen();
             }
 
             return screen;

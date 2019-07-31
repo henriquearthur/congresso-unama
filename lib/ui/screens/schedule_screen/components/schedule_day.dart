@@ -1,4 +1,4 @@
-import 'package:congresso_unama/ui/screens/schedule_screen/schedule_item.dart';
+import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_item.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleDay extends StatelessWidget {

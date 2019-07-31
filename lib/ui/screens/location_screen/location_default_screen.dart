@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LocationScreenContent extends StatelessWidget {
+class LocationDefaultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

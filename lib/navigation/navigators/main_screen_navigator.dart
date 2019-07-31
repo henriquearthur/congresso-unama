@@ -1,10 +1,15 @@
-import 'package:congresso_unama/ui/screens/main_screen/main_screen_content.dart';
+import 'package:congresso_unama/ui/screens/main_screen/main_default_screen.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreenNavigator extends StatelessWidget {
+  final Key navigatorKey;
+
+  const MainScreenNavigator({Key key, this.navigatorKey}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      key: navigatorKey,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
@@ -13,7 +18,7 @@ class MainScreen extends StatelessWidget {
 
             switch (settings.name) {
               case '/':
-                screen = MainScreenContent();
+                screen = MainDefaultScreen();
             }
 
             return screen;

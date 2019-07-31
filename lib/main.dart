@@ -1,5 +1,7 @@
-import 'package:congresso_unama/app.dart';
+import 'package:congresso_unama/ui/app.dart';
+import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,9 +11,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'IV Congresso Nacional de Ciências Exatas e Tecnologia',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Styles.primaryColor,
+        primaryColor: Styles.primaryColor,
+        primaryColorDark: Styles.primaryColorDark,
+        fontFamily: Styles.primaryFontFamily,
       ),
       home: App(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('pt', 'BR'), // English
+      ],
+      locale: Locale('pt', 'BR'),
     );
   }
 }

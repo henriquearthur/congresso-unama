@@ -1,9 +1,6 @@
-import 'package:congresso_unama/ui/screens/main_screen/explore/architecture_explore.dart';
-import 'package:congresso_unama/ui/screens/main_screen/explore/computing_explore.dart';
-import 'package:congresso_unama/ui/screens/main_screen/explore/engineering_explore.dart';
 import 'package:flutter/material.dart';
 
-class MainScreenContent extends StatelessWidget {
+class MainDefaultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,7 +15,6 @@ class MainScreenContent extends StatelessWidget {
                 "Explorar",
                 style: TextStyle(
                   color: Colors.grey[700],
-                  fontFamily: "Lato",
                   fontSize: 42.0,
                   fontWeight: FontWeight.w300,
                 ),
@@ -31,12 +27,7 @@ class MainScreenContent extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) {
-                          return ArchitectureExplore();
-                        }));
-                      },
+                      onTap: () {},
                       child: Hero(
                         tag: 'congressoArquitetura',
                         child: Image.asset(
@@ -55,12 +46,7 @@ class MainScreenContent extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) {
-                          return EngineeringExplore();
-                        }));
-                      },
+                      onTap: () {},
                       child: Hero(
                         tag: 'congressoEngenharia',
                         child: Image.asset(
@@ -79,12 +65,7 @@ class MainScreenContent extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) {
-                          return ComputingExplore();
-                        }));
-                      },
+                      onTap: () {},
                       child: Hero(
                         tag: 'congressoComputacao',
                         child: Image.asset(
@@ -100,13 +81,5 @@ class MainScreenContent extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ScrollWithoutGlow extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
   }
 }
