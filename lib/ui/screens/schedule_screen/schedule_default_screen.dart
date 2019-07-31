@@ -62,7 +62,7 @@ class ScheduleDefaultScreen extends StatelessWidget {
                         return Text('Error: ${snapshot.error}');
                       else
                         return StreamProvider<List<Lecture>>.value(
-                          value: db.streamLectures(date, snapshot.data),
+                          value: db.streamLectures(date),
                           child: ScheduleDateList(date: date),
                         );
                   }
