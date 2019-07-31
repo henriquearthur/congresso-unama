@@ -1,5 +1,6 @@
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
+import 'package:congresso_unama/ui/utils/get_event_color.dart';
 import 'package:flutter/material.dart';
 
 class LectureItem extends StatelessWidget {
@@ -36,11 +37,7 @@ class LectureItem extends StatelessWidget {
               Text(lecture.speaker),
               Chip(
                 label: Text(lecture.event),
-                backgroundColor: (lecture.event == "arquitetura")
-                    ? Styles.architectureColor
-                    : ((lecture.event == "computacao")
-                        ? Styles.computingColor
-                        : Styles.engineeringColor),
+                backgroundColor: getEventColor(lecture.event),
               ),
             ],
           ),
