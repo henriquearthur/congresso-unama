@@ -1,6 +1,5 @@
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/services/database_service.dart';
-import 'package:congresso_unama/services/filter_event_service.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/filter_events_bottom_sheet.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_date_list.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
@@ -9,7 +8,6 @@ import 'package:provider/provider.dart';
 
 class ScheduleDefaultScreen extends StatelessWidget {
   final db = DatabaseService();
-  final FilterEventService _filterEventService = FilterEventService();
 
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
 
