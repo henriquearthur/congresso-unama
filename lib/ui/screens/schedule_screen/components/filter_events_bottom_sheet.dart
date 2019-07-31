@@ -13,26 +13,23 @@ class FilterEventsBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 "Filtrar por área",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 22.0,
-                  letterSpacing: -1.0,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Styles.bottomSheetTitleText,
               ),
-              Icon(Icons.keyboard_arrow_down),
+              Icon(
+                Icons.keyboard_arrow_down,
+                size: 26.0,
+                color: Styles.bottomSheetTitleColor,
+              ),
             ],
           ),
           SizedBox(height: 10.0),
           Text(
             "Toque em uma ou mais áreas para visualizar apenas as palestras que lhe interessam.",
-            style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 16.0,
-                fontWeight: FontWeight.w500),
+            style: Styles.bottomSheetDescriptionText,
           ),
           Spacer(),
           Wrap(

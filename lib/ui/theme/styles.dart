@@ -18,10 +18,25 @@ abstract class Styles {
   static Color computingColor = Color(0xffF2A94B);
   static Color engineeringColor = Color(0xff2B80C0);
 
+  static Color bottomSheetTitleColor = Colors.grey[600];
+
   // Text styles
   static TextStyle appBarTitleText = TextStyle(
     color: Colors.green,
     letterSpacing: -0.5,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle bottomSheetTitleText = TextStyle(
+    color: bottomSheetTitleColor,
+    fontSize: 22.0,
+    letterSpacing: -1.0,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle bottomSheetDescriptionText = TextStyle(
+    color: bottomSheetTitleColor,
+    fontSize: 16.0,
     fontWeight: FontWeight.w500,
   );
 }
