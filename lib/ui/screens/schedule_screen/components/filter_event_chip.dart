@@ -1,4 +1,5 @@
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
+import 'package:congresso_unama/ui/utils/get_event_name.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,12 +13,6 @@ class FilterEventChip extends StatefulWidget {
 }
 
 class _FilterEventChipState extends State<FilterEventChip> {
-  final Map eventNames = {
-    "arquitetura": "3° Congresso de Arquitetura e Urbanismo",
-    "computacao": "3º Congresso de Informática",
-    "engenharia": "3º Congresso de Engenharia",
-  };
-
   bool _selected = true;
 
   Future<Null> configureSavedFilters() async {
@@ -51,7 +46,7 @@ class _FilterEventChipState extends State<FilterEventChip> {
   Widget build(BuildContext context) {
     return FilterChip(
       label: Text(
-        eventNames[widget.event],
+        getEventName(widget.event),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
       ),
       backgroundColor: getEventColor(widget.event).withAlpha(150),
