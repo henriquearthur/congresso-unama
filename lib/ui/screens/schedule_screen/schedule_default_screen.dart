@@ -46,27 +46,9 @@ class ScheduleDefaultScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             for (var date in dates)
-              FutureBuilder(
-                future: _filterEventService.getFilteredEvents(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<String>> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(top: 40.0),
-                        child: CircularProgressIndicator(),
-                      );
-                    default:
-                      if (snapshot.hasError)
-                        return Text('Error: ${snapshot.error}');
-                      else
-                        return StreamProvider<List<Lecture>>.value(
-                          value: db.streamLectures(date),
-                          child: ScheduleDateList(date: date),
-                        );
-                  }
-                },
+              StreamProvider<List<Lecture>>.value(
+                value: db.streamLectures(date),
+                child: ScheduleDateList(date: date),
               ),
           ],
         ),
