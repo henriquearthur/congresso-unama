@@ -19,6 +19,7 @@ class FilterEventsBottomSheet extends StatelessWidget {
                 "Filtrar por área",
                 style: Styles.bottomSheetTitleText,
               ),
+              // TODO: Dismiss BottomSheet on icon touch
               Icon(
                 Icons.keyboard_arrow_down,
                 size: 26.0,

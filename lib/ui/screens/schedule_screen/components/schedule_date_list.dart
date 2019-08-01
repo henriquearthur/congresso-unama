@@ -12,6 +12,8 @@ class ScheduleDateList extends StatelessWidget {
   Widget build(BuildContext context) {
     var lectures = Provider.of<List<Lecture>>(context);
 
+    // TODO: Change this to ListView.builder
+
     return ListView(
       padding: const EdgeInsets.all(8.0),
       children: <Widget>[
