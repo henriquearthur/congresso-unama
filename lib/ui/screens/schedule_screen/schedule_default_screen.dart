@@ -12,6 +12,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ScheduleDefaultScreen extends StatelessWidget {
   final db = DatabaseService();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  PersistentBottomSheetController _bottomSheetController;
+
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
 
   Future<List<String>> _getSavedFilteredEvents() async {
@@ -21,13 +24,16 @@ class ScheduleDefaultScreen extends StatelessWidget {
     return filters;
   }
 
-  void _filterSchedule(context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
+  void _filterSchedule() {
+    if (_bottomSheetController != null) {
+      _bottomSheetController.close();
+      _bottomSheetController = null;
+    } else {
+      _bottomSheetController =
+          _scaffoldKey.currentState.showBottomSheet((BuildContext context) {
         return FilterEventsBottomSheet();
-      },
-    );
+      });
+    }
   }
 
   @override
@@ -47,6 +53,7 @@ class ScheduleDefaultScreen extends StatelessWidget {
                 return ChangeNotifierProvider<EventFilter>(
                   builder: (_) => EventFilter(snapshot.data),
                   child: Scaffold(
+                    key: _scaffoldKey,
                     appBar: AppBar(
                       backgroundColor: Colors.white,
                       title: Text(
@@ -74,7 +81,7 @@ class ScheduleDefaultScreen extends StatelessWidget {
                     ),
                     floatingActionButton: FloatingActionButton(
                       onPressed: () {
-                        _filterSchedule(context);
+                        _filterSchedule();
                       },
                       child: Icon(Icons.filter_list),
                     ),
