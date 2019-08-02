@@ -63,8 +63,9 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                   builder: (_) => EventFilter(snapshot.data),
                   child: Scaffold(
                     key: _scaffoldKey,
+                    // TODO: Change this to SliverAppBar
                     appBar: AppBar(
-                      backgroundColor: Styles.appBarBackgroundColor,
+                      backgroundColor: Colors.white,
                       title: Text(
                         'Programação',
                         style: Styles.appBarTitleText,
@@ -72,7 +73,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                       iconTheme: IconThemeData(color: Styles.appBarIconColor),
                       centerTitle: true,
                       bottom: TabBar(
-                        labelColor: Styles.appBarLabelColor,
+                        labelColor: Colors.black,
                         tabs: [
                           Tab(text: "Dia 25"),
                           Tab(text: "Dia 26"),

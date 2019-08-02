@@ -22,11 +22,20 @@ abstract class Styles {
   static Color appBarIconColor = Colors.green;
   static Color appBarLabelColor = Colors.black;
 
+  static Color appBarPageBackgroundColor = Colors.transparent;
+  static Color appBarPageIconColor = Colors.grey[600];
+
   static Color bottomSheetTitleColor = Colors.grey[600];
 
   // Text styles
   static TextStyle appBarTitleText = TextStyle(
     color: Colors.green,
+    letterSpacing: -0.5,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle appBarPageTitleText = TextStyle(
+    color: Colors.grey[600],
     letterSpacing: -0.5,
     fontWeight: FontWeight.w500,
   );
