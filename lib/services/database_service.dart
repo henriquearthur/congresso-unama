@@ -4,13 +4,13 @@ import 'package:congresso_unama/models/lecture.dart';
 class DatabaseService {
   final Firestore _db = Firestore.instance;
 
-  Stream<Lecture> streamLecture(String id) {
-    return _db
-        .collection('palestras')
-        .document(id)
-        .snapshots()
-        .map((snap) => Lecture.fromFirestore(snap));
-  }
+  // Stream<Lecture> streamLecture(String id) {
+  //   return _db
+  //       .collection('palestras')
+  //       .document(id)
+  //       .snapshots()
+  //       .map((snap) => Lecture.fromFirestore(snap));
+  // }
 
   Stream<List<Lecture>> streamLectures(String date) {
     return _db

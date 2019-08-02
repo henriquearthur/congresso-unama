@@ -33,11 +33,14 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
   void _filterSchedule() {
     if (_bottomSheetController != null) {
       _bottomSheetController.close();
-      _bottomSheetController = null;
     } else {
       _bottomSheetController =
           _scaffoldKey.currentState.showBottomSheet((BuildContext context) {
         return FilterEventsBottomSheet();
+      });
+
+      _bottomSheetController.closed.then((value) {
+        _bottomSheetController = null;
       });
     }
   }
@@ -66,6 +69,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                         'Programação',
                         style: Styles.appBarTitleText,
                       ),
+                      iconTheme: IconThemeData(color: Styles.appBarIconColor),
                       centerTitle: true,
                       bottom: TabBar(
                         labelColor: Colors.black,
