@@ -1,5 +1,8 @@
 import 'package:congresso_unama/models/lecture.dart';
+import 'package:congresso_unama/providers/event_filter.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/lecture_item.dart';
+import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_loading_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,27 +11,39 @@ class ScheduleDateList extends StatelessWidget {
 
   const ScheduleDateList({Key key, this.date}) : super(key: key);
 
+  _buildListItem(BuildContext context, Lecture lecture) {
+    return LectureItem(lecture: lecture);
+  }
+
+  static List<Lecture> _filterLectures(data) {
+    List<Lecture> lectures = data[0];
+    EventFilter eventFilter = data[1];
+
+    List<Lecture> filteredLectures = [];
+
+    print(eventFilter.events);
+
+    for (var lecture in lectures) {
+      filteredLectures.add(lecture);
+    }
+
+    return filteredLectures;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var lectures = Provider.of<List<Lecture>>(context);
+    List<Lecture> lectures = Provider.of<List<Lecture>>(context);
+    EventFilter eventFilter = Provider.of<EventFilter>(context);
 
-    // TODO: Change this to ListView.builder
+    if (lectures == null || eventFilter == null) {
+      return ScheduleLoadingList();
+    } else {
+      var filteredLectures = _filterLectures([lectures, eventFilter]);
 
-    return ListView(
-      padding: const EdgeInsets.all(8.0),
-      children: <Widget>[
-        if (lectures == null)
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 32.0),
-            child: CircularProgressIndicator(),
-          ),
-        if (lectures != null)
-          for (var lecture in lectures) ...[
-            LectureItem(lecture: lecture),
-            if (lectures.last != lecture) Divider(),
-          ]
-      ],
-    );
+      return ListView.builder(
+          padding: const EdgeInsets.all(8.0),
+          itemBuilder: (context, index) =>
+              _buildListItem(context, filteredLectures[index]));
+    }
   }
 }

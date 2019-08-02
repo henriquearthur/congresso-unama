@@ -3,6 +3,7 @@ import 'package:congresso_unama/ui/utils/get_event_name.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO: Use Provider here somehow?
 class FilterEventChip extends StatefulWidget {
   final String event;
 

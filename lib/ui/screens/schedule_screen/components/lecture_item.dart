@@ -32,7 +32,7 @@ class LectureItem extends StatelessWidget {
                 style: TextStyle(
                     color: Styles.scheduleScreenColor, fontSize: 18.0),
               ),
-              if (lecture.speakerImg != null) ...[
+              if (lecture.speakerImg != "") ...[
                 SizedBox(height: 10.0),
                 // TODO: Add fade-in effect on load image. Add placeholder
                 ClipRRect(

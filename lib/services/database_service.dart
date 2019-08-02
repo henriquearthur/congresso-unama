@@ -13,9 +13,8 @@ class DatabaseService {
   }
 
   Stream<List<Lecture>> streamLectures(String date) {
-    var ref = _db.collection('palestras');
-
-    return ref
+    return _db
+        .collection('palestras')
         .where('date', isEqualTo: date)
         .orderBy("hour_start")
         .snapshots()
