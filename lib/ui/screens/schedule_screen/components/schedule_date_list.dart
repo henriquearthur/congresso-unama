@@ -14,7 +14,6 @@ class ScheduleDateList extends StatelessWidget {
   static List<Lecture> _filterLectures(context) {
     List<Lecture> lectures = Provider.of<List<Lecture>>(context);
     EventFilter eventFilter = Provider.of<EventFilter>(context);
-    print(eventFilter.events);
 
     List<Lecture> filteredLectures = [];
 
