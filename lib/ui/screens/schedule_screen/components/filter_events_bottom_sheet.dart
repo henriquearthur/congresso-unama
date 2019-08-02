@@ -1,8 +1,6 @@
-import 'package:congresso_unama/providers/event_filter.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/filter_event_chip.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class FilterEventsBottomSheet extends StatelessWidget {
   final events = ["arquitetura", "computacao", "engenharia"];

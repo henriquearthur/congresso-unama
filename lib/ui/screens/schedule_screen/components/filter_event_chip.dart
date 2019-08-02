@@ -3,7 +3,6 @@ import 'package:congresso_unama/ui/utils/get_event_color.dart';
 import 'package:congresso_unama/ui/utils/get_event_name.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FilterEventChip extends StatelessWidget {
   final String event;

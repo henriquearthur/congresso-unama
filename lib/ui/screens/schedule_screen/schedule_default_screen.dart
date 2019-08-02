@@ -9,10 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ScheduleDefaultScreen extends StatelessWidget {
+class ScheduleDefaultScreen extends StatefulWidget {
+  @override
+  _ScheduleDefaultScreenState createState() => _ScheduleDefaultScreenState();
+}
+
+class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
   final db = DatabaseService();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   PersistentBottomSheetController _bottomSheetController;
 
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
