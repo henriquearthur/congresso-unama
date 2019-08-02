@@ -9,8 +9,6 @@ abstract class Styles {
   static Color primaryColor = Colors.green;
   static Color primaryColorDark = Colors.green[900];
 
-  static Color appBarIconColor = Colors.green;
-
   static Color mainScreenColor = Colors.cyan;
   static Color scheduleScreenColor = Colors.green;
   static Color undergradsScreenColor = Colors.orange;
@@ -19,6 +17,10 @@ abstract class Styles {
   static Color architectureColor = Color(0xff417952);
   static Color computingColor = Color(0xffF2A94B);
   static Color engineeringColor = Color(0xff2B80C0);
+
+  static Color appBarBackgroundColor = Colors.white;
+  static Color appBarIconColor = Colors.green;
+  static Color appBarLabelColor = Colors.black;
 
   static Color bottomSheetTitleColor = Colors.grey[600];
 

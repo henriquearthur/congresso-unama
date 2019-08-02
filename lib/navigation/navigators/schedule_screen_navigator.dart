@@ -1,4 +1,5 @@
 import 'package:congresso_unama/ui/screens/schedule_screen/schedule_default_screen.dart';
+import 'package:congresso_unama/ui/screens/view_lecture_screen/view_lecture_default_screen.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleScreenNavigator extends StatelessWidget {
@@ -11,6 +12,8 @@ class ScheduleScreenNavigator extends StatelessWidget {
     return Navigator(
       key: navigatorKey,
       onGenerateRoute: (RouteSettings settings) {
+        Map args = settings.arguments;
+
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
@@ -19,6 +22,12 @@ class ScheduleScreenNavigator extends StatelessWidget {
             switch (settings.name) {
               case '/':
                 screen = ScheduleDefaultScreen();
+                break;
+
+              case '/view-lecture':
+                screen = ViewLectureDefaultScreen(
+                  lecture: args['lecture'],
+                );
             }
 
             return screen;

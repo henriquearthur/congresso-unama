@@ -64,7 +64,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                   child: Scaffold(
                     key: _scaffoldKey,
                     appBar: AppBar(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Styles.appBarBackgroundColor,
                       title: Text(
                         'Programação',
                         style: Styles.appBarTitleText,
@@ -72,7 +72,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                       iconTheme: IconThemeData(color: Styles.appBarIconColor),
                       centerTitle: true,
                       bottom: TabBar(
-                        labelColor: Colors.black,
+                        labelColor: Styles.appBarLabelColor,
                         tabs: [
                           Tab(text: "Dia 25"),
                           Tab(text: "Dia 26"),
