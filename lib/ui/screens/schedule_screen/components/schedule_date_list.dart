@@ -18,7 +18,7 @@ class ScheduleDateList extends StatelessWidget {
     List<Lecture> filteredLectures = [];
 
     for (var lecture in lectures) {
-      if (eventFilter.exists(lecture.event)) {
+      if (eventFilter.exists(lecture.event) && lecture.date == date) {
         filteredLectures.add(lecture);
       }
     }

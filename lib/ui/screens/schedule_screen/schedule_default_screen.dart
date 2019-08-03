@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/providers/event_filter.dart';
 import 'package:congresso_unama/services/database_service.dart';
@@ -16,12 +18,21 @@ class ScheduleDefaultScreen extends StatefulWidget {
 
 class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
   final db = DatabaseService();
+  Stream _stream;
+  Future<List<String>> _filteredEvents;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   PersistentBottomSheetController _bottomSheetController;
 
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _filteredEvents = _getSavedFilteredEvents();
+    _stream = db.streamLectures();
+  }
 
   Future<List<String>> _getSavedFilteredEvents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,7 +62,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
     return DefaultTabController(
       length: 3,
       child: FutureBuilder(
-          future: _getSavedFilteredEvents(),
+          future: _filteredEvents,
           builder:
               (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -83,19 +94,16 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                         ],
                       ),
                     ),
-                    body: TabBarView(
-                      children: <Widget>[
-                        for (var date in dates)
-                          StreamProvider<List<Lecture>>.value(
-                            value: db.streamLectures(date),
-                            child: ScheduleDateList(date: date),
-                          ),
-                      ],
+                    body: StreamProvider<List<Lecture>>.value(
+                      value: _stream,
+                      child: TabBarView(
+                        children: <Widget>[
+                          for (var date in dates) ScheduleDateList(date: date),
+                        ],
+                      ),
                     ),
                     floatingActionButton: FloatingActionButton(
-                      onPressed: () {
-                        _filterSchedule();
-                      },
+                      onPressed: _filterSchedule,
                       child: Icon(Icons.filter_list),
                     ),
                   ),
