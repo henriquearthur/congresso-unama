@@ -59,6 +59,13 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20.0),
+          Text(
+            lecture.getFullDate(),
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 16.0,
+            ),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

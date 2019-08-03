@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class Lecture {
   final String id;
@@ -23,6 +25,16 @@ class Lecture {
       this.hourEnd,
       this.event,
       this.date});
+
+  String getFullDate() {
+    List<String> arr = date.split('-');
+    int day = int.parse(arr[0]);
+    int month = int.parse(arr[1]);
+    int year = int.parse(arr[2]);
+
+    return DateFormat("EEEE',' d 'de' MMMM", 'pt_BR')
+        .format(DateTime(year, month, day));
+  }
 
   factory Lecture.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
