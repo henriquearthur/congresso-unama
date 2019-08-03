@@ -75,7 +75,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                   builder: (_) => EventFilter(snapshot.data),
                   child: Scaffold(
                     key: _scaffoldKey,
-                    // TODO: Change this to SliverAppBar
+                    // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
                     appBar: AppBar(
                       backgroundColor: Colors.white,
                       title: Text(

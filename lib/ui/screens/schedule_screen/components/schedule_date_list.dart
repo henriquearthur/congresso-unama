@@ -41,10 +41,12 @@ class ScheduleDateList extends StatelessWidget {
       var filteredLectures = _filterLectures(context);
 
       return ListView.separated(
-          separatorBuilder: (context, index) => Divider(height: 0.0),
-          itemCount: filteredLectures.length,
-          itemBuilder: (context, index) =>
-              _buildListItem(context, filteredLectures[index]));
+        key: PageStorageKey("ScheduleDateList-$date"),
+        separatorBuilder: (context, index) => Divider(height: 0.0),
+        itemCount: filteredLectures.length,
+        itemBuilder: (context, index) =>
+            _buildListItem(context, filteredLectures[index]),
+      );
     }
   }
 }
