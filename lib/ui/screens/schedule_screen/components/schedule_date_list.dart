@@ -6,35 +6,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ScheduleDateList extends StatefulWidget {
+class ScheduleDateList extends StatelessWidget {
   final String date;
 
   const ScheduleDateList({Key key, this.date}) : super(key: key);
 
-  @override
-  _ScheduleDateListState createState() => _ScheduleDateListState();
-}
-
-class _ScheduleDateListState extends State<ScheduleDateList> {
-  List<Lecture> _filteredLectures = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _filteredLectures = _getFilteredLectures();
-  }
-
-  List<Lecture> _getFilteredLectures() {
-    print("_getFilteredLectures");
-
-    List<Lecture> lectures = Provider.of<List<Lecture>>(context, listen: false);
-    EventFilter eventFilter = Provider.of<EventFilter>(context, listen: false);
+  List<Lecture> _getFilteredLectures(context) {
+    List<Lecture> lectures = Provider.of<List<Lecture>>(context);
+    EventFilter eventFilter = Provider.of<EventFilter>(context);
 
     List<Lecture> filteredLectures = [];
 
     for (var lecture in lectures) {
-      if (eventFilter.exists(lecture.event) && lecture.date == widget.date) {
+      if (eventFilter.exists(lecture.event) && lecture.date == date) {
         filteredLectures.add(lecture);
       }
     }
@@ -48,12 +32,14 @@ class _ScheduleDateListState extends State<ScheduleDateList> {
 
   @override
   Widget build(BuildContext context) {
+    List<Lecture> filteredLectures = _getFilteredLectures(context);
+
     return ListView.separated(
-      key: PageStorageKey("ScheduleDateList-${widget.date}"),
+      key: PageStorageKey("ScheduleDateList-$date"),
       separatorBuilder: (context, index) => Divider(height: 0.0),
-      itemCount: _filteredLectures.length,
+      itemCount: filteredLectures.length,
       itemBuilder: (context, index) =>
-          _buildListItem(context, _filteredLectures[index]),
+          _buildListItem(context, filteredLectures[index]),
     );
   }
 }
