@@ -54,6 +54,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           body: SafeArea(
             top: false,
             child: Container(
+              // TODO: Fix animation bug when change page
               child: Stack(
                 fit: StackFit.expand,
                 children: allDestinations.map((Destination destination) {

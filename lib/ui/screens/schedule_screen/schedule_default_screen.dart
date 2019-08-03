@@ -72,6 +72,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                       ),
                       iconTheme: IconThemeData(color: Styles.appBarIconColor),
                       centerTitle: true,
+                      // TODO: Scroll is restaured when tab changes
                       bottom: TabBar(
                         labelColor: Colors.black,
                         tabs: [
