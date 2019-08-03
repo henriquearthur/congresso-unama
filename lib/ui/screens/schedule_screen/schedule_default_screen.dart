@@ -16,13 +16,16 @@ class ScheduleDefaultScreen extends StatefulWidget {
   _ScheduleDefaultScreenState createState() => _ScheduleDefaultScreenState();
 }
 
-class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
+class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
+    with SingleTickerProviderStateMixin {
   final db = DatabaseService();
   Stream _stream;
   Future<List<String>> _filteredEvents;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   PersistentBottomSheetController _bottomSheetController;
+
+  TabController _tabController;
 
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
 
@@ -32,6 +35,15 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
 
     _filteredEvents = _getSavedFilteredEvents();
     _stream = db.streamLectures();
+    _tabController = TabController(length: dates.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _stream = null;
+
+    super.dispose();
   }
 
   Future<List<String>> _getSavedFilteredEvents() async {
@@ -59,58 +71,71 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: FutureBuilder(
-          future: _filteredEvents,
-          builder:
-              (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return ScheduleLoadingList();
+    return FutureBuilder(
+        future: _filteredEvents,
+        builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return ScheduleLoadingList();
+          } else {
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
             } else {
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return ChangeNotifierProvider<EventFilter>(
-                  builder: (_) => EventFilter(snapshot.data),
-                  child: Scaffold(
-                    key: _scaffoldKey,
-                    // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
-                    appBar: AppBar(
-                      backgroundColor: Colors.white,
-                      title: Text(
-                        'Programação',
-                        style: Styles.appBarTitleText,
-                      ),
-                      iconTheme: IconThemeData(color: Styles.appBarIconColor),
-                      centerTitle: true,
-                      // TODO: Scroll is restaured when tab changes
-                      bottom: TabBar(
-                        labelColor: Colors.black,
-                        tabs: [
-                          Tab(text: "Dia 25"),
-                          Tab(text: "Dia 26"),
-                          Tab(text: "Dia 27"),
-                        ],
-                      ),
+              return ChangeNotifierProvider<EventFilter>(
+                builder: (_) => EventFilter(snapshot.data),
+                child: Scaffold(
+                  key: _scaffoldKey,
+                  // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    title: Text(
+                      'Programação',
+                      style: Styles.appBarTitleText,
                     ),
-                    body: StreamProvider<List<Lecture>>.value(
-                      value: _stream,
-                      child: TabBarView(
-                        children: <Widget>[
-                          for (var date in dates) ScheduleDateList(date: date),
-                        ],
-                      ),
-                    ),
-                    floatingActionButton: FloatingActionButton(
-                      onPressed: _filterSchedule,
-                      child: Icon(Icons.filter_list),
+                    iconTheme: IconThemeData(color: Styles.appBarIconColor),
+                    centerTitle: true,
+                    bottom: TabBar(
+                      controller: _tabController,
+                      labelColor: Colors.black,
+                      tabs: [
+                        Tab(text: "Dia 25"),
+                        Tab(text: "Dia 26"),
+                        Tab(text: "Dia 27"),
+                      ],
                     ),
                   ),
-                );
-              }
+                  body: StreamBuilder(
+                    stream: _stream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return ScheduleLoadingList();
+                      } else {
+                        if (snapshot.hasError) {
+                          return Text("Error: ${snapshot.error}");
+                        } else if (!snapshot.hasData) {
+                          return ScheduleLoadingList();
+                        } else {
+                          return Provider<List<Lecture>>.value(
+                            value: snapshot.data,
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: <Widget>[
+                                for (var date in dates)
+                                  ScheduleDateList(date: date),
+                              ],
+                            ),
+                          );
+                        }
+                      }
+                    },
+                  ),
+                  floatingActionButton: FloatingActionButton(
+                    onPressed: _filterSchedule,
+                    child: Icon(Icons.filter_list),
+                  ),
+                ),
+              );
             }
-          }),
-    );
+          }
+        });
   }
 }
