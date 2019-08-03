@@ -83,6 +83,51 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             ),
           ),
           Divider(),
+          if (lecture.speakerImg != "") ...[
+            SizedBox(height: 10.0),
+            // TODO: Add fade-in effect on load image. Add placeholder
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Color.fromARGB(100, 0, 0, 0),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: new BorderRadius.circular(120.0),
+                  child: Image.network(
+                    lecture.speakerImg,
+                    height: 120.0,
+                    width: 120.0,
+                  ),
+                ),
+              ),
+            )
+          ],
+          if (lecture.speaker.isNotEmpty) SizedBox(height: 20.0),
+          Text(
+            lecture.speaker,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 18.0,
+            ),
+          ),
+          if (lecture.speakerDetails.isNotEmpty)
+            Text(
+              lecture.speakerDetails,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14.0,
+              ),
+            )
         ],
       ),
     );

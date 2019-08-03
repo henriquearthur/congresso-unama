@@ -6,6 +6,7 @@ class Lecture {
   final String type;
   final String speaker;
   final String speakerImg;
+  final String speakerDetails;
   final String hourStart;
   final String hourEnd;
   final String event;
@@ -17,6 +18,7 @@ class Lecture {
       this.type,
       this.speaker,
       this.speakerImg,
+      this.speakerDetails,
       this.hourStart,
       this.hourEnd,
       this.event,
@@ -31,6 +33,7 @@ class Lecture {
       type: data['type'] ?? '',
       speaker: data['speaker'] ?? '',
       speakerImg: data['speaker_img'] ?? '',
+      speakerDetails: data['speaker_details'] ?? '',
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
       date: data['date'] ?? '',
