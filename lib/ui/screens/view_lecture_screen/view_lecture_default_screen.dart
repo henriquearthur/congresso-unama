@@ -1,8 +1,10 @@
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
+import 'package:congresso_unama/ui/utils/get_event_link.dart';
 import 'package:congresso_unama/ui/utils/get_event_name.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class ViewLectureDefaultScreen extends StatelessWidget {
   final Lecture lecture;
@@ -19,6 +21,20 @@ class ViewLectureDefaultScreen extends StatelessWidget {
           lecture.type,
           style: Styles.appBarPageTitleText,
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              if (lecture.speaker.isNotEmpty) {
+                Share.share(
+                    "Confira ${lecture.title} no ${getEventName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speaker}! Saiba mais em ${getEventLink(lecture.event)}");
+              } else {
+                Share.share(
+                    "Confira ${lecture.title} no ${getEventName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${getEventLink(lecture.event)}");
+              }
+            },
+            icon: Icon(Icons.share),
+          )
+        ],
         elevation: 0.0,
         iconTheme: IconThemeData(color: Styles.appBarPageIconColor),
         centerTitle: true,
