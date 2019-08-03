@@ -20,7 +20,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
     with SingleTickerProviderStateMixin {
   final db = DatabaseService();
   Stream _stream;
-  Future<List<String>> _filteredEvents;
+  Future<List<String>> _savedFilteredEvents;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   PersistentBottomSheetController _bottomSheetController;
@@ -33,7 +33,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
   void initState() {
     super.initState();
 
-    _filteredEvents = _getSavedFilteredEvents();
+    _savedFilteredEvents = _getSavedFilteredEvents();
     _stream = db.streamLectures();
     _tabController = TabController(length: dates.length, vsync: this);
   }
@@ -72,7 +72,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _filteredEvents,
+        future: _savedFilteredEvents,
         builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ScheduleLoadingList();

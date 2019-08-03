@@ -6,19 +6,35 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ScheduleDateList extends StatelessWidget {
+class ScheduleDateList extends StatefulWidget {
   final String date;
 
   const ScheduleDateList({Key key, this.date}) : super(key: key);
 
-  List<Lecture> _filterLectures(context) {
-    List<Lecture> lectures = Provider.of<List<Lecture>>(context);
-    EventFilter eventFilter = Provider.of<EventFilter>(context);
+  @override
+  _ScheduleDateListState createState() => _ScheduleDateListState();
+}
+
+class _ScheduleDateListState extends State<ScheduleDateList> {
+  List<Lecture> _filteredLectures = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _filteredLectures = _getFilteredLectures();
+  }
+
+  List<Lecture> _getFilteredLectures() {
+    print("_getFilteredLectures");
+
+    List<Lecture> lectures = Provider.of<List<Lecture>>(context, listen: false);
+    EventFilter eventFilter = Provider.of<EventFilter>(context, listen: false);
 
     List<Lecture> filteredLectures = [];
 
     for (var lecture in lectures) {
-      if (eventFilter.exists(lecture.event) && lecture.date == date) {
+      if (eventFilter.exists(lecture.event) && lecture.date == widget.date) {
         filteredLectures.add(lecture);
       }
     }
@@ -32,21 +48,12 @@ class ScheduleDateList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Lecture> lectures = Provider.of<List<Lecture>>(context);
-    EventFilter eventFilter = Provider.of<EventFilter>(context);
-
-    if (lectures == null || eventFilter == null) {
-      return ScheduleLoadingList();
-    } else {
-      var filteredLectures = _filterLectures(context);
-
-      return ListView.separated(
-        key: PageStorageKey("ScheduleDateList-$date"),
-        separatorBuilder: (context, index) => Divider(height: 0.0),
-        itemCount: filteredLectures.length,
-        itemBuilder: (context, index) =>
-            _buildListItem(context, filteredLectures[index]),
-      );
-    }
+    return ListView.separated(
+      key: PageStorageKey("ScheduleDateList-${widget.date}"),
+      separatorBuilder: (context, index) => Divider(height: 0.0),
+      itemCount: _filteredLectures.length,
+      itemBuilder: (context, index) =>
+          _buildListItem(context, _filteredLectures[index]),
+    );
   }
 }
