@@ -1,7 +1,6 @@
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/providers/event_filter.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/lecture_item.dart';
-import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_loading_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

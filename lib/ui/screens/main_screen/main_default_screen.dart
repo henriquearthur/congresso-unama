@@ -1,5 +1,4 @@
 import 'package:congresso_unama/ui/screens/main_screen/components/event_banner.dart';
-import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class MainDefaultScreen extends StatelessWidget {
