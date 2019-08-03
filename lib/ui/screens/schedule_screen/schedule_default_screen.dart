@@ -25,7 +25,8 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
 
   Future<List<String>> _getSavedFilteredEvents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> filters = prefs.getStringList("schedule_filter_event") ?? [];
+    List<String> filters = prefs.getStringList("schedule_filter_event") ??
+        ['arquitetura', 'computacao', 'engenharia'];
 
     return filters;
   }
