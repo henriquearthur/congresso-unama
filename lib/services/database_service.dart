@@ -13,8 +13,6 @@ class DatabaseService {
   // }
 
   Stream<List<Lecture>> streamLectures() {
-    print("streamLectures");
-
     return _db.collection('palestras').orderBy("hour_start").snapshots().map(
         (list) =>
             list.documents.map((doc) => Lecture.fromFirestore(doc)).toList());

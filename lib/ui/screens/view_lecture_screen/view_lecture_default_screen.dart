@@ -24,7 +24,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           Text(
             lecture.title,
@@ -111,23 +111,26 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               ),
             )
           ],
-          if (lecture.speaker.isNotEmpty) SizedBox(height: 20.0),
-          Text(
-            lecture.speaker,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 18.0,
+          if (lecture.speaker.isNotEmpty) ...[
+            SizedBox(height: 20.0),
+            Text(
+              lecture.speaker,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 22.0,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          if (lecture.speakerDetails.isNotEmpty)
+            if (lecture.speakerDetails.isNotEmpty) SizedBox(height: 15.0),
             Text(
               lecture.speakerDetails,
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 14.0,
+                color: Colors.grey[600],
+                fontSize: 16.0,
               ),
             )
+          ],
         ],
       ),
     );
