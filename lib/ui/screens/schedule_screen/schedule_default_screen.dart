@@ -19,7 +19,7 @@ class ScheduleDefaultScreen extends StatefulWidget {
 class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
     with SingleTickerProviderStateMixin {
   final db = DatabaseService();
-  Stream _stream;
+  Stream<List<Lecture>> _stream;
   Future<List<String>> _savedFilteredEvents;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
