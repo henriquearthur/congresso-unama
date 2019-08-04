@@ -25,6 +25,7 @@ class MainDefaultScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.0),
+            // TODO: Change EventBanner image style
             EventBanner(
               image: AssetImage('assets/images/banner_arquitetura.jpg'),
               heroTag: "arquitetura",
