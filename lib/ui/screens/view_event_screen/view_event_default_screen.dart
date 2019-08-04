@@ -1,9 +1,11 @@
 import 'package:congresso_unama/models/event.dart';
 import 'package:congresso_unama/models/speaker.dart';
 import 'package:congresso_unama/services/database_service.dart';
+import 'package:congresso_unama/ui/screens/view_event_screen/components/event_data_loading.dart';
+import 'package:congresso_unama/ui/screens/view_event_screen/components/event_info_title.dart';
+import 'package:congresso_unama/ui/screens/view_event_screen/components/speaker_item.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
-import 'package:congresso_unama/ui/utils/get_event_name.dart';
 import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
 import 'package:flutter/material.dart';
 
@@ -67,64 +69,55 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
             ),
           ),
         ),
-        // Divide below tree in Widgets and use Provider for the streams
+        // TODO: Divide below tree in Widgets and use Provider for the streams
         StreamBuilder(
           stream: _streamEventData,
           builder: (BuildContext context, AsyncSnapshot<Event> snapshotEvent) {
-            if (snapshotEvent.connectionState == ConnectionState.waiting) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Center(
-                    child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            getEventColor(widget.event)))),
-              );
-            } else {
-              if (snapshotEvent.hasError) {
-                return Text("Error: ${snapshotEvent.error}");
-              } else if (!snapshotEvent.hasData) {
-                return Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Center(
-                        child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                getEventColor(widget.event)))));
-              } else {
-                return Column(
-                  children: <Widget>[
-                    Padding(
+            return StreamBuilder(
+              stream: _streamEventSpeakers,
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Speaker>> snapshotSpeaker) {
+                if (snapshotEvent.connectionState == ConnectionState.waiting ||
+                    snapshotSpeaker.connectionState ==
+                        ConnectionState.waiting) {
+                  return EventDataLoading(color: getEventColor(widget.event));
+                } else {
+                  if (snapshotEvent.hasError || snapshotSpeaker.hasError) {
+                    return Text(
+                        "Error: ${snapshotEvent.error} - ${snapshotSpeaker.error}");
+                  } else if (!snapshotEvent.hasData ||
+                      !snapshotSpeaker.hasData) {
+                    return EventDataLoading(color: getEventColor(widget.event));
+                  } else {
+                    return Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        snapshotEvent.data.description,
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 14.0,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          EventInfoTitle(title: "Sobre o evento"),
+                          Text(
+                            snapshotEvent.data.description,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          SizedBox(height: 25.0),
+                          if (snapshotSpeaker.data.length > 0) ...[
+                            EventInfoTitle(title: "Palestrantes"),
+                            for (Speaker speaker in snapshotSpeaker.data) ...[
+                              SpeakerItem(speaker: speaker),
+                              SizedBox(height: 15.0),
+                            ]
+                          ],
+                        ],
                       ),
-                    ),
-                    StreamBuilder(
-                      stream: _streamEventSpeakers,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Speaker>> snapshotSpeaker) {
-                        if (snapshotSpeaker.hasError) {
-                          return Text("Error: ${snapshotEvent.error}");
-                        } else if (snapshotSpeaker.hasData) {
-                          return Column(
-                            children: <Widget>[
-                              for (Speaker speaker in snapshotSpeaker.data) ...[
-                                Text(speaker.name),
-                              ]
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
-                );
-              }
-            }
+                    );
+                  }
+                }
+              },
+            );
           },
         ),
       ]),

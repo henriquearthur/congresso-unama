@@ -21,9 +21,11 @@ class DatabaseService {
   }
 
   Stream<List<Speaker>> streamEventSpeakers(String event) {
+    // TODO: Add new logic on Data Fetcher to eliminate duplicated speakers
     return _db
         .collection('palestras')
         .where("event", isEqualTo: event)
+        .where("speaker", isGreaterThan: "")
         .orderBy("speaker")
         .snapshots()
         .map((list) =>

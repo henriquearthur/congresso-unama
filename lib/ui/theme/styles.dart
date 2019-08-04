@@ -50,6 +50,7 @@ abstract class Styles {
   static TextStyle bottomSheetDescriptionText = TextStyle(
     color: bottomSheetTitleColor,
     fontSize: 16.0,
+    letterSpacing: -1.0,
     fontWeight: FontWeight.w500,
   );
 }
