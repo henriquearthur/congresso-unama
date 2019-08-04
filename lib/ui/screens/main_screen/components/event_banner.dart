@@ -13,7 +13,7 @@ class EventBanner extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AspectRatio(
-        aspectRatio: 16 / 9,
+        aspectRatio: 20 / 9,
         child: Hero(
           tag: heroTag,
           child: Container(

@@ -11,7 +11,6 @@ class LectureItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Add lecture/speaker details on touch LectureItem
     return InkWell(
       onTap: () {
         Navigator.of(context)

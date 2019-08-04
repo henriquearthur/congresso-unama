@@ -56,7 +56,7 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
       // TODO: Replace ListView with slivers
       body: ListView(children: <Widget>[
         AspectRatio(
-          aspectRatio: 16 / 9,
+          aspectRatio: 20 / 9,
           child: Hero(
             tag: widget.event,
             child: Container(
@@ -69,7 +69,6 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
             ),
           ),
         ),
-        // TODO: Divide below tree in Widgets and use Provider for the streams
         StreamBuilder(
           stream: _streamEventData,
           builder: (BuildContext context, AsyncSnapshot<Event> snapshotEvent) {
