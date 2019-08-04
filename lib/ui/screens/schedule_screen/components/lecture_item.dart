@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
@@ -38,11 +39,14 @@ class LectureItem extends StatelessWidget {
                 ),
                 if (lecture.speakerImg != "") ...[
                   SizedBox(height: 10.0),
-                  // TODO: Add fade-in effect on load image. Add placeholder
                   ClipRRect(
                     borderRadius: new BorderRadius.circular(60.0),
-                    child: Image.network(
-                      lecture.speakerImg,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) => Image.asset(
+                          'assets/images/placeholder.png',
+                          width: 60.0,
+                          height: 60.0),
+                      imageUrl: lecture.speakerImg,
                       height: 60.0,
                       width: 60.0,
                     ),

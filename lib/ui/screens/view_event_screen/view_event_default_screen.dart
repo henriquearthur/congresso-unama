@@ -94,6 +94,7 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           EventInfoTitle(title: "Sobre o evento"),
+                          // TODO: Improve text structure
                           Text(
                             snapshotEvent.data.description,
                             textAlign: TextAlign.justify,

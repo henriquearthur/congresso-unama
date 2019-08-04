@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SpeakerImage extends StatelessWidget {
@@ -24,14 +25,17 @@ class SpeakerImage extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: new BorderRadius.circular(size),
-        // TODO: Add default image
         child: (image.isNotEmpty)
-            ? Image.network(
-                image,
+            ? CachedNetworkImage(
+                placeholder: (context, url) => Image.asset(
+                    'assets/images/placeholder.png',
+                    width: 50.0,
+                    height: 50.0),
+                imageUrl: image,
                 height: 50.0,
                 width: 50.0,
               )
-            : Placeholder(),
+            : Image.asset('assets/images/placeholder.png'),
       ),
     );
   }
