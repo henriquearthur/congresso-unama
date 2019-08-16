@@ -12,6 +12,7 @@ class SpeakerItem extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
+        // TODO: Fix scroll
         return SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(16.0),

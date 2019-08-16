@@ -1,6 +1,6 @@
 import 'package:congresso_unama/providers/event_filter.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
-import 'package:congresso_unama/ui/utils/get_event_name.dart';
+import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class FilterEventChip extends StatelessWidget {
 
     return FilterChip(
       label: Text(
-        getEventName(event),
+        getEventShortName(event),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
       ),
       backgroundColor: getEventColor(event).withAlpha(150),

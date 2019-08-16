@@ -13,7 +13,6 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
   List<Key> _destinationKeys;
 
   int _currentIndex = 0;
-  Color _currentColor = Colors.green;
 
   @override
   void initState() {
@@ -63,20 +62,10 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentIndex,
-            selectedItemColor: _currentColor,
+            selectedItemColor: Styles.primaryColor,
             onTap: (int index) {
               setState(() {
                 _currentIndex = index;
-
-                if (index == 0) {
-                  _currentColor = Styles.mainScreenColor;
-                } else if (index == 1) {
-                  _currentColor = Styles.scheduleScreenColor;
-                } else if (index == 2) {
-                  _currentColor = Styles.undergradsScreenColor;
-                } else if (index == 3) {
-                  _currentColor = Styles.locationScreenColor;
-                }
               });
             },
             items: allDestinations.map((Destination destination) {
