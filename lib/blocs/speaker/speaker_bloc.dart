@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'package:congresso_unama/models/speaker.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';

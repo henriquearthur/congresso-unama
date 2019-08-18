@@ -6,7 +6,6 @@ class SpeakerRepository {
   final Firestore _db = Firestore.instance;
 
   Stream<List<Speaker>> getCongressSpeakers(Congress congress) {
-    // TODO: Add new logic on Data Fetcher to eliminate duplicated speakers
     return _db
         .collection('palestras')
         .where("event", isEqualTo: congress.id)
