@@ -12,11 +12,5 @@ class CongressesLoading extends CongressScheduleFilterState {}
 class CongressesLoaded extends CongressScheduleFilterState {
   final List<Congress> congresses;
 
-  CongressesLoaded(this.congresses);
-}
-
-class CongressesUpdated extends CongressScheduleFilterState {
-  final List<Congress> congresses;
-
-  CongressesUpdated(this.congresses);
+  CongressesLoaded(this.congresses) : super([congresses]);
 }

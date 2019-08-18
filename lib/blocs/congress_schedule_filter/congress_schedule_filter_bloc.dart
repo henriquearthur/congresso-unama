@@ -24,24 +24,25 @@ class CongressScheduleFilterBloc
 
   Stream<CongressScheduleFilterState> _mapLoadCongressesToState(
       LoadCongresses event) async* {
-    if (currentState is CongressesLoaded) {
-      List<String> congressesId = await getSavedCongresses();
-      List<Congress> congresses = _mapCongressesIdToCongress(congressesId);
+    List<String> congressesId = await getSavedCongresses();
+    List<Congress> congresses = _mapCongressesIdToCongress(congressesId);
 
-      yield CongressesLoaded(congresses);
-    }
+    yield CongressesLoaded(congresses);
   }
 
   Stream<CongressScheduleFilterState> _mapAddCongressToState(
       AddCongress event) async* {
     if (currentState is CongressesLoaded) {
       List<String> congressesId = await getSavedCongresses();
-      congressesId.add(event.congress.id);
+
+      if (!congressesId.contains(event.congressId)) {
+        congressesId.add(event.congressId);
+      }
 
       List<Congress> updatedCongresses =
-          congressesId.map((id) => Congress(id: id)).toList();
+          _mapCongressesIdToCongress(congressesId);
 
-      yield CongressesUpdated(updatedCongresses);
+      yield CongressesLoaded(updatedCongresses);
 
       _saveCongresses(congressesId);
     }
@@ -51,12 +52,12 @@ class CongressScheduleFilterBloc
       DeleteCongress event) async* {
     if (currentState is CongressesLoaded) {
       List<String> congressesId = await getSavedCongresses();
-      congressesId.remove(event.congress.id);
+      congressesId.remove(event.congressId);
 
       List<Congress> updatedCongresses =
-          congressesId.map((id) => Congress(id: id)).toList();
+          _mapCongressesIdToCongress(congressesId);
 
-      yield CongressesUpdated(updatedCongresses);
+      yield CongressesLoaded(updatedCongresses);
 
       _saveCongresses(congressesId);
     }

@@ -14,5 +14,5 @@ class LoadingSpeakersState extends SpeakerState {}
 class LoadedSpeakersState extends SpeakerState {
   final List<Speaker> speakers;
 
-  LoadedSpeakersState(this.speakers);
+  LoadedSpeakersState(this.speakers) : super([speakers]);
 }

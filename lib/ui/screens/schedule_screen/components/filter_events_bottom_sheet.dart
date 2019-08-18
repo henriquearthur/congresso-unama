@@ -3,7 +3,7 @@ import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class FilterEventsBottomSheet extends StatelessWidget {
-  final events = ["arquitetura", "computacao", "engenharia"];
+  final congressesIds = ["arquitetura", "computacao", "engenharia"];
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class FilterEventsBottomSheet extends StatelessWidget {
             Wrap(
               direction: Axis.vertical,
               children: <Widget>[
-                for (var event in events) FilterEventChip(event: event),
+                for (var congressId in congressesIds)
+                  FilterEventChip(congressId: congressId),
               ],
             )
           ],

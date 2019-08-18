@@ -1,34 +1,48 @@
-import 'package:congresso_unama/providers/congress_filter.dart';
+import 'package:congresso_unama/blocs/congress_schedule_filter/bloc.dart';
+import 'package:congresso_unama/models/congress.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
 import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterEventChip extends StatelessWidget {
-  final String event;
+  final String congressId;
 
-  const FilterEventChip({Key key, this.event}) : super(key: key);
+  const FilterEventChip({Key key, this.congressId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final congressFilter = Provider.of<CongressFilter>(context);
+    final congressScheduleFilterBloc =
+        BlocProvider.of<CongressScheduleFilterBloc>(context);
 
-    return FilterChip(
-      label: Text(
-        getEventShortName(event),
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-      ),
-      backgroundColor: getEventColor(event).withAlpha(150),
-      selectedColor: getEventColor(event),
-      selected: congressFilter.exists(event),
-      onSelected: (bool value) {
-        if (value) {
-          congressFilter.add(event);
-        } else {
-          if (congressFilter.total() > 1) {
-            congressFilter.remove(event);
-          }
+    return BlocBuilder<CongressScheduleFilterBloc, CongressScheduleFilterState>(
+      builder: (context, state) {
+        if (state is CongressesLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is CongressesLoaded) {
+          return FilterChip(
+            label: Text(
+              getEventShortName(congressId),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            ),
+            backgroundColor: getEventColor(congressId).withAlpha(150),
+            selectedColor: getEventColor(congressId),
+            selected: state.congresses.contains(Congress(id: congressId)),
+            onSelected: (bool value) {
+              if (value) {
+                congressScheduleFilterBloc.dispatch(AddCongress(congressId));
+              } else {
+                if (state.congresses.length > 1) {
+                  congressScheduleFilterBloc
+                      .dispatch(DeleteCongress(congressId));
+                }
+              }
+            },
+          );
         }
+
+        return Center(child: CircularProgressIndicator());
       },
     );
   }

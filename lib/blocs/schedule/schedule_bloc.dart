@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:congresso_unama/blocs/congress_schedule_filter/bloc.dart';
 import 'package:congresso_unama/models/lecture.dart';
@@ -14,9 +15,12 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   final CongressScheduleFilterBloc filterBloc;
   StreamSubscription filterBlocSubscription;
 
-  ScheduleBloc({this.lectureRepository, this.filterBloc, this.date}) {
+  ScheduleBloc(
+      {@required this.lectureRepository,
+      @required this.filterBloc,
+      @required this.date}) {
     filterBlocSubscription = filterBloc.state.listen((state) {
-      if (state is CongressesUpdated) {
+      if (state is CongressesLoaded) {
         dispatch(LoadSchedule());
       }
     });
@@ -47,8 +51,8 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
 
   @override
   void dispose() {
-    subscription.cancel();
-    filterBlocSubscription.cancel();
+    subscription?.cancel();
+    filterBlocSubscription?.cancel();
     super.dispose();
   }
 

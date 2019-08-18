@@ -1,4 +1,3 @@
-import 'package:congresso_unama/models/congress.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -7,20 +6,16 @@ abstract class CongressScheduleFilterEvent extends Equatable {
   CongressScheduleFilterEvent([List props = const <dynamic>[]]) : super(props);
 }
 
-class LoadCongresses extends CongressScheduleFilterEvent {
-  final List<Congress> congress;
-
-  LoadCongresses(this.congress) : super([congress]);
-}
+class LoadCongresses extends CongressScheduleFilterEvent {}
 
 class AddCongress extends CongressScheduleFilterEvent {
-  final Congress congress;
+  final String congressId;
 
-  AddCongress(this.congress) : super([congress]);
+  AddCongress(this.congressId) : super([congressId]);
 }
 
 class DeleteCongress extends CongressScheduleFilterEvent {
-  final Congress congress;
+  final String congressId;
 
-  DeleteCongress(this.congress) : super([congress]);
+  DeleteCongress(this.congressId) : super([congressId]);
 }
