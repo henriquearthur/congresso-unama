@@ -7,5 +7,5 @@ String getCongressShortName(event) {
     return "Engenharia";
   }
 
-  return "xatas";
+  return "Exatas";
 }
