@@ -1,52 +1,47 @@
-import 'package:congresso_unama/models/event.dart';
-import 'package:congresso_unama/models/speaker.dart';
-import 'package:congresso_unama/services/database_service.dart';
+import 'package:congresso_unama/blocs/congress/bloc.dart';
+import 'package:congresso_unama/blocs/speaker/bloc.dart';
+import 'package:congresso_unama/blocs/speaker/speaker_bloc.dart';
+import 'package:congresso_unama/repositories/congress_repository.dart';
+import 'package:congresso_unama/repositories/speaker_repository.dart';
 import 'package:congresso_unama/ui/screens/view_event_screen/components/event_data_loading.dart';
 import 'package:congresso_unama/ui/screens/view_event_screen/components/event_info_title.dart';
-import 'package:congresso_unama/ui/screens/view_event_screen/components/speaker_item.dart';
+import 'package:congresso_unama/ui/screens/view_event_screen/components/speakers_list.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:congresso_unama/ui/utils/get_event_color.dart';
 import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewEventDefaultScreen extends StatefulWidget {
-  final String event;
+  final String congress;
 
-  const ViewEventDefaultScreen({Key key, @required this.event})
-      : super(key: key);
+  const ViewEventDefaultScreen({Key key, this.congress}) : super(key: key);
 
   @override
   _ViewEventDefaultScreenState createState() => _ViewEventDefaultScreenState();
 }
 
 class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
-  final db = DatabaseService();
-  Stream<Event> _streamEventData;
-  Stream<List<Speaker>> _streamEventSpeakers;
+  CongressRepository congressRepository;
+  CongressBloc congressBloc;
 
   @override
   void initState() {
     super.initState();
 
-    _streamEventData = db.streamEventData(widget.event);
-    _streamEventSpeakers = db.streamEventSpeakers(widget.event);
-  }
+    congressRepository = CongressRepository();
+    congressBloc = CongressBloc(congressRepository: congressRepository);
 
-  @override
-  void dispose() {
-    _streamEventData = null;
-    _streamEventSpeakers = null;
-
-    super.dispose();
+    congressBloc.dispatch(LoadCongress(widget.congress));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: getEventColor(widget.event),
+        backgroundColor: getEventColor(widget.congress),
         title: Text(
-          getEventShortName(widget.event),
+          getEventShortName(widget.congress),
           style: Styles.appBarPageTitleText.apply(color: Colors.white),
         ),
         elevation: 0.0,
@@ -58,68 +53,61 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
         AspectRatio(
           aspectRatio: 20 / 9,
           child: Hero(
-            tag: widget.event,
+            tag: widget.congress,
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage("assets/images/banner_${widget.event}.jpg"),
+                  image:
+                      AssetImage("assets/images/banner_${widget.congress}.jpg"),
                 ),
               ),
             ),
           ),
         ),
-        StreamBuilder(
-          stream: _streamEventData,
-          builder: (BuildContext context, AsyncSnapshot<Event> snapshotEvent) {
-            return StreamBuilder(
-              stream: _streamEventSpeakers,
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<Speaker>> snapshotSpeaker) {
-                if (snapshotEvent.connectionState == ConnectionState.waiting ||
-                    snapshotSpeaker.connectionState ==
-                        ConnectionState.waiting) {
-                  return EventDataLoading(color: getEventColor(widget.event));
-                } else {
-                  if (snapshotEvent.hasError || snapshotSpeaker.hasError) {
-                    return Text(
-                        "Error: ${snapshotEvent.error} - ${snapshotSpeaker.error}");
-                  } else if (!snapshotEvent.hasData ||
-                      !snapshotSpeaker.hasData) {
-                    return EventDataLoading(color: getEventColor(widget.event));
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          EventInfoTitle(title: "Sobre o evento"),
-                          // TODO: Improve text structure
-                          Text(
-                            snapshotEvent.data.description,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          SizedBox(height: 25.0),
-                          if (snapshotSpeaker.data.length > 0) ...[
-                            EventInfoTitle(title: "Palestrantes"),
-                            for (Speaker speaker in snapshotSpeaker.data) ...[
-                              SpeakerItem(speaker: speaker),
-                              SizedBox(height: 15.0),
-                            ]
-                          ],
-                        ],
+        BlocBuilder<CongressBloc, CongressState>(
+          bloc: congressBloc,
+          builder: (context, state) {
+            if (state is InitialCongressState) {
+              return EventDataLoading(color: getEventColor(widget.congress));
+            } else if (state is LoadingCongressState) {
+              return EventDataLoading(color: getEventColor(widget.congress));
+            } else if (state is LoadedCongressState) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    EventInfoTitle(title: "Sobre o evento"),
+                    // TODO: Improve text structure
+                    Text(
+                      state.congress.description,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 14.0,
                       ),
-                    );
-                  }
-                }
-              },
-            );
+                    ),
+                    BlocProvider(
+                      builder: (context) {
+                        SpeakerBloc bloc = SpeakerBloc(
+                          speakerRepository: SpeakerRepository(),
+                        );
+
+                        bloc.dispatch(LoadSpeakers(state.congress));
+
+                        return bloc;
+                      },
+                      child: SpeakersList(),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return EventDataLoading(color: getEventColor(widget.congress));
           },
-        ),
+        )
       ]),
     );
   }
