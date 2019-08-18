@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EventFilter with ChangeNotifier {
+class CongressFilter with ChangeNotifier {
   List<String> _events;
 
-  EventFilter(this._events);
+  CongressFilter(this._events);
 
   List<String> get events => _events;
 
@@ -16,7 +16,7 @@ class EventFilter with ChangeNotifier {
       notifyListeners();
     } else {
       print(
-          "[Warning] Event '$event' can't be added on the EventFilter because it already exists.");
+          "[Warning] Event '$event' can't be added on the CongressFilter because it already exists.");
     }
   }
 

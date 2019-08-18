@@ -1,5 +1,5 @@
 import 'package:congresso_unama/models/lecture.dart';
-import 'package:congresso_unama/providers/event_filter.dart';
+import 'package:congresso_unama/providers/congress_filter.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/lecture_item.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +12,12 @@ class ScheduleDateList extends StatelessWidget {
 
   List<Lecture> _getFilteredLectures(context) {
     List<Lecture> lectures = Provider.of<List<Lecture>>(context);
-    EventFilter eventFilter = Provider.of<EventFilter>(context);
+    CongressFilter congressFilter = Provider.of<CongressFilter>(context);
 
     List<Lecture> filteredLectures = [];
 
     for (var lecture in lectures) {
-      if (eventFilter.exists(lecture.event) && lecture.date == date) {
+      if (congressFilter.exists(lecture.event) && lecture.date == date) {
         filteredLectures.add(lecture);
       }
     }

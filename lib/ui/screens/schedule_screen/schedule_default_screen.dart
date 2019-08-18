@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:congresso_unama/models/lecture.dart';
-import 'package:congresso_unama/providers/event_filter.dart';
+import 'package:congresso_unama/providers/congress_filter.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/filter_events_bottom_sheet.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_date_list.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_loading_list.dart';
@@ -79,8 +79,8 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen>
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return ChangeNotifierProvider<EventFilter>(
-                builder: (_) => EventFilter(snapshot.data),
+              return ChangeNotifierProvider<CongressFilter>(
+                builder: (_) => CongressFilter(snapshot.data),
                 child: Scaffold(
                   key: _scaffoldKey,
                   // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
