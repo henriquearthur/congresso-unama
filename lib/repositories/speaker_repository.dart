@@ -5,7 +5,7 @@ import 'package:congresso_unama/models/speaker.dart';
 class SpeakerRepository {
   final Firestore _db = Firestore.instance;
 
-  Stream<List<Speaker>> getConressSpeakers(Congress congress) {
+  Stream<List<Speaker>> getCongressSpeakers(Congress congress) {
     // TODO: Add new logic on Data Fetcher to eliminate duplicated speakers
     return _db
         .collection('palestras')

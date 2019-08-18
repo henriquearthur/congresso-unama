@@ -22,7 +22,7 @@ class SpeakerBloc extends Bloc<SpeakerEvent, SpeakerState> {
 
       subscription?.cancel();
       subscription = speakerRepository
-          .getConressSpeakers(event.congress)
+          .getCongressSpeakers(event.congress)
           .listen((speakers) => dispatch(LoadedSpeakers(speakers)));
     }
 
