@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class Speaker {
+class Speaker extends Equatable {
   final String id;
   final String name;
   final String image;
   final String details;
 
-  Speaker({this.id, this.name, this.image, this.details});
+  Speaker({this.id, this.name, this.image, this.details})
+      : super([id, name, image, details]);
 
   factory Speaker.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
