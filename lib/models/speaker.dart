@@ -7,8 +7,7 @@ class Speaker extends Equatable {
   final String image;
   final String details;
 
-  Speaker({this.id, this.name, this.image, this.details})
-      : super([id, name, image, details]);
+  Speaker({this.id, this.name, this.image, this.details}) : super([name]);
 
   factory Speaker.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
