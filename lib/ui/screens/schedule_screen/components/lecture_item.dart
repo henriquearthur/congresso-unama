@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_event_color.dart';
-import 'package:congresso_unama/ui/utils/get_event_name.dart';
+import 'package:congresso_unama/ui/utils/get_congress_color.dart';
+import 'package:congresso_unama/ui/utils/get_congress_name.dart';
 import 'package:flutter/material.dart';
 
 class LectureItem extends StatelessWidget {
@@ -80,14 +80,14 @@ class LectureItem extends StatelessWidget {
                   SizedBox(height: 10.0),
                   Chip(
                     label: Text(
-                      getEventName(lecture.event),
+                      getCongressName(lecture.event),
                       style: TextStyle(
                         fontSize: 13.0,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    backgroundColor: getEventColor(lecture.event),
+                    backgroundColor: getCongressColor(lecture.event),
                   ),
                 ],
               ),

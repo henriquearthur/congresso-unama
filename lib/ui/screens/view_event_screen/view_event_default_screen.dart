@@ -7,8 +7,8 @@ import 'package:congresso_unama/ui/screens/view_event_screen/components/event_da
 import 'package:congresso_unama/ui/screens/view_event_screen/components/event_info_title.dart';
 import 'package:congresso_unama/ui/screens/view_event_screen/components/speakers_list.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_event_color.dart';
-import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
+import 'package:congresso_unama/ui/utils/get_congress_color.dart';
+import 'package:congresso_unama/ui/utils/get_congress_short_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,9 +21,9 @@ class ViewEventDefaultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: getEventColor(congress),
+        backgroundColor: getCongressColor(congress),
         title: Text(
-          getEventShortName(congress),
+          getCongressShortName(congress),
           style: Styles.appBarPageTitleText.apply(color: Colors.white),
         ),
         elevation: 0.0,
@@ -59,9 +59,9 @@ class ViewEventDefaultScreen extends StatelessWidget {
           child: BlocBuilder<CongressBloc, CongressState>(
             builder: (context, state) {
               if (state is InitialCongressState) {
-                return EventDataLoading(color: getEventColor(congress));
+                return EventDataLoading(color: getCongressColor(congress));
               } else if (state is LoadingCongressState) {
-                return EventDataLoading(color: getEventColor(congress));
+                return EventDataLoading(color: getCongressColor(congress));
               } else if (state is LoadedCongressState) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -95,7 +95,7 @@ class ViewEventDefaultScreen extends StatelessWidget {
                 );
               }
 
-              return EventDataLoading(color: getEventColor(congress));
+              return EventDataLoading(color: getCongressColor(congress));
             },
           ),
         )

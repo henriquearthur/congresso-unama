@@ -1,4 +1,4 @@
-String getEventShortName(event) {
+String getCongressShortName(event) {
   if (event == "arquitetura") {
     return "Arquitetura e Urbanismo";
   } else if (event == "computacao") {

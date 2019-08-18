@@ -1,4 +1,4 @@
-String getEventName(event) {
+String getCongressName(event) {
   if (event == "arquitetura") {
     return "3º Congresso de Arquitetura e Urbanismo";
   } else if (event == "computacao") {

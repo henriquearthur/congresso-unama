@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_event_color.dart';
-import 'package:congresso_unama/ui/utils/get_event_link.dart';
-import 'package:congresso_unama/ui/utils/get_event_name.dart';
+import 'package:congresso_unama/ui/utils/get_congress_color.dart';
+import 'package:congresso_unama/ui/utils/get_congress_link.dart';
+import 'package:congresso_unama/ui/utils/get_congress_name.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
@@ -27,10 +27,10 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             onPressed: () {
               if (lecture.speaker.isNotEmpty) {
                 Share.share(
-                    "Confira ${lecture.title} no ${getEventName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speaker}! Saiba mais em ${getEventLink(lecture.event)}");
+                    "Confira ${lecture.title} no ${getCongressName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speaker}! Saiba mais em ${getCongressLink(lecture.event)}");
               } else {
                 Share.share(
-                    "Confira ${lecture.title} no ${getEventName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${getEventLink(lecture.event)}");
+                    "Confira ${lecture.title} no ${getCongressName(lecture.event)} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${getCongressLink(lecture.event)}");
               }
             },
             icon: Icon(Icons.share),
@@ -46,7 +46,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
           Text(
             lecture.title,
             style: TextStyle(
-              color: getEventColor(lecture.event),
+              color: getCongressColor(lecture.event),
               fontSize: 26.0,
               letterSpacing: -0.5,
               fontWeight: FontWeight.w500,
@@ -73,7 +73,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               Text(
                 lecture.hourStart,
                 style: TextStyle(
-                    color: getEventColor(lecture.event), fontSize: 24.0),
+                    color: getCongressColor(lecture.event), fontSize: 24.0),
               ),
               SizedBox(width: 8.0),
               Padding(
@@ -87,7 +87,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               Text(
                 lecture.hourEnd,
                 style: TextStyle(
-                    color: getEventColor(lecture.event), fontSize: 24.0),
+                    color: getCongressColor(lecture.event), fontSize: 24.0),
               ),
             ],
           ),
@@ -96,14 +96,14 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Chip(
               label: Text(
-                getEventName(lecture.event),
+                getCongressName(lecture.event),
                 style: TextStyle(
                   fontSize: 13.0,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              backgroundColor: getEventColor(lecture.event),
+              backgroundColor: getCongressColor(lecture.event),
             ),
           ),
           Divider(),

@@ -1,7 +1,7 @@
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
 
-Color getEventColor(event) {
+Color getCongressColor(event) {
   if (event == "arquitetura") {
     return Styles.architectureColor;
   } else if (event == "computacao") {
