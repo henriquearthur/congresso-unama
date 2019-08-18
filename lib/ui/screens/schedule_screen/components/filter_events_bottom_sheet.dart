@@ -7,45 +7,35 @@ class FilterEventsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 8.0,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16.0),
-          topRight: Radius.circular(16.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Filtrar por área",
-                  style: Styles.bottomSheetTitleText,
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              "Toque em uma ou mais áreas para visualizar apenas as palestras que lhe interessam.",
-              style: Styles.bottomSheetDescriptionText,
-            ),
-            SizedBox(height: 20.0),
-            Wrap(
-              direction: Axis.vertical,
-              children: <Widget>[
-                for (var congressId in congressesIds)
-                  FilterEventChip(congressId: congressId),
-              ],
-            )
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "Filtrar por área",
+                style: Styles.bottomSheetTitleText,
+              ),
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Text(
+            "Toque em uma ou mais áreas para visualizar apenas as palestras que lhe interessam.",
+            style: Styles.bottomSheetDescriptionText,
+          ),
+          SizedBox(height: 20.0),
+          Wrap(
+            direction: Axis.vertical,
+            children: <Widget>[
+              for (var congressId in congressesIds)
+                FilterEventChip(congressId: congressId),
+            ],
+          )
+        ],
       ),
     );
   }
