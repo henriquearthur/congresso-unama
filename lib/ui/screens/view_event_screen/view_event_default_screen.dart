@@ -12,36 +12,18 @@ import 'package:congresso_unama/ui/utils/get_event_short_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ViewEventDefaultScreen extends StatefulWidget {
+class ViewEventDefaultScreen extends StatelessWidget {
   final String congress;
 
   const ViewEventDefaultScreen({Key key, this.congress}) : super(key: key);
 
   @override
-  _ViewEventDefaultScreenState createState() => _ViewEventDefaultScreenState();
-}
-
-class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
-  CongressRepository congressRepository;
-  CongressBloc congressBloc;
-
-  @override
-  void initState() {
-    super.initState();
-
-    congressRepository = CongressRepository();
-    congressBloc = CongressBloc(congressRepository: congressRepository);
-
-    congressBloc.dispatch(LoadCongress(widget.congress));
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: getEventColor(widget.congress),
+        backgroundColor: getEventColor(congress),
         title: Text(
-          getEventShortName(widget.congress),
+          getEventShortName(congress),
           style: Styles.appBarPageTitleText.apply(color: Colors.white),
         ),
         elevation: 0.0,
@@ -53,60 +35,69 @@ class _ViewEventDefaultScreenState extends State<ViewEventDefaultScreen> {
         AspectRatio(
           aspectRatio: 20 / 9,
           child: Hero(
-            tag: widget.congress,
+            tag: congress,
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image:
-                      AssetImage("assets/images/banner_${widget.congress}.jpg"),
+                  image: AssetImage("assets/images/banner_$congress.jpg"),
                 ),
               ),
             ),
           ),
         ),
-        BlocBuilder<CongressBloc, CongressState>(
-          bloc: congressBloc,
-          builder: (context, state) {
-            if (state is InitialCongressState) {
-              return EventDataLoading(color: getEventColor(widget.congress));
-            } else if (state is LoadingCongressState) {
-              return EventDataLoading(color: getEventColor(widget.congress));
-            } else if (state is LoadedCongressState) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    EventInfoTitle(title: "Sobre o evento"),
-                    // TODO: Improve text structure
-                    Text(
-                      state.congress.description,
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 14.0,
-                      ),
-                    ),
-                    BlocProvider(
-                      builder: (context) {
-                        SpeakerBloc bloc = SpeakerBloc(
-                          speakerRepository: SpeakerRepository(),
-                        );
+        BlocProvider(
+          builder: (context) {
+            CongressBloc congressBloc = CongressBloc(
+              congressRepository: CongressRepository(),
+            );
 
-                        bloc.dispatch(LoadSpeakers(state.congress));
+            congressBloc.dispatch(LoadCongress(congress));
 
-                        return bloc;
-                      },
-                      child: SpeakersList(),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            return EventDataLoading(color: getEventColor(widget.congress));
+            return congressBloc;
           },
+          child: BlocBuilder<CongressBloc, CongressState>(
+            builder: (context, state) {
+              if (state is InitialCongressState) {
+                return EventDataLoading(color: getEventColor(congress));
+              } else if (state is LoadingCongressState) {
+                return EventDataLoading(color: getEventColor(congress));
+              } else if (state is LoadedCongressState) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      EventInfoTitle(title: "Sobre o evento"),
+                      // TODO: Improve text structure
+                      Text(
+                        state.congress.description,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      BlocProvider(
+                        builder: (context) {
+                          SpeakerBloc speakerBloc = SpeakerBloc(
+                            speakerRepository: SpeakerRepository(),
+                          );
+
+                          speakerBloc.dispatch(LoadSpeakers(state.congress));
+
+                          return speakerBloc;
+                        },
+                        child: SpeakersList(),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return EventDataLoading(color: getEventColor(congress));
+            },
+          ),
         )
       ]),
     );
