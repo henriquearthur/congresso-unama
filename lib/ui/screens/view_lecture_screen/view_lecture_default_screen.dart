@@ -17,7 +17,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Styles.appBarPageBackgroundColor,
+        backgroundColor: getCongressColor(lecture.event),
         title: Text(
           lecture.type,
           style: Styles.appBarPageTitleText,

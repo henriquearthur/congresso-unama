@@ -19,23 +19,23 @@ abstract class Styles {
   static Color engineeringColor = Color(0xff2B80C0);
 
   static Color appBarBackgroundColor = Colors.white;
-  static Color appBarIconColor = Colors.green;
-  static Color appBarLabelColor = Colors.black;
+  static Color appBarIconColor = Colors.white;
+  static Color appBarLabelColor = Colors.white;
 
   static Color appBarPageBackgroundColor = Colors.transparent;
-  static Color appBarPageIconColor = Colors.grey[600];
+  static Color appBarPageIconColor = Colors.white;
 
   static Color bottomSheetTitleColor = Colors.grey[600];
 
   // Text styles
   static TextStyle appBarTitleText = TextStyle(
-    color: Colors.green,
+    color: Colors.white,
     letterSpacing: -0.5,
     fontWeight: FontWeight.w500,
   );
 
   static TextStyle appBarPageTitleText = TextStyle(
-    color: Colors.grey[600],
+    color: Colors.white,
     letterSpacing: -0.5,
     fontWeight: FontWeight.w500,
   );

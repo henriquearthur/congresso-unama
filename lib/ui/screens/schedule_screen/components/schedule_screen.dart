@@ -35,7 +35,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       child: Scaffold(
         // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Styles.primaryColor,
           title: Text(
             'Programação',
             style: Styles.appBarTitleText,
@@ -43,7 +43,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           iconTheme: IconThemeData(color: Styles.appBarIconColor),
           centerTitle: true,
           bottom: TabBar(
-            labelColor: Colors.black,
+            labelColor: Styles.appBarLabelColor,
             tabs: [
               Tab(text: "Dia 25"),
               Tab(text: "Dia 26"),
