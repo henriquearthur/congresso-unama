@@ -1,4 +1,4 @@
-import 'package:congresso_unama/blocs/congress_schedule_filter/bloc.dart';
+import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
 import 'package:congresso_unama/blocs/schedule/bloc.dart';
 import 'package:congresso_unama/repositories/lecture_repository.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/lecture_item.dart';
@@ -18,7 +18,7 @@ class ScheduleDateList extends StatelessWidget {
       builder: (context) {
         ScheduleBloc scheduleBloc = ScheduleBloc(
           lectureRepository: LectureRepository(),
-          filterBloc: BlocProvider.of<CongressScheduleFilterBloc>(context),
+          filterBloc: BlocProvider.of<CongressFilterBloc>(context),
           date: date,
         );
 

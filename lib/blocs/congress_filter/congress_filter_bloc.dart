@@ -4,14 +4,14 @@ import 'package:congresso_unama/models/congress.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './bloc.dart';
 
-class CongressScheduleFilterBloc
-    extends Bloc<CongressScheduleFilterEvent, CongressScheduleFilterState> {
+class CongressFilterBloc
+    extends Bloc<CongressFilterEvent, CongressFilterState> {
   @override
-  CongressScheduleFilterState get initialState => CongressesLoading();
+  CongressFilterState get initialState => CongressesLoading();
 
   @override
-  Stream<CongressScheduleFilterState> mapEventToState(
-    CongressScheduleFilterEvent event,
+  Stream<CongressFilterState> mapEventToState(
+    CongressFilterEvent event,
   ) async* {
     if (event is LoadCongresses) {
       yield* _mapLoadCongressesToState(event);
@@ -22,7 +22,7 @@ class CongressScheduleFilterBloc
     }
   }
 
-  Stream<CongressScheduleFilterState> _mapLoadCongressesToState(
+  Stream<CongressFilterState> _mapLoadCongressesToState(
       LoadCongresses event) async* {
     List<String> congressesId = await getSavedCongresses();
     List<Congress> congresses = _mapCongressesIdToCongress(congressesId);
@@ -30,8 +30,7 @@ class CongressScheduleFilterBloc
     yield CongressesLoaded(congresses);
   }
 
-  Stream<CongressScheduleFilterState> _mapAddCongressToState(
-      AddCongress event) async* {
+  Stream<CongressFilterState> _mapAddCongressToState(AddCongress event) async* {
     if (currentState is CongressesLoaded) {
       List<String> congressesId = await getSavedCongresses();
 
@@ -48,7 +47,7 @@ class CongressScheduleFilterBloc
     }
   }
 
-  Stream<CongressScheduleFilterState> _mapDeleteCongressToState(
+  Stream<CongressFilterState> _mapDeleteCongressToState(
       DeleteCongress event) async* {
     if (currentState is CongressesLoaded) {
       List<String> congressesId = await getSavedCongresses();
@@ -67,8 +66,8 @@ class CongressScheduleFilterBloc
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> congressesId;
 
-    if (prefs.containsKey("congress_schedule_filter")) {
-      congressesId = prefs.getStringList("congress_schedule_filter");
+    if (prefs.containsKey("congress_filter")) {
+      congressesId = prefs.getStringList("congress_filter");
     } else {
       congressesId = ['arquitetura', 'computacao', 'engenharia'];
       _saveCongresses(congressesId);
@@ -79,7 +78,7 @@ class CongressScheduleFilterBloc
 
   Future _saveCongresses(List<String> congressesId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList("congress_schedule_filter", congressesId);
+    prefs.setStringList("congress_filter", congressesId);
   }
 
   List<Congress> _mapCongressesIdToCongress(List<String> congressesId) {

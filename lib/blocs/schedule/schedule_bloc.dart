@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
-import 'package:congresso_unama/blocs/congress_schedule_filter/bloc.dart';
+import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/repositories/lecture_repository.dart';
 import './bloc.dart';
@@ -12,7 +12,7 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   final LectureRepository lectureRepository;
   StreamSubscription subscription;
 
-  final CongressScheduleFilterBloc filterBloc;
+  final CongressFilterBloc filterBloc;
   StreamSubscription filterBlocSubscription;
 
   ScheduleBloc(

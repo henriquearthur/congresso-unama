@@ -1,4 +1,4 @@
-import 'package:congresso_unama/blocs/congress_schedule_filter/congress_schedule_filter_bloc.dart';
+import 'package:congresso_unama/blocs/congress_filter/congress_filter_bloc.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/filter_events_bottom_sheet.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_date_list.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
@@ -14,14 +14,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   final dates = ["25-10-2018", "26-10-2018", "27-10-2018"];
 
   void _openFilterSchedule() {
-    final congressScheduleFilterBloc =
-        BlocProvider.of<CongressScheduleFilterBloc>(context);
+    final congressFilterBloc = BlocProvider.of<CongressFilterBloc>(context);
 
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
         return BlocProvider.value(
-          value: congressScheduleFilterBloc,
+          value: congressFilterBloc,
           child: FilterEventsBottomSheet(),
         );
       },

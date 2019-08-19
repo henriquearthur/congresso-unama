@@ -1,4 +1,4 @@
-import 'package:congresso_unama/blocs/congress_schedule_filter/bloc.dart';
+import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
 import 'package:congresso_unama/models/congress.dart';
 import 'package:congresso_unama/ui/utils/get_congress_color.dart';
 import 'package:congresso_unama/ui/utils/get_congress_short_name.dart';
@@ -12,10 +12,9 @@ class FilterEventChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final congressScheduleFilterBloc =
-        BlocProvider.of<CongressScheduleFilterBloc>(context);
+    final congressFilterBloc = BlocProvider.of<CongressFilterBloc>(context);
 
-    return BlocBuilder<CongressScheduleFilterBloc, CongressScheduleFilterState>(
+    return BlocBuilder<CongressFilterBloc, CongressFilterState>(
       builder: (context, state) {
         if (state is CongressesLoading) {
           return Center(child: CircularProgressIndicator());
@@ -31,11 +30,10 @@ class FilterEventChip extends StatelessWidget {
             selected: state.congresses.contains(Congress(id: congressId)),
             onSelected: (bool value) {
               if (value) {
-                congressScheduleFilterBloc.dispatch(AddCongress(congressId));
+                congressFilterBloc.dispatch(AddCongress(congressId));
               } else {
                 if (state.congresses.length > 1) {
-                  congressScheduleFilterBloc
-                      .dispatch(DeleteCongress(congressId));
+                  congressFilterBloc.dispatch(DeleteCongress(congressId));
                 }
               }
             },
