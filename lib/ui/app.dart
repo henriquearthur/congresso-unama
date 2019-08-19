@@ -1,7 +1,9 @@
+import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
 import 'package:congresso_unama/navigation/destination/destination.dart';
 import 'package:congresso_unama/navigation/destination/destination_view.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatefulWidget {
   @override
@@ -35,9 +37,15 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
         navigator.pop();
         return false;
       },
-      child: Container(
-        child: Scaffold(
-          body: SafeArea(
+      child: Scaffold(
+        body: BlocProvider(
+          builder: (context) {
+            CongressFilterBloc congressFilterBloc = CongressFilterBloc();
+            congressFilterBloc.dispatch(LoadCongresses());
+
+            return congressFilterBloc;
+          },
+          child: SafeArea(
             top: false,
             child: Container(
               child: Stack(
@@ -59,22 +67,22 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
               ),
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            selectedItemColor: Styles.primaryColor,
-            onTap: (int index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: allDestinations.map((Destination destination) {
-              return BottomNavigationBarItem(
-                icon: Icon(destination.icon),
-                title: SizedBox.shrink(),
-              );
-            }).toList(),
-          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          selectedItemColor: Styles.primaryColor,
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: allDestinations.map((Destination destination) {
+            return BottomNavigationBarItem(
+              icon: Icon(destination.icon),
+              title: SizedBox.shrink(),
+            );
+          }).toList(),
         ),
       ),
     );
