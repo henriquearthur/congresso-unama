@@ -31,13 +31,13 @@ class Paper {
       id: doc.documentID,
       title: data['title'] ?? '',
       type: data['type'] ?? '',
-      students: data['names'] ?? [],
+      students: (data['names'].cast<String>() ?? [])..sort(),
       presentationMethod: data['presentation_method'] ?? '',
       location: data['location'] ?? '',
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
       date: data['date'] ?? '',
-      congress: data['event'] ?? '',
+      congress: data['congress'] ?? '',
     );
   }
 }

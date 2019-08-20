@@ -1,10 +1,7 @@
-import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
-import 'package:congresso_unama/ui/screens/schedule_screen/components/filter_events_bottom_sheet.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_date_list.dart';
 import 'package:congresso_unama/ui/shared_components/fab_open_filter.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScheduleDefaultScreen extends StatefulWidget {
   @override
