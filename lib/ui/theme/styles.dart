@@ -42,6 +42,11 @@ abstract class Styles {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle bottomNavigationBarTitleText = TextStyle(
+    letterSpacing: -0.5,
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle bottomSheetTitleText = TextStyle(
     color: bottomSheetTitleColor,
     fontSize: 22.0,

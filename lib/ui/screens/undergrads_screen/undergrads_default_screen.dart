@@ -2,7 +2,6 @@ import 'package:congresso_unama/blocs/congress_filter/congress_filter_bloc.dart'
 import 'package:congresso_unama/blocs/paper/bloc.dart';
 import 'package:congresso_unama/blocs/paper/paper_bloc.dart';
 import 'package:congresso_unama/repositories/paper_repository.dart';
-import 'package:congresso_unama/ui/helpers/scroll_no_glow_behavior.dart';
 import 'package:congresso_unama/ui/screens/undergrads_screen/components/paper_item.dart';
 import 'package:congresso_unama/ui/screens/undergrads_screen/components/paper_loading_list.dart';
 import 'package:congresso_unama/ui/shared_components/fab_open_filter.dart';

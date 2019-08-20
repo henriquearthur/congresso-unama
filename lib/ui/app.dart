@@ -80,7 +80,10 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           items: allDestinations.map((Destination destination) {
             return BottomNavigationBarItem(
               icon: Icon(destination.icon),
-              title: Text(destination.title),
+              title: Text(
+                destination.title,
+                style: Styles.bottomNavigationBarTitleText,
+              ),
             );
           }).toList(),
         ),
