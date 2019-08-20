@@ -10,7 +10,7 @@ class Lecture {
   final String speakerDetails;
   final String hourStart;
   final String hourEnd;
-  final String event;
+  final String congress;
   final String date;
 
   Lecture(
@@ -22,7 +22,7 @@ class Lecture {
       this.speakerDetails,
       this.hourStart,
       this.hourEnd,
-      this.event,
+      this.congress,
       this.date});
 
   String getFullDate() {
@@ -48,7 +48,7 @@ class Lecture {
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
       date: data['date'] ?? '',
-      event: data['event'] ?? '',
+      congress: data['congress'] ?? '',
     );
   }
 }

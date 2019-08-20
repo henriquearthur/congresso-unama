@@ -27,6 +27,13 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   }
 
   @override
+  void dispose() {
+    subscription?.cancel();
+    filterBlocSubscription?.cancel();
+    super.dispose();
+  }
+
+  @override
   ScheduleState get initialState => InitialScheduleState();
 
   @override
@@ -49,18 +56,11 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
     }
   }
 
-  @override
-  void dispose() {
-    subscription?.cancel();
-    filterBlocSubscription?.cancel();
-    super.dispose();
-  }
-
   Future<List<Lecture>> _filterLectures(List<Lecture> lectures) async {
     List<String> congresses = await filterBloc.getSavedCongresses();
 
     return lectures
-        .where((lecture) => congresses.contains(lecture.event))
+        .where((lecture) => congresses.contains(lecture.congress))
         .toList();
   }
 }

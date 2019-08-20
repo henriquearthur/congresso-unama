@@ -80,14 +80,14 @@ class LectureItem extends StatelessWidget {
                   SizedBox(height: 10.0),
                   Chip(
                     label: Text(
-                      getCongressName(lecture.event),
+                      getCongressName(lecture.congress),
                       style: TextStyle(
                         fontSize: 13.0,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    backgroundColor: getCongressColor(lecture.event),
+                    backgroundColor: getCongressColor(lecture.congress),
                   ),
                 ],
               ),
