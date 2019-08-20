@@ -9,7 +9,7 @@ class Destination {
 }
 
 List<Destination> allDestinations = <Destination>[
-  Destination(0, 'Principal', Icons.home),
+  Destination(0, 'Home', Icons.home),
   Destination(1, 'Programação', Icons.calendar_today),
   Destination(2, 'Trabalhos', Icons.school),
   Destination(3, 'Localização', Icons.location_on),

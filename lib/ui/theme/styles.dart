@@ -25,6 +25,8 @@ abstract class Styles {
   static Color appBarPageBackgroundColor = Colors.transparent;
   static Color appBarPageIconColor = Colors.white;
 
+  static Color bottomNavigationBarIconColor = Colors.grey[700];
+
   static Color bottomSheetTitleColor = Colors.grey[600];
 
   // Text styles

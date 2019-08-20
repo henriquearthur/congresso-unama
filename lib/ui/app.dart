@@ -69,9 +69,9 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           selectedItemColor: Styles.primaryColor,
+          unselectedItemColor: Styles.bottomNavigationBarIconColor,
           onTap: (int index) {
             setState(() {
               _currentIndex = index;
@@ -80,7 +80,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           items: allDestinations.map((Destination destination) {
             return BottomNavigationBarItem(
               icon: Icon(destination.icon),
-              title: SizedBox.shrink(),
+              title: Text(destination.title),
             );
           }).toList(),
         ),

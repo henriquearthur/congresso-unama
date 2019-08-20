@@ -42,56 +42,58 @@ class _UndergradsDefaultScreenState extends State<UndergradsDefaultScreen> {
 
           return paperBloc;
         },
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: RichText(
-                text: TextSpan(
-                  text:
-                      'Os trabalhos científicos abaixo foram submetidos por congressistas e aprovados pela Comissão Científica do Congresso. A apresentação de cada trabalho por seus respectivos autores é realizada por meio de ',
-                  style: DefaultTextStyle.of(context)
-                      .style
-                      .apply(color: Colors.grey[600]),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'pôster ',
-                        style: TextStyle(fontWeight: FontWeight.w500)),
-                    TextSpan(text: 'ou '),
-                    TextSpan(
-                        text: 'apresentação oral.',
-                        style: TextStyle(fontWeight: FontWeight.w500)),
-                  ],
-                ),
-              ),
-            ),
-            BlocBuilder<PaperBloc, PaperState>(
-              builder: (context, state) {
-                if (state is InitialPaperState) {
-                  return PaperLoadingList();
-                } else if (state is LoadingPapersState) {
-                  return PaperLoadingList();
-                } else if (state is LoadedPapersState) {
-                  return Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollNoGlowBehavior(),
-                      child: ListView.separated(
-                        key: PageStorageKey("UndergradsDefaultScreen"),
-                        separatorBuilder: (context, index) =>
-                            Divider(height: 0.0),
-                        itemCount: state.papers.length,
-                        itemBuilder: (context, index) {
-                          return PaperItem(paper: state.papers[index]);
-                        },
-                      ),
-                    ),
-                  );
-                }
+        child: BlocBuilder<PaperBloc, PaperState>(
+          builder: (context, state) {
+            if (state is InitialPaperState) {
+              return PaperLoadingList();
+            } else if (state is LoadingPapersState) {
+              return PaperLoadingList();
+            } else if (state is LoadedPapersState) {
+              return ListView.separated(
+                key: PageStorageKey("UndergradsDefaultScreen"),
+                separatorBuilder: (context, index) => Divider(height: 0.0),
+                itemCount: state.papers.length,
+                itemBuilder: (context, index) {
+                  PaperItem paperItem = PaperItem(paper: state.papers[index]);
 
-                return PaperLoadingList();
-              },
-            ),
-          ],
+                  if (index == 0) {
+                    return Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: RichText(
+                            text: TextSpan(
+                              text:
+                                  'Os trabalhos científicos abaixo foram submetidos por congressistas e aprovados pela Comissão Científica do Congresso. A apresentação de cada trabalho por seus respectivos autores é realizada por meio de ',
+                              style: DefaultTextStyle.of(context)
+                                  .style
+                                  .apply(color: Colors.grey[600]),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'pôster ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w500)),
+                                TextSpan(text: 'ou '),
+                                TextSpan(
+                                    text: 'apresentação oral.',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        paperItem,
+                      ],
+                    );
+                  }
+
+                  return paperItem;
+                },
+              );
+            }
+
+            return PaperLoadingList();
+          },
         ),
       ),
       floatingActionButton: FabOpenFilter(),
