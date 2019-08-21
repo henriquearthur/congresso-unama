@@ -26,16 +26,14 @@ class LectureItem extends StatelessWidget {
               children: <Widget>[
                 Text(
                   lecture.hourStart,
-                  style: TextStyle(
-                      color: Styles.scheduleScreenColor, fontSize: 18.0),
+                  style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
                 ),
                 SizedBox(height: 5.0),
                 Text("até"),
                 SizedBox(height: 5.0),
                 Text(
                   lecture.hourEnd,
-                  style: TextStyle(
-                      color: Styles.scheduleScreenColor, fontSize: 18.0),
+                  style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
                 ),
                 if (lecture.speakerImg != "") ...[
                   SizedBox(height: 10.0),

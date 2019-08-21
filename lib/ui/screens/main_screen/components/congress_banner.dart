@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class EventBanner extends StatelessWidget {
+class CongressBanner extends StatelessWidget {
   final ImageProvider image;
   final String heroTag;
   final VoidCallback onTap;
 
-  const EventBanner({Key key, this.image, this.onTap, this.heroTag})
+  const CongressBanner({Key key, this.image, this.onTap, this.heroTag})
       : super(key: key);
 
   @override
