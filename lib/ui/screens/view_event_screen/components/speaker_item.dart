@@ -12,7 +12,7 @@ class SpeakerItem extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        // TODO: Change this to scrollable bottom sheet
+        // TODO: UI - Change this to scrollable bottom sheet
         return SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(16.0),

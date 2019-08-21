@@ -16,7 +16,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        // TODO: Change this to SliverAppBar (https://github.com/flutter/flutter/issues/19720)
+        // TODO: UI - Use Slivers (https://github.com/flutter/flutter/issues/19720)
         appBar: AppBar(
           backgroundColor: Styles.primaryColor,
           title: Text(

@@ -30,7 +30,7 @@ class ViewEventDefaultScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
       ),
-      // TODO: Replace ListView with slivers
+      // TODO: UI - Use Slivers
       body: ListView(children: <Widget>[
         AspectRatio(
           aspectRatio: 20 / 9,
@@ -69,7 +69,7 @@ class ViewEventDefaultScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       EventInfoTitle(title: "Sobre o evento"),
-                      // TODO: Improve text structure
+                      // TODO: Data - Improve text structure
                       Text(
                         state.congress.description,
                         textAlign: TextAlign.justify,
