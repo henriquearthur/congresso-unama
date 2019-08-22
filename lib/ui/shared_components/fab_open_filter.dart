@@ -25,9 +25,13 @@ class _FabOpenFilterState extends State<FabOpenFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return FloatingActionButton.extended(
       onPressed: _openFilterSchedule,
-      child: Icon(Icons.filter_list),
+      icon: Icon(Icons.filter_list),
+      label: Text(
+        "Filtrar",
+        style: TextStyle(letterSpacing: 0.0),
+      ),
     );
   }
 }

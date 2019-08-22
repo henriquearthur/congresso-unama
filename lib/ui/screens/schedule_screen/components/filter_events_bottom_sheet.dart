@@ -20,6 +20,10 @@ class FilterEventsBottomSheet extends StatelessWidget {
                 "Filtrar por área",
                 style: Styles.bottomSheetTitleText,
               ),
+              Icon(
+                Icons.filter_list,
+                color: Styles.bottomSheetTitleColor,
+              ),
             ],
           ),
           SizedBox(height: 10.0),
