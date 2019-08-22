@@ -33,13 +33,25 @@ class ScheduleDateList extends StatelessWidget {
           } else if (state is LoadingScheduleState) {
             return ScheduleLoadingList();
           } else if (state is LoadedScheduleState) {
-            return ListView.separated(
-              key: PageStorageKey("ScheduleDateList-$date"),
-              separatorBuilder: (context, index) => Divider(height: 0.0),
-              itemCount: state.lectures.length,
-              itemBuilder: (context, index) {
-                return LectureItem(lecture: state.lectures[index]);
-              },
+            return CustomScrollView(
+              key: PageStorageKey<String>(date),
+              slivers: <Widget>[
+                SliverOverlapInjector(
+                  // This is the flip side of the SliverOverlapAbsorber above.
+                  handle:
+                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return LectureItem(
+                        lecture: state.lectures[index],
+                      );
+                    },
+                    childCount: state.lectures.length,
+                  ),
+                )
+              ],
             );
           }
 

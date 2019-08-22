@@ -13,34 +13,54 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        // TODO: UI - Use Slivers (https://github.com/flutter/flutter/issues/19720)
-        appBar: AppBar(
-          backgroundColor: Styles.primaryColor,
-          title: Text(
-            'Programação',
-            style: Styles.appBarTitleText,
-          ),
-          iconTheme: IconThemeData(color: Styles.appBarIconColor),
-          centerTitle: true,
-          bottom: TabBar(
-            labelColor: Styles.appBarLabelColor,
-            tabs: [
-              Tab(text: "Dia 25"),
-              Tab(text: "Dia 26"),
-              Tab(text: "Dia 27"),
-            ],
+    return Scaffold(
+      body: DefaultTabController(
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverOverlapAbsorber(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                child: SliverSafeArea(
+                  top: false,
+                  sliver: SliverAppBar(
+                    backgroundColor: Styles.primaryColor,
+                    title: Text(
+                      'Programação',
+                      style: Styles.appBarTitleText,
+                    ),
+                    iconTheme: IconThemeData(color: Styles.appBarIconColor),
+                    centerTitle: true,
+                    floating: true,
+                    snap: true,
+                    primary: true,
+                    forceElevated: innerBoxIsScrolled,
+                    bottom: TabBar(
+                      labelColor: Styles.appBarLabelColor,
+                      tabs: [
+                        Tab(text: "Dia 25"),
+                        Tab(text: "Dia 26"),
+                        Tab(text: "Dia 27"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: dates.map((date) {
+              return SafeArea(
+                top: false,
+                bottom: false,
+                child: ScheduleDateList(date: date),
+              );
+            }).toList(),
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            for (var date in dates) ScheduleDateList(date: date),
-          ],
-        ),
-        floatingActionButton: FabOpenFilter(),
       ),
+      floatingActionButton: FabOpenFilter(),
     );
   }
 }
