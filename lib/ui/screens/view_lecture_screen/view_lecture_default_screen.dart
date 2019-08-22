@@ -36,129 +36,135 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             icon: Icon(Icons.share),
           )
         ],
-        elevation: 0.0,
         iconTheme: IconThemeData(color: Styles.appBarPageIconColor),
         centerTitle: true,
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: <Widget>[
-          Text(
-            lecture.title,
-            style: TextStyle(
-              color: getCongressColor(lecture.congress),
-              fontSize: 26.0,
-              letterSpacing: -0.5,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          Text(
-            lecture.type,
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Text(
-            lecture.getFullDate(),
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 16.0,
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                lecture.hourStart,
-                style: TextStyle(
-                    color: getCongressColor(lecture.congress), fontSize: 24.0),
-              ),
-              SizedBox(width: 8.0),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
-                  "até",
-                  style: TextStyle(color: Colors.grey, fontSize: 16.0),
-                ),
-              ),
-              SizedBox(width: 8.0),
-              Text(
-                lecture.hourEnd,
-                style: TextStyle(
-                    color: getCongressColor(lecture.congress), fontSize: 24.0),
-              ),
-            ],
-          ),
-          SizedBox(height: 15.0),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Chip(
-              label: Text(
-                getCongressName(lecture.congress),
-                style: TextStyle(
-                  fontSize: 13.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              backgroundColor: getCongressColor(lecture.congress),
-            ),
-          ),
-          Divider(),
-          if (lecture.speakerImg != "") ...[
-            SizedBox(height: 10.0),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(100.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Color.fromARGB(100, 0, 0, 0),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: new BorderRadius.circular(120.0),
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) => Image.asset(
-                        'assets/images/placeholder.png',
-                        width: 120.0,
-                        height: 120.0),
-                    imageUrl: lecture.speakerImg,
-                    height: 120.0,
-                    width: 120.0,
-                  ),
-                ),
-              ),
-            )
-          ],
-          if (lecture.speaker.isNotEmpty) ...[
-            SizedBox(height: 20.0),
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          accentColor: getCongressColor(lecture.congress),
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(16.0),
+          children: <Widget>[
             Text(
-              lecture.speaker,
-              textAlign: TextAlign.center,
+              lecture.title,
               style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 22.0,
+                color: getCongressColor(lecture.congress),
+                fontSize: 26.0,
+                letterSpacing: -0.5,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            if (lecture.speakerDetails.isNotEmpty) SizedBox(height: 15.0),
             Text(
-              lecture.speakerDetails,
+              lecture.type,
               style: TextStyle(
-                color: Colors.grey[600],
+                color: Colors.grey,
                 fontSize: 16.0,
               ),
-            )
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              lecture.getFullDate(),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 16.0,
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  lecture.hourStart,
+                  style: TextStyle(
+                      color: getCongressColor(lecture.congress),
+                      fontSize: 24.0),
+                ),
+                SizedBox(width: 8.0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Text(
+                    "até",
+                    style: TextStyle(color: Colors.grey, fontSize: 16.0),
+                  ),
+                ),
+                SizedBox(width: 8.0),
+                Text(
+                  lecture.hourEnd,
+                  style: TextStyle(
+                      color: getCongressColor(lecture.congress),
+                      fontSize: 24.0),
+                ),
+              ],
+            ),
+            SizedBox(height: 15.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Chip(
+                label: Text(
+                  getCongressName(lecture.congress),
+                  style: TextStyle(
+                    fontSize: 13.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                backgroundColor: getCongressColor(lecture.congress),
+              ),
+            ),
+            Divider(),
+            if (lecture.speakerImg != "") ...[
+              SizedBox(height: 10.0),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Color.fromARGB(100, 0, 0, 0),
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 5.0,
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: new BorderRadius.circular(120.0),
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) => Image.asset(
+                          'assets/images/placeholder.png',
+                          width: 120.0,
+                          height: 120.0),
+                      imageUrl: lecture.speakerImg,
+                      height: 120.0,
+                      width: 120.0,
+                    ),
+                  ),
+                ),
+              )
+            ],
+            if (lecture.speaker.isNotEmpty) ...[
+              SizedBox(height: 20.0),
+              Text(
+                lecture.speaker,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (lecture.speakerDetails.isNotEmpty) SizedBox(height: 15.0),
+              Text(
+                lecture.speakerDetails,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16.0,
+                ),
+              )
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
