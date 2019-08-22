@@ -63,72 +63,76 @@ class ViewEventDefaultScreen extends StatelessWidget {
             ),
           ];
         },
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate(
-                <Widget>[
-                  BlocProvider(
-                    builder: (context) {
-                      CongressBloc congressBloc = CongressBloc(
-                        congressRepository: CongressRepository(),
-                      );
+        body: Theme(
+          data: Theme.of(context)
+              .copyWith(accentColor: getCongressColor(congress)),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  <Widget>[
+                    BlocProvider(
+                      builder: (context) {
+                        CongressBloc congressBloc = CongressBloc(
+                          congressRepository: CongressRepository(),
+                        );
 
-                      congressBloc.dispatch(LoadCongress(congress));
+                        congressBloc.dispatch(LoadCongress(congress));
 
-                      return congressBloc;
-                    },
-                    child: BlocBuilder<CongressBloc, CongressState>(
-                      builder: (context, state) {
-                        if (state is InitialCongressState) {
-                          return EventDataLoading(
-                              color: getCongressColor(congress));
-                        } else if (state is LoadingCongressState) {
-                          return EventDataLoading(
-                              color: getCongressColor(congress));
-                        } else if (state is LoadedCongressState) {
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                EventInfoTitle(title: "Sobre o evento"),
-                                // TODO: Data - Improve text structure
-                                Text(
-                                  state.congress.description,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                                BlocProvider(
-                                  builder: (context) {
-                                    SpeakerBloc speakerBloc = SpeakerBloc(
-                                      speakerRepository: SpeakerRepository(),
-                                    );
-
-                                    speakerBloc
-                                        .dispatch(LoadSpeakers(state.congress));
-
-                                    return speakerBloc;
-                                  },
-                                  child: SpeakersList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-
-                        return EventDataLoading(
-                            color: getCongressColor(congress));
+                        return congressBloc;
                       },
-                    ),
-                  )
-                ],
+                      child: BlocBuilder<CongressBloc, CongressState>(
+                        builder: (context, state) {
+                          if (state is InitialCongressState) {
+                            return EventDataLoading(
+                                color: getCongressColor(congress));
+                          } else if (state is LoadingCongressState) {
+                            return EventDataLoading(
+                                color: getCongressColor(congress));
+                          } else if (state is LoadedCongressState) {
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  EventInfoTitle(title: "Sobre o evento"),
+                                  // TODO: Data - Improve text structure
+                                  Text(
+                                    state.congress.description,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  BlocProvider(
+                                    builder: (context) {
+                                      SpeakerBloc speakerBloc = SpeakerBloc(
+                                        speakerRepository: SpeakerRepository(),
+                                      );
+
+                                      speakerBloc.dispatch(
+                                          LoadSpeakers(state.congress));
+
+                                      return speakerBloc;
+                                    },
+                                    child: SpeakersList(),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+
+                          return EventDataLoading(
+                              color: getCongressColor(congress));
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
