@@ -35,7 +35,7 @@ abstract class Styles {
 
   static TextStyle appBarPageTitleText = TextStyle(
     color: Colors.white,
-    letterSpacing: -0.5,
+    letterSpacing: -1.0,
     fontWeight: FontWeight.w500,
   );
 

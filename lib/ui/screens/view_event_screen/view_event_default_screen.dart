@@ -20,86 +20,117 @@ class ViewEventDefaultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: getCongressColor(congress),
-        title: Text(
-          getCongressShortName(congress),
-          style: Styles.appBarPageTitleText.apply(color: Colors.white),
-        ),
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.white),
-        centerTitle: true,
-      ),
-      // TODO: UI - Use Slivers
-      body: ListView(children: <Widget>[
-        AspectRatio(
-          aspectRatio: 20 / 9,
-          child: Hero(
-            tag: congress,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage("assets/images/banner_$congress.jpg"),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 180.0,
+              floating: false,
+              pinned: true,
+              backgroundColor: getCongressColor(congress),
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Text(
+                  getCongressShortName(congress),
+                  style: Styles.appBarPageTitleText.apply(color: Colors.white),
+                ),
+                background: Stack(
+                  children: <Widget>[
+                    Image(
+                      fit: BoxFit.fill,
+                      width: MediaQuery.of(context).size.width,
+                      height: 180.0 + 24.0,
+                      image: AssetImage("assets/images/banner_$congress.jpg"),
+                    ),
+                    Container(
+                      height: 180.0 + 24.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        gradient: LinearGradient(
+                          begin: FractionalOffset.topCenter,
+                          end: FractionalOffset.bottomCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.1),
+                            getCongressColor(congress).withOpacity(0.8),
+                          ],
+                          stops: [0.0, 1.0],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-        ),
-        BlocProvider(
-          builder: (context) {
-            CongressBloc congressBloc = CongressBloc(
-              congressRepository: CongressRepository(),
-            );
+          ];
+        },
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                <Widget>[
+                  BlocProvider(
+                    builder: (context) {
+                      CongressBloc congressBloc = CongressBloc(
+                        congressRepository: CongressRepository(),
+                      );
 
-            congressBloc.dispatch(LoadCongress(congress));
+                      congressBloc.dispatch(LoadCongress(congress));
 
-            return congressBloc;
-          },
-          child: BlocBuilder<CongressBloc, CongressState>(
-            builder: (context, state) {
-              if (state is InitialCongressState) {
-                return EventDataLoading(color: getCongressColor(congress));
-              } else if (state is LoadingCongressState) {
-                return EventDataLoading(color: getCongressColor(congress));
-              } else if (state is LoadedCongressState) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      EventInfoTitle(title: "Sobre o evento"),
-                      // TODO: Data - Improve text structure
-                      Text(
-                        state.congress.description,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      BlocProvider(
-                        builder: (context) {
-                          SpeakerBloc speakerBloc = SpeakerBloc(
-                            speakerRepository: SpeakerRepository(),
+                      return congressBloc;
+                    },
+                    child: BlocBuilder<CongressBloc, CongressState>(
+                      builder: (context, state) {
+                        if (state is InitialCongressState) {
+                          return EventDataLoading(
+                              color: getCongressColor(congress));
+                        } else if (state is LoadingCongressState) {
+                          return EventDataLoading(
+                              color: getCongressColor(congress));
+                        } else if (state is LoadedCongressState) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                EventInfoTitle(title: "Sobre o evento"),
+                                // TODO: Data - Improve text structure
+                                Text(
+                                  state.congress.description,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                                BlocProvider(
+                                  builder: (context) {
+                                    SpeakerBloc speakerBloc = SpeakerBloc(
+                                      speakerRepository: SpeakerRepository(),
+                                    );
+
+                                    speakerBloc
+                                        .dispatch(LoadSpeakers(state.congress));
+
+                                    return speakerBloc;
+                                  },
+                                  child: SpeakersList(),
+                                ),
+                              ],
+                            ),
                           );
+                        }
 
-                          speakerBloc.dispatch(LoadSpeakers(state.congress));
-
-                          return speakerBloc;
-                        },
-                        child: SpeakersList(),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return EventDataLoading(color: getCongressColor(congress));
-            },
-          ),
-        )
-      ]),
+                        return EventDataLoading(
+                            color: getCongressColor(congress));
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

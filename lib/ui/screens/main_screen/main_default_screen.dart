@@ -88,7 +88,6 @@ class MainDefaultScreen extends StatelessWidget {
                   SizedBox(height: 20.0),
                   CongressBanner(
                     image: AssetImage('assets/images/banner_arquitetura.jpg'),
-                    heroTag: "arquitetura",
                     onTap: () {
                       Navigator.of(context).pushNamed("/view-event",
                           arguments: {'event': 'arquitetura'});
@@ -97,7 +96,6 @@ class MainDefaultScreen extends StatelessWidget {
                   SizedBox(height: 20.0),
                   CongressBanner(
                     image: AssetImage('assets/images/banner_computacao.jpg'),
-                    heroTag: "computacao",
                     onTap: () {
                       Navigator.of(context).pushNamed("/view-event",
                           arguments: {'event': 'computacao'});
@@ -106,7 +104,6 @@ class MainDefaultScreen extends StatelessWidget {
                   SizedBox(height: 20.0),
                   CongressBanner(
                     image: AssetImage('assets/images/banner_engenharia.jpg'),
-                    heroTag: "engenharia",
                     onTap: () {
                       Navigator.of(context).pushNamed("/view-event",
                           arguments: {'event': 'engenharia'});
