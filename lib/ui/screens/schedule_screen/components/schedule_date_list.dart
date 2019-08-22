@@ -46,6 +46,7 @@ class ScheduleDateList extends StatelessWidget {
                     (BuildContext context, int index) {
                       return LectureItem(
                         lecture: state.lectures[index],
+                        separator: (index < state.lectures.length - 1),
                       );
                     },
                     childCount: state.lectures.length,
