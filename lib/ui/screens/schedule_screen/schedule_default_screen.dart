@@ -33,6 +33,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                     iconTheme: IconThemeData(color: Styles.appBarIconColor),
                     centerTitle: true,
                     floating: true,
+                    pinned: true,
                     snap: true,
                     primary: true,
                     forceElevated: innerBoxIsScrolled,
