@@ -8,6 +8,4 @@
 
         <item name="android:defaultFocusHighlightEnabled">false</item>
     </style>
-
-    <color name="green">#4caf50</color>
 </resources>
