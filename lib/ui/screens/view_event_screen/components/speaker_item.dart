@@ -11,32 +11,41 @@ class SpeakerItem extends StatelessWidget {
   void _showDetails(context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        // TODO: UI - Change this to scrollable bottom sheet
-        return SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                SpeakerImage(
-                  image: speaker.image,
-                  size: 120.0,
-                ),
-                SizedBox(height: 15.0),
-                Text(
-                  speaker.name,
-                  style: Styles.bottomSheetTitleText,
-                ),
-                SizedBox(height: 15.0),
-                Text(
-                  speaker.details,
-                  textAlign: TextAlign.justify,
-                  style: Styles.bottomSheetDescriptionText
-                      .copyWith(fontSize: 14.0),
-                )
-              ],
-            ),
-          ),
+        return DraggableScrollableSheet(
+          expand: false,
+          builder: (BuildContext context, ScrollController scrollController) {
+            return Container(
+              color: Colors.grey[200],
+              child: ListView(
+                controller: scrollController,
+                padding: const EdgeInsets.all(16.0),
+                children: <Widget>[
+                  Center(
+                    child: SpeakerImage(
+                      image: speaker.image,
+                      size: 120.0,
+                    ),
+                  ),
+                  SizedBox(height: 15.0),
+                  Center(
+                    child: Text(
+                      speaker.name,
+                      style: Styles.bottomSheetTitleText,
+                    ),
+                  ),
+                  SizedBox(height: 15.0),
+                  Text(
+                    speaker.details,
+                    textAlign: TextAlign.justify,
+                    style: Styles.bottomSheetDescriptionText
+                        .copyWith(fontSize: 14.0),
+                  )
+                ],
+              ),
+            );
+          },
         );
       },
     );

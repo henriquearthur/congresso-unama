@@ -22,7 +22,7 @@ abstract class Styles {
 
   static Color bottomNavigationBarIconColor = Colors.grey[700];
 
-  static Color bottomSheetTitleColor = Colors.grey[600];
+  static Color bottomSheetTitleColor = Colors.grey[700];
 
   static Color dialogTitleColor = Colors.grey[600];
 
