@@ -41,13 +41,6 @@ class _LocationMapState extends State<LocationMap> {
           return Container(
             width: MediaQuery.of(context).size.width,
             height: 300.0,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            height: 300.0,
             child: Stack(
               children: <Widget>[
                 GoogleMap(
