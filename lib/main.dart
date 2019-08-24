@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IV Congresso Nacional de Ciências Exatas e Tecnologia',
+      title: 'Congressos Unama',
       theme: ThemeData(
         primarySwatch: Styles.primaryColor,
         primaryColor: Styles.primaryColor,

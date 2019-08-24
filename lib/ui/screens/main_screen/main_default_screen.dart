@@ -76,7 +76,7 @@ class MainDefaultScreen extends StatelessWidget {
                       style: Styles.mainScreenTitleText,
                     ),
                     Text(
-                      "Os congressos estão acontecendo no Hangar.",
+                      "Endereço e localização do evento",
                       style: Styles.mainScreenDescriptionText,
                     ),
                     SizedBox(height: 20.0),
