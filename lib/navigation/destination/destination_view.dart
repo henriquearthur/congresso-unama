@@ -3,7 +3,9 @@ import 'package:congresso_unama/navigation/navigators/location_screen_navigator.
 import 'package:congresso_unama/navigation/navigators/main_screen_navigator.dart';
 import 'package:congresso_unama/navigation/navigators/schedule_screen_navigator.dart';
 import 'package:congresso_unama/navigation/navigators/undergrads_screen_navigator.dart';
+import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DestinationView extends StatefulWidget {
   const DestinationView({Key key, this.destination, this.navigatorKey})

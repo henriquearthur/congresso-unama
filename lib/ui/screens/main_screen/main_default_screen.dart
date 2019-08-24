@@ -9,6 +9,13 @@ class MainDefaultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0.0),
+        child: AppBar(
+          backgroundColor: Styles.primaryColor,
+          elevation: 0.0,
+        ),
+      ),
       body: ScrollConfiguration(
         behavior: ScrollNoGlowBehavior(),
         child: ListView(

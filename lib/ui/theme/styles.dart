@@ -60,7 +60,7 @@ abstract class Styles {
 
   static TextStyle dialogContentText = TextStyle(
     fontFamily: Styles.primaryFontFamily,
-    fontSize: 16.0,
+    fontSize: 14.0,
     color: Colors.grey[700],
   );
 }

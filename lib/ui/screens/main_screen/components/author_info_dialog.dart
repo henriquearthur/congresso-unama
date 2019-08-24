@@ -1,8 +1,16 @@
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AuthorInfoDialog extends StatelessWidget {
+class AuthorInfoDialog extends StatefulWidget {
+  @override
+  _AuthorInfoDialogState createState() => _AuthorInfoDialogState();
+}
+
+class _AuthorInfoDialogState extends State<AuthorInfoDialog> {
+  Future<String> _appVersion;
+
   _launchMailTo() async {
     const url =
         'mailto:eu@henriquearthur.com.br?subject=Aplicativo%20Congresso%20Unama';
@@ -17,20 +25,50 @@ class AuthorInfoDialog extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
+  Future<String> _getAppVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _appVersion = _getAppVersion();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Row(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      title: Column(
         children: <Widget>[
           Icon(
-            Icons.info_outline,
-            color: Styles.dialogTitleColor,
+            Icons.school,
+            color: Styles.primaryColor,
+            size: 56.0,
           ),
-          SizedBox(width: 15.0),
           Text(
-            "Sobre o app",
-            style: TextStyle(color: Styles.dialogTitleColor),
+            "Congressos Unama",
+            style: TextStyle(color: Styles.primaryColor),
           ),
+          FutureBuilder(
+            future: _appVersion,
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData) {
+                return Text(
+                  "Versão ${snapshot.data}",
+                  style: Styles.dialogContentText,
+                );
+              } else {
+                return Text(
+                  "Versão -",
+                  style: Styles.dialogContentText,
+                );
+              }
+            },
+          )
         ],
       ),
       content: Column(
@@ -55,21 +93,6 @@ class AuthorInfoDialog extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Desenvolvido com Flutter",
-                style: Styles.dialogContentText.apply(fontSizeFactor: 0.85),
-              ),
-              SizedBox(
-                width: 16,
-                height: 16,
-                child: FlutterLogo(),
-              ),
-            ],
-          )
         ],
       ),
       actions: [
