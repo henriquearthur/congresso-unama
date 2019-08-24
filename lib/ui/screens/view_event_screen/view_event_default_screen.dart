@@ -97,7 +97,6 @@ class ViewEventDefaultScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   EventInfoTitle(title: "Sobre o evento"),
-                                  // TODO: Data - Improve text structure
                                   Text(
                                     state.congress.description,
                                     textAlign: TextAlign.justify,
