@@ -36,6 +36,8 @@ dependencies:
   equatable: ^0.4.0
   url_launcher: ^5.1.2
   package_info: ^0.4.0+6
+  google_maps_flutter: ^0.5.20+6
+
 
 dev_dependencies:
   flutter_test:

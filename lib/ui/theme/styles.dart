@@ -63,4 +63,16 @@ abstract class Styles {
     fontSize: 14.0,
     color: Colors.grey[700],
   );
+
+  static TextStyle mainScreenTitleText = TextStyle(
+    color: Styles.primaryColorDark,
+    fontSize: 32.0,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -2.0,
+  );
+
+  static TextStyle mainScreenDescriptionText = TextStyle(
+    color: Styles.primaryColorDark,
+    fontSize: 16.0,
+  );
 }

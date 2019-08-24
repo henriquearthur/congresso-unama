@@ -32,7 +32,7 @@ class SpeakerItem extends StatelessWidget {
                   speaker.details,
                   textAlign: TextAlign.justify,
                   style: Styles.bottomSheetDescriptionText
-                      .apply(fontSizeFactor: 0.9),
+                      .copyWith(fontSize: 14.0),
                 )
               ],
             ),

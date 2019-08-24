@@ -32,7 +32,8 @@ class ViewEventDefaultScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   getCongressShortName(congress),
-                  style: Styles.appBarPageTitleText.apply(color: Colors.white),
+                  style:
+                      Styles.appBarPageTitleText.copyWith(color: Colors.white),
                 ),
                 background: Stack(
                   children: <Widget>[

@@ -72,7 +72,7 @@ class PaperItem extends StatelessWidget {
                     text: 'Local de apresentaçao:\n',
                     style: DefaultTextStyle.of(context)
                         .style
-                        .apply(color: Colors.grey[600]),
+                        .copyWith(color: Colors.grey[600]),
                     children: <TextSpan>[
                       TextSpan(
                         text: paper.location,

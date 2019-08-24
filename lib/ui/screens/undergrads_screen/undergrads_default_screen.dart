@@ -66,7 +66,7 @@ class _UndergradsDefaultScreenState extends State<UndergradsDefaultScreen> {
                                   'Os trabalhos científicos abaixo foram submetidos por congressistas e aprovados pela Comissão Científica do Congresso. A apresentação de cada trabalho por seus respectivos autores é realizada por meio de ',
                               style: DefaultTextStyle.of(context)
                                   .style
-                                  .apply(color: Colors.grey[600]),
+                                  .copyWith(color: Colors.grey[600]),
                               children: <TextSpan>[
                                 TextSpan(
                                     text: 'pôster ',

@@ -1,7 +1,7 @@
 import 'package:congresso_unama/ui/helpers/scroll_no_glow_behavior.dart';
-import 'package:congresso_unama/ui/screens/main_screen/components/author_info_button.dart';
 import 'package:congresso_unama/ui/screens/main_screen/components/congress_banner.dart';
-import 'package:congresso_unama/ui/screens/main_screen/components/curve_painter.dart';
+import 'package:congresso_unama/ui/screens/main_screen/components/explore_header.dart';
+import 'package:congresso_unama/ui/screens/main_screen/components/location_map.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -21,56 +21,7 @@ class MainDefaultScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(0.0),
           children: <Widget>[
-            CustomPaint(
-              child: Container(
-                height: 380.0,
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: AuthorInfoButton(),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.school,
-                                color: Colors.white,
-                                size: 64.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "Olá, congressista!",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 26.0,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: -1.0,
-                          ),
-                        ),
-                        SizedBox(height: 15.0),
-                        Text(
-                          "Consulte a programação dos congressos de Arquitetura e Urbanismo, Informática e/ou Engenharia.",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            letterSpacing: -0.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              painter: CurvePainter(),
-            ),
+            ExploreHeader(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -78,19 +29,11 @@ class MainDefaultScreen extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Explore os congressos",
-                    style: TextStyle(
-                      color: Styles.primaryColorDark,
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: -2.0,
-                    ),
+                    style: Styles.mainScreenTitleText,
                   ),
                   Text(
                     "Toque em um congresso para saber mais sobre os temas abordados e os conferencistas participantes.",
-                    style: TextStyle(
-                      color: Styles.primaryColorDark,
-                      fontSize: 16.0,
-                    ),
+                    style: Styles.mainScreenDescriptionText,
                   ),
                   SizedBox(height: 20.0),
                   CongressBanner(
@@ -116,9 +59,37 @@ class MainDefaultScreen extends StatelessWidget {
                           arguments: {'event': 'engenharia'});
                     },
                   ),
+                  SizedBox(height: 40.0),
+                  Text(
+                    "Localização",
+                    style: Styles.mainScreenTitleText,
+                  ),
+                  Text(
+                    "Os congressos estão acontecendo no Hangar.",
+                    style: Styles.mainScreenDescriptionText,
+                  ),
+                  SizedBox(height: 20.0),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Hangar Convenções & Feiras da Amazônia\n',
+                      style: DefaultTextStyle.of(context).style.copyWith(
+                            color: Styles.primaryColorDark,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'Av. Doutor Freitas, s/n\n',
+                            style: TextStyle(fontWeight: FontWeight.normal)),
+                        TextSpan(
+                            text: 'CEP 66613-902 - Marco – Belém – Pará\n',
+                            style: TextStyle(fontWeight: FontWeight.normal)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
+            LocationMap(),
           ],
         ),
       ),
