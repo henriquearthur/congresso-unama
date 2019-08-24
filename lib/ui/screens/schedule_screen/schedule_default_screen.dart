@@ -15,7 +15,7 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 3,
+        length: dates.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -39,11 +39,10 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
                     forceElevated: innerBoxIsScrolled,
                     bottom: TabBar(
                       labelColor: Styles.appBarLabelColor,
-                      tabs: [
-                        Tab(text: "Dia 25"),
-                        Tab(text: "Dia 26"),
-                        Tab(text: "Dia 27"),
-                      ],
+                      tabs: dates.map((date) {
+                        String day = date.split('-')[0];
+                        return Tab(text: "Dia $day");
+                      }).toList(),
                     ),
                   ),
                 ),
