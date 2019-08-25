@@ -7,6 +7,8 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       [GMSServices provideAPIKey:@"AIzaSyDG4IHDx29bO1jyyvrJzq5hoVAHK730wXw"];
+    UIApplication.sharedApplication.statusBarHidden = false;
+
   [GeneratedPluginRegistrant registerWithRegistry:self];
   // Override point for customization after application launch.
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
