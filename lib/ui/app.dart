@@ -1,6 +1,8 @@
 import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
+import 'package:congresso_unama/blocs/information/bloc.dart';
 import 'package:congresso_unama/navigation/destination/destination.dart';
 import 'package:congresso_unama/navigation/destination/destination_view.dart';
+import 'package:congresso_unama/repositories/information_repository.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,13 +40,26 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
         return false;
       },
       child: Scaffold(
-        body: BlocProvider(
-          builder: (context) {
-            CongressFilterBloc congressFilterBloc = CongressFilterBloc();
-            congressFilterBloc.dispatch(LoadCongresses());
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<CongressFilterBloc>(
+              builder: (context) {
+                CongressFilterBloc congressFilterBloc = CongressFilterBloc();
+                congressFilterBloc.dispatch(LoadCongresses());
 
-            return congressFilterBloc;
-          },
+                return congressFilterBloc;
+              },
+            ),
+            BlocProvider<InformationBloc>(
+              builder: (context) {
+                InformationBloc informationBloc = InformationBloc(
+                    informationRepository: InformationRepository());
+                informationBloc.dispatch(LoadInformation());
+
+                return informationBloc;
+              },
+            ),
+          ],
           child: SafeArea(
             top: false,
             child: Container(

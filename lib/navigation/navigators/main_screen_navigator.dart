@@ -1,3 +1,4 @@
+import 'package:congresso_unama/ui/screens/location_screen/location_default_screen.dart';
 import 'package:congresso_unama/ui/screens/main_screen/main_default_screen.dart';
 import 'package:congresso_unama/ui/screens/view_event_screen/view_event_default_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,11 @@ class MainScreenNavigator extends StatelessWidget {
                 screen = ViewEventDefaultScreen(
                   congress: args['event'],
                 );
+                break;
+
+              case '/view-location':
+                screen = LocationDefaultScreen();
+                break;
             }
 
             return screen;

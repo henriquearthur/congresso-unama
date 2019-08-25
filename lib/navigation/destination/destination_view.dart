@@ -1,5 +1,4 @@
 import 'package:congresso_unama/navigation/destination/destination.dart';
-import 'package:congresso_unama/navigation/navigators/location_screen_navigator.dart';
 import 'package:congresso_unama/navigation/navigators/main_screen_navigator.dart';
 import 'package:congresso_unama/navigation/navigators/schedule_screen_navigator.dart';
 import 'package:congresso_unama/navigation/navigators/undergrads_screen_navigator.dart';
@@ -32,10 +31,6 @@ class _DestinationViewState extends State<DestinationView> {
 
       case 2:
         screen = UndergradsScreenNavigator(navigatorKey: widget.navigatorKey);
-        break;
-
-      case 3:
-        screen = LocationScreenNavigator(navigatorKey: widget.navigatorKey);
         break;
     }
 
