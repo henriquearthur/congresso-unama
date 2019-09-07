@@ -1,4 +1,4 @@
-import 'package:congresso_unama/models/location.dart';
+import 'package:congresso_unama/models/information.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -10,7 +10,7 @@ abstract class InformationEvent extends Equatable {
 class LoadInformation extends InformationEvent {}
 
 class UpdateInformation extends InformationEvent {
-  final Location location;
+  final Information information;
 
-  UpdateInformation(this.location) : super([location]);
+  UpdateInformation(this.information) : super([information]);
 }

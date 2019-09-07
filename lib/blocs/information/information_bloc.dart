@@ -28,12 +28,12 @@ class InformationBloc extends Bloc<InformationEvent, InformationState> {
 
       subscription?.cancel();
       subscription = informationRepository
-          .getLocation()
-          .listen((location) => dispatch(UpdateInformation(location)));
+          .getInformation()
+          .listen((information) => dispatch(UpdateInformation(information)));
     }
 
     if (event is UpdateInformation) {
-      yield LoadedInformationState(event.location);
+      yield LoadedInformationState(event.information);
     }
   }
 }

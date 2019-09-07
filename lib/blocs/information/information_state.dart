@@ -1,4 +1,4 @@
-import 'package:congresso_unama/models/location.dart';
+import 'package:congresso_unama/models/information.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -12,7 +12,7 @@ class InitialInformationState extends InformationState {}
 class LoadingInformationState extends InformationState {}
 
 class LoadedInformationState extends InformationState {
-  final Location location;
+  final Information information;
 
-  LoadedInformationState(this.location) : super([location]);
+  LoadedInformationState(this.information) : super([information]);
 }
