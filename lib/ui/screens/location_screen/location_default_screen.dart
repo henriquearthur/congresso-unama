@@ -57,15 +57,17 @@ class _LocationDefaultScreenState extends State<LocationDefaultScreen> {
                     onMapCreated: _onMapCreated,
                     markers: {
                       Marker(
-                        markerId: MarkerId(state.location.name),
-                        position:
-                            LatLng(state.location.lat, state.location.lng),
-                        infoWindow: InfoWindow(title: state.location.name),
+                        markerId: MarkerId(state.information.locationName),
+                        position: LatLng(state.information.locationLat,
+                            state.information.locationLng),
+                        infoWindow:
+                            InfoWindow(title: state.information.locationName),
                         icon: BitmapDescriptor.defaultMarker,
                       ),
                     },
                     initialCameraPosition: CameraPosition(
-                      target: LatLng(state.location.lat, state.location.lng),
+                      target: LatLng(state.information.locationLat,
+                          state.information.locationLng),
                       zoom: 15.0,
                     ),
                   ),
