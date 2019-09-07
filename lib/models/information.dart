@@ -27,6 +27,8 @@ class Information {
       locationDistrict: data['location_district'],
       locationLat: data['location_lat'],
       locationLng: data['location_lng'],
+      dateStart: data['date_start'],
+      dateEnd: data['date_end'],
     );
   }
 }

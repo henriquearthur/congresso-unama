@@ -16,5 +16,13 @@ class LoadCongress extends CongressEvent {
 class LoadedCongress extends CongressEvent {
   final Congress congress;
 
-  LoadedCongress(this.congress);
+  LoadedCongress(this.congress) : super([congress]);
+}
+
+class LoadCongressList extends CongressEvent {}
+
+class LoadedCongressList extends CongressEvent {
+  final List<Congress> congresses;
+
+  LoadedCongressList(this.congresses) : super([congresses]);
 }

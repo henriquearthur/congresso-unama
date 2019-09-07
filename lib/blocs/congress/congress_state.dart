@@ -16,3 +16,11 @@ class LoadedCongressState extends CongressState {
 
   LoadedCongressState(this.congress) : super([congress]);
 }
+
+class LoadingCongressListState extends CongressState {}
+
+class LoadedCongressListState extends CongressState {
+  final List<Congress> congresses;
+
+  LoadedCongressListState(this.congresses) : super([congresses]);
+}

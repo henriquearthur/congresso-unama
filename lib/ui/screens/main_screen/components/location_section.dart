@@ -11,6 +11,7 @@ class LocationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           "Localização",
@@ -23,11 +24,7 @@ class LocationSection extends StatelessWidget {
         SizedBox(height: 20.0),
         BlocBuilder<InformationBloc, InformationState>(
           builder: (context, state) {
-            if (state is InitialInformationState) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is LoadingInformationState) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is LoadedInformationState) {
+            if (state is LoadedInformationState) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -68,7 +65,7 @@ class LocationSection extends StatelessWidget {
               );
             }
 
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           },
         )
       ],

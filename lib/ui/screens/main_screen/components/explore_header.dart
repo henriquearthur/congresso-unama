@@ -7,7 +7,7 @@ class ExploreHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       child: Container(
-        height: 380.0,
+        height: 320.0,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

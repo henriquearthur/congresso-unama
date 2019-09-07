@@ -11,4 +11,15 @@ class CongressRepository {
         .snapshots()
         .map((snap) => Congress.fromFirestore(snap));
   }
+
+  Stream<List<Congress>> getCongresses() {
+    return _db
+        .collection('2019_congressos')
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.documents
+          .map((congress) => Congress.fromFirestore(congress))
+          .toList();
+    });
+  }
 }

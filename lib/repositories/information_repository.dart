@@ -6,7 +6,7 @@ class InformationRepository {
 
   Stream<Information> getInformation() {
     return _db
-        .collection('4_congresso_nacional_ciencias_exatas_e_tecnologia')
+        .collection('2019_geral')
         .document('informacoes')
         .snapshots()
         .map((snap) => Information.fromFirestore(snap));

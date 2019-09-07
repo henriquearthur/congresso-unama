@@ -18,17 +18,47 @@ class CongressBloc extends Bloc<CongressEvent, CongressState> {
     CongressEvent event,
   ) async* {
     if (event is LoadCongress) {
-      yield LoadingCongressState();
-
-      subscription?.cancel();
-      subscription = congressRepository
-          .getCongress(event.name)
-          .listen((congress) => dispatch(LoadedCongress(congress)));
+      yield* _mapLoadCongressToState(event);
     }
 
     if (event is LoadedCongress) {
-      yield LoadedCongressState(event.congress);
+      yield* _mapLoadedCongressToState(event);
     }
+
+    if (event is LoadCongressList) {
+      yield* _mapLoadCongressListToState();
+    }
+
+    if (event is LoadedCongressList) {
+      yield* _mapLoadedCongressListToState(event);
+    }
+  }
+
+  Stream<CongressState> _mapLoadCongressToState(LoadCongress event) async* {
+    yield LoadingCongressState();
+
+    subscription?.cancel();
+    subscription = congressRepository
+        .getCongress(event.name)
+        .listen((congress) => dispatch(LoadedCongress(congress)));
+  }
+
+  Stream<CongressState> _mapLoadedCongressToState(LoadedCongress event) async* {
+    yield LoadedCongressState(event.congress);
+  }
+
+  Stream<CongressState> _mapLoadCongressListToState() async* {
+    yield LoadingCongressListState();
+
+    subscription?.cancel();
+    subscription = congressRepository
+        .getCongresses()
+        .listen((congresses) => dispatch(LoadedCongressList(congresses)));
+  }
+
+  Stream<CongressState> _mapLoadedCongressListToState(
+      LoadedCongressList event) async* {
+    yield LoadedCongressListState(event.congresses);
   }
 
   @override
