@@ -41,7 +41,8 @@ class ExploreHeader extends StatelessWidget {
                 ),
                 SizedBox(height: 15.0),
                 Text(
-                  "Consulte a programação dos congressos de Arquitetura e Urbanismo, Informática e/ou Engenharia.",
+                  "Confira a programação do 4º Congresso Nacional de Ciências Exatas e Tecnologia.",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
