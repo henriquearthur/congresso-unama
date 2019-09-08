@@ -1,4 +1,5 @@
 import 'package:congresso_unama/blocs/congress/bloc.dart';
+import 'package:congresso_unama/models/congress.dart';
 import 'package:congresso_unama/repositories/congress_repository.dart';
 import 'package:congresso_unama/ui/screens/main_screen/components/congress_banner.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CongressesSection extends StatelessWidget {
-  void _openCongress(BuildContext context, String congress) {
+  void _openCongress(BuildContext context, Congress congress) {
     Navigator.of(context).pushNamed("/view-event", arguments: {
-      'event': congress,
+      'congress': congress,
     });
   }
 
@@ -43,8 +44,9 @@ class CongressesSection extends StatelessWidget {
                   children: <Widget>[
                     for (var congress in state.congresses) ...[
                       CongressBanner(
-                        image: NetworkImage(congress.image),
-                        onTap: () => _openCongress(context, "arquitetura"),
+                        imageUrl: congress.image,
+                        color: congress.color,
+                        onTap: () => _openCongress(context, congress),
                       ),
                       SizedBox(height: 20.0),
                     ],

@@ -27,7 +27,7 @@ class MainScreenNavigator extends StatelessWidget {
 
               case '/view-event':
                 screen = ViewEventDefaultScreen(
-                  congress: args['event'],
+                  congress: args['congress'],
                 );
                 break;
 
