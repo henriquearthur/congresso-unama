@@ -82,7 +82,7 @@ class LectureItem extends StatelessWidget {
                       SizedBox(height: 10.0),
                       Chip(
                         label: Text(
-                          lecture.congress.shortName,
+                          lecture.congress.shortestName,
                           style: TextStyle(
                             fontSize: 13.0,
                             color: Colors.white,

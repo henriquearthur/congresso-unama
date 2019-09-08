@@ -11,6 +11,7 @@ class Congress extends Equatable {
   final String description;
   final String image;
   final Color color;
+  final String link;
 
   Congress({
     this.id,
@@ -20,7 +21,17 @@ class Congress extends Equatable {
     this.description,
     this.image,
     this.color,
-  }) : super([id, name, shortName, shortestName, description, image, color]);
+    this.link,
+  }) : super([
+          id,
+          name,
+          shortName,
+          shortestName,
+          description,
+          image,
+          color,
+          link
+        ]);
 
   factory Congress.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
@@ -34,6 +45,7 @@ class Congress extends Equatable {
       image: data['image'],
       color: Color(int.parse(data['color'].replaceAll('#', ''), radix: 16))
           .withOpacity(1.0),
+      link: data['link'],
     );
   }
 }

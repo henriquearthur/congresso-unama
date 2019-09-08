@@ -17,7 +17,7 @@ class FilterEventChip extends StatelessWidget {
         if (state is CongressesLoaded) {
           return FilterChip(
             label: Text(
-              congress.shortName,
+              congress.shortestName,
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
             ),

@@ -5,17 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterEventsBottomSheet extends StatelessWidget {
-  final congressesIds = [
-    'arquitetura_e_design',
-    'artes_e_matematica',
-    'computacao_redes_e_analise',
-    'engenharias'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(32.0),
+      padding: const EdgeInsets.all(24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

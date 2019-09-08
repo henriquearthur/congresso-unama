@@ -1,9 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_congress_color.dart';
-import 'package:congresso_unama/ui/utils/get_congress_link.dart';
-import 'package:congresso_unama/ui/utils/get_congress_name.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
@@ -17,7 +14,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: getCongressColor(lecture.congressId),
+        backgroundColor: lecture.congress.color,
         title: Text(
           lecture.type,
           style: Styles.appBarPageTitleText,
@@ -27,10 +24,10 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             onPressed: () {
               if (lecture.speaker.isNotEmpty) {
                 Share.share(
-                    "Confira ${lecture.title} no ${getCongressName(lecture.congressId)} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speaker}! Saiba mais em ${getCongressLink(lecture.congressId)}");
+                    "Confira ${lecture.title} no ${lecture.congress.name} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speaker}! Saiba mais em ${lecture.congress.link}");
               } else {
                 Share.share(
-                    "Confira ${lecture.title} no ${getCongressName(lecture.congressId)} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${getCongressLink(lecture.congressId)}");
+                    "Confira ${lecture.title} no ${lecture.congress.name} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${lecture.congress.link}");
               }
             },
             icon: Icon(Icons.share),
@@ -41,7 +38,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
       ),
       body: Theme(
         data: Theme.of(context).copyWith(
-          accentColor: getCongressColor(lecture.congressId),
+          accentColor: lecture.congress.color,
         ),
         child: ListView(
           padding: const EdgeInsets.all(16.0),
@@ -49,7 +46,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
             Text(
               lecture.title,
               style: TextStyle(
-                color: getCongressColor(lecture.congressId),
+                color: lecture.congress.color,
                 fontSize: 26.0,
                 letterSpacing: -0.5,
                 fontWeight: FontWeight.w500,
@@ -75,9 +72,8 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               children: <Widget>[
                 Text(
                   lecture.hourStart,
-                  style: TextStyle(
-                      color: getCongressColor(lecture.congressId),
-                      fontSize: 24.0),
+                  style:
+                      TextStyle(color: lecture.congress.color, fontSize: 24.0),
                 ),
                 SizedBox(width: 8.0),
                 Padding(
@@ -90,9 +86,8 @@ class ViewLectureDefaultScreen extends StatelessWidget {
                 SizedBox(width: 8.0),
                 Text(
                   lecture.hourEnd,
-                  style: TextStyle(
-                      color: getCongressColor(lecture.congressId),
-                      fontSize: 24.0),
+                  style:
+                      TextStyle(color: lecture.congress.color, fontSize: 24.0),
                 ),
               ],
             ),
@@ -101,14 +96,14 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Chip(
                 label: Text(
-                  getCongressName(lecture.congressId),
+                  lecture.congress.shortName,
                   style: TextStyle(
                     fontSize: 13.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                backgroundColor: getCongressColor(lecture.congressId),
+                backgroundColor: lecture.congress.color,
               ),
             ),
             Divider(),
