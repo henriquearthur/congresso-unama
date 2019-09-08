@@ -46,7 +46,7 @@ class PaperBloc extends Bloc<PaperEvent, PaperState> {
       subscription?.cancel();
       subscription = paperRepository.getPapers(date).listen((papers) async {
         List<Paper> filteredPapers = await _filterPapers(papers);
-        dispatch(UpdatePapers(filteredPapers));
+        dispatch(UpdatePapers(papers));
       });
     }
 

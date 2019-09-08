@@ -8,15 +8,18 @@ class Information {
   final double locationLng;
   final String dateStart;
   final String dateEnd;
+  final String dateUndergrads;
 
-  Information(
-      {this.locationName,
-      this.locationAddress,
-      this.locationDistrict,
-      this.locationLat,
-      this.locationLng,
-      this.dateStart,
-      this.dateEnd});
+  Information({
+    this.locationName,
+    this.locationAddress,
+    this.locationDistrict,
+    this.locationLat,
+    this.locationLng,
+    this.dateStart,
+    this.dateEnd,
+    this.dateUndergrads,
+  });
 
   factory Information.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
@@ -29,6 +32,7 @@ class Information {
       locationLng: data['location_lng'],
       dateStart: data['date_start'],
       dateEnd: data['date_end'],
+      dateUndergrads: data['date_undergrads'],
     );
   }
 }
