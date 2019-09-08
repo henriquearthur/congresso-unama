@@ -13,9 +13,22 @@ class LocationDefaultScreen extends StatefulWidget {
 
 class _LocationDefaultScreenState extends State<LocationDefaultScreen> {
   Completer<GoogleMapController> _controller = Completer();
+  bool _showGoogleMaps = false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
+  }
+
+  @override
+  void initState() {
+    // https://github.com/flutter/flutter/issues/28493
+    Future.delayed(const Duration(milliseconds: 300), () {
+      setState(() {
+        _showGoogleMaps = true;
+      });
+    });
+
+    super.initState();
   }
 
   @override
@@ -32,23 +45,7 @@ class _LocationDefaultScreenState extends State<LocationDefaultScreen> {
       ),
       body: BlocBuilder<InformationBloc, InformationState>(
         builder: (context, state) {
-          if (state is InitialInformationState) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              height: 300.0,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (state is LoadingInformationState) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              height: 300.0,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (state is LoadedInformationState) {
+          if (state is LoadedInformationState && _showGoogleMaps) {
             return Container(
               width: MediaQuery.of(context).size.width,
               child: Stack(
@@ -76,7 +73,13 @@ class _LocationDefaultScreenState extends State<LocationDefaultScreen> {
             );
           }
 
-          return Center(child: CircularProgressIndicator());
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            height: 300.0,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         },
       ),
     );
