@@ -60,7 +60,7 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
     List<String> congresses = await filterBloc.getSavedCongresses();
 
     return lectures
-        .where((lecture) => congresses.contains(lecture.congress))
+        .where((lecture) => congresses.contains(lecture.congressId))
         .toList();
   }
 }

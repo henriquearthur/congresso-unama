@@ -1,7 +1,9 @@
+import 'package:congresso_unama/blocs/congress/bloc.dart';
 import 'package:congresso_unama/blocs/congress_filter/bloc.dart';
 import 'package:congresso_unama/blocs/information/bloc.dart';
 import 'package:congresso_unama/navigation/destination/destination.dart';
 import 'package:congresso_unama/navigation/destination/destination_view.dart';
+import 'package:congresso_unama/repositories/congress_repository.dart';
 import 'package:congresso_unama/repositories/information_repository.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +44,6 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
       child: Scaffold(
         body: MultiBlocProvider(
           providers: [
-            BlocProvider<CongressFilterBloc>(
-              builder: (context) {
-                CongressFilterBloc congressFilterBloc = CongressFilterBloc();
-                congressFilterBloc.dispatch(LoadCongresses());
-
-                return congressFilterBloc;
-              },
-            ),
             BlocProvider<InformationBloc>(
               builder: (context) {
                 InformationBloc informationBloc = InformationBloc(
@@ -57,6 +51,25 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
                 informationBloc.dispatch(LoadInformation());
 
                 return informationBloc;
+              },
+            ),
+            BlocProvider<CongressBloc>(
+              builder: (context) {
+                CongressBloc congressBloc = CongressBloc(
+                  congressRepository: CongressRepository(),
+                );
+
+                congressBloc.dispatch(LoadCongressList());
+
+                return congressBloc;
+              },
+            ),
+            BlocProvider<CongressFilterBloc>(
+              builder: (context) {
+                CongressFilterBloc congressFilterBloc = CongressFilterBloc();
+                congressFilterBloc.dispatch(LoadCongresses());
+
+                return congressFilterBloc;
               },
             ),
           ],

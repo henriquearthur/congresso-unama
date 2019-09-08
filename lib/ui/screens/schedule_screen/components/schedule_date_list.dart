@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScheduleDateList extends StatelessWidget {
-  final String date;
+  final DateTime date;
 
   const ScheduleDateList({Key key, this.date}) : super(key: key);
 
@@ -16,10 +16,13 @@ class ScheduleDateList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       builder: (context) {
+        String dateString =
+            '${date.day.toString().padLeft(2, "0")}-${date.month}-${date.year}';
+
         ScheduleBloc scheduleBloc = ScheduleBloc(
           lectureRepository: LectureRepository(),
           filterBloc: BlocProvider.of<CongressFilterBloc>(context),
-          date: date,
+          date: dateString,
         );
 
         scheduleBloc.dispatch(LoadSchedule());
@@ -28,30 +31,46 @@ class ScheduleDateList extends StatelessWidget {
       },
       child: BlocBuilder<ScheduleBloc, ScheduleState>(
         builder: (context, state) {
-          if (state is InitialScheduleState) {
-            return ScheduleLoadingList();
-          } else if (state is LoadingScheduleState) {
-            return ScheduleLoadingList();
-          } else if (state is LoadedScheduleState) {
+          if (state is LoadedScheduleState) {
             return CustomScrollView(
-              key: PageStorageKey<String>(date),
+              key: PageStorageKey<DateTime>(date),
               slivers: <Widget>[
                 SliverOverlapInjector(
                   // This is the flip side of the SliverOverlapAbsorber above.
                   handle:
                       NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return LectureItem(
-                        lecture: state.lectures[index],
-                        separator: (index < state.lectures.length - 1),
-                      );
-                    },
-                    childCount: state.lectures.length,
+                if (state.lectures.isEmpty)
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Center(
+                          child: Container(
+                            child: Text(
+                              "Ainda não há programação para este dia.",
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
                   ),
-                )
+                if (state.lectures.isNotEmpty)
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return LectureItem(
+                          lecture: state.lectures[index],
+                          separator: (index < state.lectures.length - 1),
+                        );
+                      },
+                      childCount: state.lectures.length,
+                    ),
+                  )
               ],
             );
           }

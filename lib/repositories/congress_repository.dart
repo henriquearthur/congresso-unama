@@ -22,4 +22,23 @@ class CongressRepository {
           .toList();
     });
   }
+
+  Future<List<Congress>> getCongressesAsList() async {
+    QuerySnapshot documents =
+        await _db.collection('2019_congressos').getDocuments();
+    List<Congress> congresses = documents.documents
+        .map((document) => Congress.fromFirestore(document))
+        .toList();
+
+    return congresses;
+  }
+
+  Future<List<String>> getCongressesId() async {
+    QuerySnapshot documents =
+        await _db.collection('2019_congressos').getDocuments();
+    List<String> congressesId =
+        documents.documents.map((document) => document.documentID).toList();
+
+    return congressesId;
+  }
 }

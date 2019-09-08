@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:congresso_unama/models/congress.dart';
 import 'package:intl/intl.dart';
 
 class Lecture {
@@ -10,8 +11,9 @@ class Lecture {
   final String speakerDetails;
   final String hourStart;
   final String hourEnd;
-  final String congress;
+  final String congressId;
   final String date;
+  Congress congress;
 
   Lecture(
       {this.id,
@@ -22,8 +24,9 @@ class Lecture {
       this.speakerDetails,
       this.hourStart,
       this.hourEnd,
-      this.congress,
-      this.date});
+      this.congressId,
+      this.date,
+      this.congress});
 
   String getFullDate() {
     List<String> arr = date.split('-');
@@ -48,7 +51,7 @@ class Lecture {
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
       date: data['date'] ?? '',
-      congress: data['congress'] ?? '',
+      congressId: data['congress'] ?? '',
     );
   }
 }

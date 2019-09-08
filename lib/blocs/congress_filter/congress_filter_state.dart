@@ -1,4 +1,3 @@
-import 'package:congresso_unama/models/congress.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -10,7 +9,7 @@ abstract class CongressFilterState extends Equatable {
 class CongressesLoading extends CongressFilterState {}
 
 class CongressesLoaded extends CongressFilterState {
-  final List<Congress> congresses;
+  final List<String> congresses;
 
   CongressesLoaded(this.congresses) : super([congresses]);
 }

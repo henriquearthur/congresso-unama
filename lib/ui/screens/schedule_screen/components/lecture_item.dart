@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:congresso_unama/models/lecture.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_congress_color.dart';
-import 'package:congresso_unama/ui/utils/get_congress_name.dart';
 import 'package:flutter/material.dart';
 
 class LectureItem extends StatelessWidget {
@@ -46,9 +44,10 @@ class LectureItem extends StatelessWidget {
                         borderRadius: new BorderRadius.circular(60.0),
                         child: CachedNetworkImage(
                           placeholder: (context, url) => Image.asset(
-                              'assets/images/placeholder.png',
-                              width: 60.0,
-                              height: 60.0),
+                            'assets/images/placeholder.png',
+                            width: 60.0,
+                            height: 60.0,
+                          ),
                           imageUrl: lecture.speakerImg,
                           height: 60.0,
                           width: 60.0,
@@ -83,14 +82,14 @@ class LectureItem extends StatelessWidget {
                       SizedBox(height: 10.0),
                       Chip(
                         label: Text(
-                          getCongressName(lecture.congress),
+                          lecture.congress.shortName,
                           style: TextStyle(
                             fontSize: 13.0,
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        backgroundColor: getCongressColor(lecture.congress),
+                        backgroundColor: lecture.congress.color,
                       ),
                     ],
                   ),
