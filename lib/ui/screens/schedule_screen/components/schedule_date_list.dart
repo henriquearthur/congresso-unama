@@ -17,7 +17,7 @@ class ScheduleDateList extends StatelessWidget {
     return BlocProvider(
       builder: (context) {
         String dateString =
-            '${date.day.toString().padLeft(2, "0")}-${date.month}-${date.year}';
+            '${date.day.toString().padLeft(2, "0")}-${date.month.toString().padLeft(2, "0")}-${date.year}';
 
         ScheduleBloc scheduleBloc = ScheduleBloc(
           lectureRepository: LectureRepository(),

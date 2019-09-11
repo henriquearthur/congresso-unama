@@ -1,3 +1,4 @@
+import 'package:congresso_unama/blocs/congress/bloc.dart';
 import 'package:congresso_unama/blocs/information/bloc.dart';
 import 'package:congresso_unama/ui/screens/schedule_screen/components/schedule_date_list.dart';
 import 'package:congresso_unama/ui/shared_components/fab_open_filter.dart';
@@ -104,7 +105,15 @@ class _ScheduleDefaultScreenState extends State<ScheduleDefaultScreen> {
           return CircularProgressIndicator();
         },
       ),
-      floatingActionButton: FabOpenFilter(),
+      floatingActionButton: BlocBuilder<CongressBloc, CongressState>(
+        builder: (context, state) {
+          if (state is LoadedCongressListState && state.congresses.length > 1) {
+            return FabOpenFilter();
+          }
+
+          return SizedBox.shrink();
+        },
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ class SpeakerRepository {
 
   Stream<List<Speaker>> getCongressSpeakers(Congress congress) {
     return _db
-        .collection('palestras')
+        .collection('2019_palestras')
         .where("congress", isEqualTo: congress.id)
         .where("speaker", isGreaterThan: "")
         .orderBy("speaker")

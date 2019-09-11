@@ -1,6 +1,8 @@
+import 'package:congresso_unama/blocs/information/bloc.dart';
 import 'package:congresso_unama/ui/screens/main_screen/components/author_info_button.dart';
 import 'package:congresso_unama/ui/screens/main_screen/components/curve_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExploreHeader extends StatelessWidget {
   @override
@@ -40,15 +42,31 @@ class ExploreHeader extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15.0),
-                Text(
-                  "Confira a programação do 4º Congresso Nacional de Ciências Exatas e Tecnologia.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    letterSpacing: -0.5,
-                  ),
-                ),
+                BlocBuilder<InformationBloc, InformationState>(
+                  builder: (context, state) {
+                    if (state is LoadedInformationState) {
+                      return Text(
+                        "Confira a programação do ${state.information.eventName}.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          letterSpacing: -0.5,
+                        ),
+                      );
+                    }
+
+                    return Text(
+                      "Carregando",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        letterSpacing: -0.5,
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),

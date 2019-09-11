@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Congressos Unama',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Styles.primaryColor,
         primaryColor: Styles.primaryColor,
