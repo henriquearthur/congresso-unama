@@ -6,6 +6,7 @@ class Lecture {
   final String id;
   final String title;
   final String type;
+  final String local;
   final String speaker;
   final String speakerImg;
   final String speakerDetails;
@@ -19,6 +20,7 @@ class Lecture {
       {this.id,
       this.title,
       this.type,
+      this.local,
       this.speaker,
       this.speakerImg,
       this.speakerDetails,
@@ -45,6 +47,7 @@ class Lecture {
       id: doc.documentID,
       title: data['title'] ?? '',
       type: data['type'] ?? '',
+      local: data['local'] ?? '',
       speaker: data['speaker'] ?? '',
       speakerImg: data['speaker_img'] ?? '',
       speakerDetails: data['speaker_details'] ?? '',

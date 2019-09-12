@@ -70,10 +70,19 @@ class LectureItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 5.0),
+                      if (lecture.local.isNotEmpty) ...[
+                        Text(
+                          lecture.local,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                      ],
                       Text(
                         lecture.type +
-                            ((lecture.speaker.isNotEmpty)
-                                ? ' - ' + lecture.speaker
+                            (lecture.speaker.isNotEmpty
+                                ? ' com ${lecture.speaker}'
                                 : ''),
                         style: TextStyle(
                           color: Colors.grey[500],

@@ -53,7 +53,7 @@ class ViewLectureDefaultScreen extends StatelessWidget {
               ),
             ),
             Text(
-              lecture.type,
+              "${lecture.type} - ${lecture.local}",
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 16.0,
