@@ -53,12 +53,19 @@ class _UndergradsDefaultScreenState extends State<UndergradsDefaultScreen> {
                 builder: (context, state) {
                   if (state is LoadedPapersState) {
                     if (state.papers.length == 0) {
-                      return Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          "Os trabalhos aprovados de congressistas ainda não foram divulgados. Tente novamente em outro momento.",
-                          style: TextStyle(color: Colors.grey[600]),
-                        ),
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(32.0),
+                            child: Text(
+                              "Os trabalhos aprovados de congressistas ainda não foram divulgados.\n\nTente novamente em outro momento.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.grey[600]),
+                            ),
+                          ),
+                        ],
                       );
                     } else {
                       return ListView.separated(
