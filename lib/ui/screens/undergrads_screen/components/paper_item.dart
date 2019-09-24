@@ -20,24 +20,31 @@ class PaperItem extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Text(
-                paper.hourStart,
-                style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
-              ),
-              SizedBox(height: 5.0),
-              Text("até"),
-              SizedBox(height: 5.0),
-              Text(
-                paper.hourEnd,
-                style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
-              ),
+              if (paper.hourStart.isNotEmpty && paper.hourEnd.isNotEmpty) ...[
+                Text(
+                  paper.hourStart,
+                  style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
+                ),
+                SizedBox(height: 5.0),
+                Text("até"),
+                SizedBox(height: 5.0),
+                Text(
+                  paper.hourEnd,
+                  style: TextStyle(color: Styles.primaryColor, fontSize: 18.0),
+                ),
+              ],
+              if (paper.hour.isNotEmpty) ...[
+                Text(
+                  paper.hour,
+                  style: TextStyle(color: Styles.primaryColor, fontSize: 22.0),
+                ),
+              ],
               SizedBox(height: 15.0),
               IconButton(
                 onPressed: () {
-                  print(
-                      "Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${getCongressLink(paper.congress)}");
+                  //print("Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
                   Share.share(
-                      "Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${getCongressLink(paper.congress)}");
+                      "Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
                 },
                 icon: Icon(
                   Icons.share,
@@ -61,7 +68,7 @@ class PaperItem extends StatelessWidget {
                 ),
                 SizedBox(height: 5.0),
                 Text(
-                  paper.type + " por:",
+                  paper.type.isNotEmpty ? paper.type + " por:" : "Por:",
                   style: TextStyle(color: Colors.grey[500]),
                 ),
                 for (var student in paper.students)
@@ -78,21 +85,22 @@ class PaperItem extends StatelessWidget {
                         text: paper.location,
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      TextSpan(text: " (${paper.presentationMethod})"),
+                      if (paper.presentationMethod.isNotEmpty)
+                        TextSpan(text: " (${paper.presentationMethod})"),
                     ],
                   ),
                 ),
                 SizedBox(height: 10.0),
                 Chip(
                   label: Text(
-                    getCongressName(paper.congress),
+                    paper.congress.shortName,
                     style: TextStyle(
                       fontSize: 13.0,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  backgroundColor: getCongressColor(paper.congress),
+                  backgroundColor: paper.congress.color,
                 ),
               ],
             ),

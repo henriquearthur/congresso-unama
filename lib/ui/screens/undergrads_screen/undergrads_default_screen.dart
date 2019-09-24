@@ -1,3 +1,4 @@
+import 'package:congresso_unama/blocs/congress/bloc.dart';
 import 'package:congresso_unama/blocs/congress_filter/congress_filter_bloc.dart';
 import 'package:congresso_unama/blocs/information/bloc.dart';
 import 'package:congresso_unama/blocs/paper/bloc.dart';
@@ -137,11 +138,16 @@ class _UndergradsDefaultScreenState extends State<UndergradsDefaultScreen> {
               ),
               floatingActionButton: BlocBuilder<PaperBloc, PaperState>(
                 builder: (context, state) {
-                  if (state is LoadedPapersState && state.papers.length > 0) {
-                    return FabOpenFilter();
-                  }
+                  return BlocBuilder<CongressBloc, CongressState>(
+                    builder: (context, state) {
+                      if (state is LoadedCongressListState &&
+                          state.congresses.length > 1) {
+                        return FabOpenFilter();
+                      }
 
-                  return SizedBox.shrink();
+                      return SizedBox.shrink();
+                    },
+                  );
                 },
               ),
             ),

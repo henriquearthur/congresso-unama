@@ -59,7 +59,7 @@ class PaperBloc extends Bloc<PaperEvent, PaperState> {
     List<String> congresses = await filterBloc.getSavedCongresses();
 
     return papers
-        .where((paper) => congresses.contains(paper.congress))
+        .where((paper) => congresses.contains(paper.congressId))
         .toList();
   }
 }

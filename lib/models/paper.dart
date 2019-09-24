@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:congresso_unama/models/congress.dart';
 
 class Paper {
   final String id;
@@ -7,10 +8,12 @@ class Paper {
   final List<String> students;
   final String presentationMethod;
   final String location;
+  final String hour;
   final String hourStart;
   final String hourEnd;
-  final String congress;
+  final String congressId;
   final String date;
+  Congress congress;
 
   Paper(
       {this.id,
@@ -19,10 +22,12 @@ class Paper {
       this.students,
       this.presentationMethod,
       this.location,
+      this.hour,
       this.hourStart,
       this.hourEnd,
-      this.congress,
-      this.date});
+      this.congressId,
+      this.date,
+      this.congress});
 
   factory Paper.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
@@ -34,10 +39,11 @@ class Paper {
       students: (data['names'].cast<String>() ?? [])..sort(),
       presentationMethod: data['presentation_method'] ?? '',
       location: data['location'] ?? '',
+      hour: data['hour'] ?? '',
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
       date: data['date'] ?? '',
-      congress: data['congress'] ?? '',
+      congressId: data['congress'] ?? '',
     );
   }
 }
