@@ -1,8 +1,5 @@
 import 'package:congresso_unama/models/paper.dart';
 import 'package:congresso_unama/ui/theme/styles.dart';
-import 'package:congresso_unama/ui/utils/get_congress_color.dart';
-import 'package:congresso_unama/ui/utils/get_congress_link.dart';
-import 'package:congresso_unama/ui/utils/get_congress_name.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
@@ -42,9 +39,9 @@ class PaperItem extends StatelessWidget {
               SizedBox(height: 15.0),
               IconButton(
                 onPressed: () {
-                  //print("Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
+                  //print("Confira ${paper.title} no ${paper.congress.name} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
                   Share.share(
-                      "Confira ${paper.title} no ${getCongressName(paper.congress)} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
+                      "Confira ${paper.title} no ${paper.congress.name} de ${paper.hourStart} até ${paper.hourEnd} com ${paper.students.join(', ')}! Saiba mais em ${paper.congress.link}");
                 },
                 icon: Icon(
                   Icons.share,
