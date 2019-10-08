@@ -14,7 +14,7 @@ class Lecture {
   final String hourStart;
   final String hourEnd;
   final String congressId;
-  final String date;
+  final DateTime date;
   Congress congress;
 
   Lecture(
@@ -31,18 +31,22 @@ class Lecture {
       this.date,
       this.congress});
 
-  String getFullDate() {
-    List<String> arr = date.split('-');
-    int day = int.parse(arr[0]);
-    int month = int.parse(arr[1]);
-    int year = int.parse(arr[2]);
-
-    return DateFormat("EEEE',' d 'de' MMMM", 'pt_BR')
-        .format(DateTime(year, month, day));
-  }
+  String getFullDate() =>
+      DateFormat("EEEE',' d 'de' MMMM", 'pt_BR').format(date);
 
   factory Lecture.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
+
+    DateTime date;
+
+    if (data['date'] != null) {
+      List<String> dateArr = data['date'].split('-');
+      int dateDay = int.parse(dateArr[0]);
+      int dateMonth = int.parse(dateArr[1]);
+      int dateYear = int.parse(dateArr[2]);
+
+      date = DateTime(dateYear, dateMonth, dateDay);
+    }
 
     return Lecture(
       id: doc.documentID,
@@ -54,7 +58,7 @@ class Lecture {
       speakerDetails: data['speaker_details'] ?? '',
       hourStart: data['hour_start'] ?? '',
       hourEnd: data['hour_end'] ?? '',
-      date: data['date'] ?? '',
+      date: date ?? '',
       congressId: data['congress'] ?? '',
     );
   }

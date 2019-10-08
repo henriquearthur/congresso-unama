@@ -46,6 +46,7 @@ class CongressBox extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 16),
           Text(
             congress.title,
             style: TextStyle(
@@ -54,6 +55,13 @@ class CongressBox extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          Text(
+            "de ${congress.getFullDateStart()}",
+          ),
+          Text(
+            "até ${congress.getFullDateEnd()}",
+          ),
+          SizedBox(height: 16),
         ],
       ),
     );
