@@ -12,12 +12,12 @@ class CongressBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          AspectRatio(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        GestureDetector(
+          onTap: onTap,
+          child: AspectRatio(
             aspectRatio: 20 / 9,
             child: CachedNetworkImage(
               imageUrl: congress.image,
@@ -46,8 +46,11 @@ class CongressBox extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          Text(
+        ),
+        const SizedBox(height: 16),
+        GestureDetector(
+          onTap: onTap,
+          child: Text(
             congress.title,
             style: TextStyle(
               color: Styles.primaryColorDark,
@@ -55,15 +58,15 @@ class CongressBox extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Text(
-            "de ${congress.getFullDateStart()}",
-          ),
-          Text(
-            "até ${congress.getFullDateEnd()}",
-          ),
-          const SizedBox(height: 16),
-        ],
-      ),
+        ),
+        Text(
+          "de ${congress.getFullDateStart()}",
+        ),
+        Text(
+          "até ${congress.getFullDateEnd()}",
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }
