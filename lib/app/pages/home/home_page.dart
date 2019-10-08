@@ -1,6 +1,6 @@
-import 'package:congresso_unama/app/pages/home/home_bloc.dart';
-import 'package:congresso_unama/app/pages/home/home_module.dart';
+import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/pages/pick_congress/pick_congress_module.dart';
+import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeBloc _homeBloc = HomeModule.to.bloc<HomeBloc>();
+  final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
 
   int _selectedIndex = 0;
   List<GlobalKey<NavigatorState>> _navigatorKeys;
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     _navigatorKeys = List<GlobalKey<NavigatorState>>.generate(
         allDestinations.length, (int index) => GlobalKey()).toList();
 
-    _homeBloc.mustSelectCongressOut.listen((mustSelectCongress) {
+    _congressBloc.mustSelectCongressOut.listen((mustSelectCongress) {
       if (mustSelectCongress) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => PickCongressModule()),

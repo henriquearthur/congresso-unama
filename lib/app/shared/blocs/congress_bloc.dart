@@ -15,6 +15,11 @@ class CongressBloc extends BlocBase {
   Observable<Congress> get congressOut => _congressController.stream;
   Sink<Congress> get congressIn => _congressController.sink;
 
+  BehaviorSubject<bool> _mustSelectCongressController = BehaviorSubject<bool>();
+  Stream<bool> get mustSelectCongressOut =>
+      _mustSelectCongressController.stream;
+  Sink<bool> get _mustSelectCongressIn => _mustSelectCongressController.sink;
+
   CongressBloc() {
     configureCurrent();
   }
@@ -24,20 +29,31 @@ class CongressBloc extends BlocBase {
 
     if (prefs.containsKey(currentCongressKey)) {
       _congressRepository.getCongresses().listen((congresses) async {
-        Congress congress;
-
         String congressId = prefs.getString(currentCongressKey);
-        congress =
-            congresses.where((congress) => congress.id == congressId).single;
 
-        congressIn.add(congress);
+        congresses
+            .where((congress) => congress.id == congressId)
+            .forEach(congressIn.add);
+
+        _mustSelectCongressIn.add(false);
       });
+    } else {
+      _mustSelectCongressIn.add(true);
     }
+  }
+
+  Future pick(Congress congress) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString(currentCongressKey, congress.id);
+    congressIn.add(congress);
+    _mustSelectCongressIn.add(false);
   }
 
   @override
   void dispose() {
     _congressController.close();
+    _mustSelectCongressController.close();
     super.dispose();
   }
 }
