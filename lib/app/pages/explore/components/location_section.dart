@@ -31,15 +31,15 @@ class LocationSection extends StatelessWidget {
         //               text: state.information.locationName + "\n",
         //               style: DefaultTextStyle.of(context).style.copyWith(
         //                     color: Styles.primaryColorDark,
-        //                     fontWeight: FontWeight.w600,
+        //                     fontWeight: Styles.primaryFontSemiboldWeight,
         //                   ),
         //               children: <TextSpan>[
         //                 TextSpan(
         //                     text: state.information.locationAddress + "\n",
-        //                     style: TextStyle(fontWeight: FontWeight.normal)),
+        //                     style: TextStyle(fontWeight: Styles.primaryFontRegularWeight)),
         //                 TextSpan(
         //                     text: state.information.locationDistrict,
-        //                     style: TextStyle(fontWeight: FontWeight.normal)),
+        //                     style: TextStyle(fontWeight: Styles.primaryFontRegularWeight)),
         //               ],
         //             ),
         //           ),
@@ -54,7 +54,7 @@ class LocationSection extends StatelessWidget {
         //                   color: Colors.white,
         //                   letterSpacing: -0.5,
         //                   fontSize: 16.0,
-        //                   fontWeight: FontWeight.w500,
+        //                   fontWeight: Styles.primaryFontMediumWeight,
         //                 ),
         //               ),
         //             ),

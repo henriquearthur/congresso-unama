@@ -81,15 +81,18 @@ class _AuthorInfoDialogState extends State<AuthorInfoDialog> {
               children: <TextSpan>[
                 TextSpan(
                     text: 'Henrique Arthur',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
+                    style:
+                        TextStyle(fontWeight: Styles.primaryFontMediumWeight)),
                 TextSpan(text: ', graduando do curso de '),
                 TextSpan(
                     text: 'Ciência da Computação ',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
+                    style:
+                        TextStyle(fontWeight: Styles.primaryFontMediumWeight)),
                 TextSpan(text: 'na '),
                 TextSpan(
                     text: 'Universidade da Amazônia (UNAMA).',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
+                    style:
+                        TextStyle(fontWeight: Styles.primaryFontMediumWeight)),
               ],
             ),
           ),

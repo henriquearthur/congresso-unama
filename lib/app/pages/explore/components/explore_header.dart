@@ -42,7 +42,7 @@ class ExploreHeader extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 26.0,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: Styles.primaryFontMediumWeight,
                     letterSpacing: -1.0,
                   ),
                 ),
@@ -63,7 +63,8 @@ class ExploreHeader extends StatelessWidget {
                           children: <TextSpan>[
                             TextSpan(
                               text: '${snapshot.data.title}.',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontWeight: Styles.primaryFontSemiboldWeight),
                             ),
                           ],
                         ),
