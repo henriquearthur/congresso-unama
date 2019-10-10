@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/pages/pick_congress/pick_congress_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
@@ -13,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
+  StreamSubscription _mustSelectCongressOutSubscription;
 
   int _selectedIndex = 0;
   List<GlobalKey<NavigatorState>> _navigatorKeys;
@@ -25,13 +28,20 @@ class _HomePageState extends State<HomePage> {
     _navigatorKeys = List<GlobalKey<NavigatorState>>.generate(
         allDestinations.length, (int index) => GlobalKey()).toList();
 
-    _congressBloc.mustSelectCongressOut.listen((mustSelectCongress) {
+    _mustSelectCongressOutSubscription =
+        _congressBloc.mustSelectCongressOut.listen((mustSelectCongress) {
       if (mustSelectCongress) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => PickCongressModule()),
         );
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _mustSelectCongressOutSubscription.cancel();
+    super.dispose();
   }
 
   Widget _buildOffstageNavigator(int viewIndex) {

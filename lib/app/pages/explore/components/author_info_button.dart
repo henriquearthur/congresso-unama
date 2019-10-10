@@ -22,8 +22,8 @@ class AuthorInfoButton extends StatelessWidget {
           splashColor:
               Styles.primaryColorDark.withOpacity(0.3), // inkwell color
           child: SizedBox(
-            width: 48,
-            height: 48,
+            width: 32,
+            height: 32,
             child: Icon(
               Icons.info_outline,
               color: Colors.white,

@@ -18,7 +18,7 @@ class CongressBloc extends BlocBase {
   BehaviorSubject<bool> _mustSelectCongressController = BehaviorSubject<bool>();
   Stream<bool> get mustSelectCongressOut =>
       _mustSelectCongressController.stream;
-  Sink<bool> get _mustSelectCongressIn => _mustSelectCongressController.sink;
+  Sink<bool> get mustSelectCongressIn => _mustSelectCongressController.sink;
 
   CongressBloc() {
     configureCurrent();
@@ -36,10 +36,10 @@ class CongressBloc extends BlocBase {
             .where((congress) => congress.id == congressId)
             .forEach(congressIn.add);
 
-        _mustSelectCongressIn.add(false);
+        mustSelectCongressIn.add(false);
       });
     } else {
-      _mustSelectCongressIn.add(true);
+      mustSelectCongressIn.add(true);
     }
   }
 
@@ -48,7 +48,7 @@ class CongressBloc extends BlocBase {
 
     prefs.setString(currentCongressKey, congress.id);
     congressIn.add(congress);
-    _mustSelectCongressIn.add(false);
+    mustSelectCongressIn.add(false);
   }
 
   @override

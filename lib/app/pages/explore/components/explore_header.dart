@@ -14,7 +14,7 @@ class ExploreHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       child: Container(
-        height: 320.0,
+        height: 330.0,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -32,7 +32,7 @@ class ExploreHeader extends StatelessWidget {
                       child: Icon(
                         Icons.school,
                         color: Colors.white,
-                        size: 64.0,
+                        size: 42.0,
                       ),
                     ),
                   ],
@@ -41,7 +41,7 @@ class ExploreHeader extends StatelessWidget {
                   "Olá, congressista!",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 26.0,
+                    fontSize: 22.0,
                     fontWeight: Styles.primaryFontMediumWeight,
                     letterSpacing: -1.0,
                   ),
@@ -52,22 +52,37 @@ class ExploreHeader extends StatelessWidget {
                   builder:
                       (BuildContext context, AsyncSnapshot<Congress> snapshot) {
                     if (snapshot.hasData) {
-                      return RichText(
-                        text: TextSpan(
-                          text: 'Confira a programação do ',
-                          style: DefaultTextStyle.of(context).style.copyWith(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                letterSpacing: -0.5,
-                              ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '${snapshot.data.title}.',
-                              style: TextStyle(
-                                  fontWeight: Styles.primaryFontSemiboldWeight),
+                      return Column(
+                        children: <Widget>[
+                          Text(
+                            snapshot.data.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: Styles.primaryFontSemiboldWeight,
+                              letterSpacing: -0.5,
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 5),
+                          RaisedButton(
+                            onPressed: () {
+                              _congressBloc.mustSelectCongressIn.add(true);
+                            },
+                            color: Colors.black.withOpacity(0.3),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
+                            ),
+                            elevation: 0,
+                            child: Text(
+                              "Mudar congresso",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
                       );
                     }
 
