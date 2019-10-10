@@ -26,6 +26,7 @@ class CongressBloc extends BlocBase {
 
   void configureCurrent() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.clear();
 
     if (prefs.containsKey(currentCongressKey)) {
       _congressRepository.getCongresses().listen((congresses) async {

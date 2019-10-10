@@ -55,17 +55,19 @@ class CongressBox extends StatelessWidget {
             style: TextStyle(
               color: Styles.primaryColorDark,
               fontSize: 18.0,
-              fontWeight: FontWeight.w500,
+              fontWeight: Styles.primaryFontSemiboldWeight,
+              letterSpacing: -0.5,
             ),
           ),
         ),
+        SizedBox(height: 5),
         Text(
           "de ${congress.getFullDateStart()}",
         ),
         Text(
           "até ${congress.getFullDateEnd()}",
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 32),
       ],
     );
   }

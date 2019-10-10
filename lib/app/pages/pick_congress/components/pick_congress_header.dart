@@ -1,4 +1,5 @@
 import 'package:congresso_unama/app/pages/explore/components/curve_painter.dart';
+import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class PickCongressHeader extends StatelessWidget {
@@ -9,7 +10,7 @@ class PickCongressHeader extends StatelessWidget {
     return CustomPaint(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 260.0,
+        height: 220.0,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -19,15 +20,15 @@ class PickCongressHeader extends StatelessWidget {
                 Icon(
                   Icons.school,
                   color: Colors.white,
-                  size: 56.0,
+                  size: 42.0,
                 ),
                 SizedBox(height: 5),
                 Text(
                   "Escolha um congresso",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 20.0,
+                    fontWeight: Styles.primaryFontMediumWeight,
                     letterSpacing: -1.0,
                   ),
                 ),

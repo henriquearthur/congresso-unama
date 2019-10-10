@@ -5,74 +5,68 @@ abstract class Styles {
   static String primaryFontFamily = "Montserrat";
   static String secondaryFontFamily = "Roboto";
 
+  static FontWeight primaryFontRegularWeight = FontWeight.normal;
+  static FontWeight primaryFontMediumWeight = FontWeight.w500;
+  static FontWeight primaryFontSemiboldWeight = FontWeight.w600;
+  static FontWeight primaryFontBoldWeight = FontWeight.w700;
+
   // Colors
   static Color primaryColor = Colors.green;
   static Color primaryColorDark = Colors.green[900];
 
-  static Color architectureColor = Color(0xff417952);
-  static Color computingColor = Color(0xffF2A94B);
-  static Color engineeringColor = Color(0xff2B80C0);
-
-  static Color appBarBackgroundColor = Colors.white;
-  static Color appBarIconColor = Colors.white;
-  static Color appBarLabelColor = Colors.white;
-
-  static Color appBarPageBackgroundColor = Colors.transparent;
-  static Color appBarPageIconColor = Colors.white;
+  static Color textColor = Colors.grey[800];
 
   static Color bottomNavigationBarIconColor = Colors.grey[700];
-
   static Color bottomSheetTitleColor = Colors.grey[700];
-
   static Color dialogTitleColor = Colors.grey[600];
 
   // Text styles
   static TextStyle appBarTitleText = TextStyle(
     color: Colors.white,
     letterSpacing: -0.5,
-    fontWeight: FontWeight.w500,
+    fontWeight: primaryFontMediumWeight,
   );
 
   static TextStyle appBarPageTitleText = TextStyle(
     color: Colors.white,
     letterSpacing: -1.0,
-    fontWeight: FontWeight.w500,
+    fontWeight: primaryFontMediumWeight,
   );
 
   static TextStyle bottomNavigationBarTitleText = TextStyle(
     letterSpacing: -0.5,
-    fontWeight: FontWeight.w500,
+    fontWeight: primaryFontMediumWeight,
   );
 
   static TextStyle bottomSheetTitleText = TextStyle(
     color: bottomSheetTitleColor,
     fontSize: 22.0,
     letterSpacing: -1.0,
-    fontWeight: FontWeight.w600,
+    fontWeight: primaryFontSemiboldWeight,
   );
 
   static TextStyle bottomSheetDescriptionText = TextStyle(
     color: bottomSheetTitleColor,
     fontSize: 16.0,
     letterSpacing: -1.0,
-    fontWeight: FontWeight.w500,
+    fontWeight: primaryFontMediumWeight,
   );
 
   static TextStyle dialogContentText = TextStyle(
-    fontFamily: Styles.primaryFontFamily,
+    fontFamily: primaryFontFamily,
     fontSize: 14.0,
     color: Colors.grey[700],
   );
 
   static TextStyle mainScreenTitleText = TextStyle(
-    color: Styles.primaryColorDark,
+    color: primaryColorDark,
     fontSize: 32.0,
-    fontWeight: FontWeight.w500,
+    fontWeight: primaryFontMediumWeight,
     letterSpacing: -2.0,
   );
 
   static TextStyle mainScreenDescriptionText = TextStyle(
-    color: Styles.primaryColorDark,
+    color: primaryColorDark,
     fontSize: 16.0,
   );
 }

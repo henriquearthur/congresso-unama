@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Congress {
   final String link;
   final DateTime dateStart;
   final DateTime dateEnd;
+  final LatLng latLng;
 
   Congress({
     this.id,
@@ -22,6 +24,7 @@ class Congress {
     this.link,
     this.dateStart,
     this.dateEnd,
+    this.latLng,
   });
 
   String getFullDateStart() =>
@@ -32,6 +35,7 @@ class Congress {
   factory Congress.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
 
+    // Process date
     DateTime dateStart;
     DateTime dateEnd;
 
@@ -58,13 +62,14 @@ class Congress {
       title: data['title'],
       description: data['description'],
       image: data['image'],
-      color: data['color'] is String
-          ? Color(int.parse(data['color'].replaceAll('#', ''), radix: 16))
-              .withOpacity(1.0)
+      color: data['color'] != null
+          ? Color.fromRGBO(
+              data['color'][0], data['color'][1], data['color'][2], 1)
           : Colors.grey,
       link: data['link'],
       dateStart: dateStart ?? null,
       dateEnd: dateEnd ?? null,
+      latLng: LatLng(data['location_lat'], data['location_lng']),
     );
   }
 }

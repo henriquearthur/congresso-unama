@@ -5,12 +5,14 @@ import 'package:congresso_unama/app/pages/pick_congress/pick_congress_bloc.dart'
 import 'package:congresso_unama/app/pages/pick_congress/pick_congress_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
+import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 import 'components/pick_congress_header.dart';
 
 class PickCongressPage extends StatelessWidget {
   final _congressBloc = AppModule.to.bloc<CongressBloc>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +20,28 @@ class PickCongressPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const PickCongressHeader(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: RichText(
+                text: TextSpan(
+                  text:
+                      'Esses são os próximos congressos a serem realizados pela ',
+                  style: TextStyle(
+                    fontFamily: Styles.primaryFontFamily,
+                    color: Styles.textColor,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Universidade da Amazônia - UNAMA.',
+                        style: TextStyle(
+                            fontWeight: Styles.primaryFontBoldWeight)),
+                    TextSpan(
+                        text:
+                            ' Toque em um para ver mais informações e a programação oficial.'),
+                  ],
+                ),
+              ),
+            ),
             StreamBuilder(
               stream: PickCongressModule.to
                   .bloc<PickCongressBloc>()
