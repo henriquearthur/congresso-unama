@@ -50,6 +50,10 @@ android {
     }
 
     signingConfigs {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        
        release {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
