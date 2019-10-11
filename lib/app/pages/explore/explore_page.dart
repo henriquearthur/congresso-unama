@@ -132,7 +132,13 @@ class _ExplorePageState extends State<ExplorePage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
-                                child: Text("Fazer inscrição no site"),
+                                child: Text(
+                                  "Fazer inscrição no site",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 16),
@@ -149,15 +155,17 @@ class _ExplorePageState extends State<ExplorePage> {
                             Text(congress.address),
                             Center(
                               child: RaisedButton(
-                                color: Styles.primaryColor,
                                 onPressed: () => _openLocationScreen(
                                     congress.address, congress.latLng),
+                                color: Styles.primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100.0)),
+                                ),
                                 child: Text(
                                   "Ver no mapa",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    letterSpacing: -0.5,
-                                    fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
