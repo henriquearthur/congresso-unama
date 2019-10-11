@@ -14,6 +14,7 @@ import 'package:congresso_unama/app/shared/models/speaker.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'components/explore_header.dart';
 
@@ -51,6 +52,14 @@ class _ExplorePageState extends State<ExplorePage> {
     );
   }
 
+  Future __openRegistrationSite(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,12 +86,53 @@ class _ExplorePageState extends State<ExplorePage> {
                           children: <Widget>[
                             ClipRRect(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
+                                  BorderRadius.all(Radius.circular(16)),
                               child: Image(
                                 fit: BoxFit.fill,
                                 width: MediaQuery.of(context).size.width,
                                 image:
                                     CachedNetworkImageProvider(congress.image),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const SectionTitle(
+                              title: 'Inscrições',
+                              description:
+                                  'Datas e valores para se inscrever no congresso',
+                            ),
+                            for (var registration in congress.registrations)
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    registration.type,
+                                    style: TextStyle(
+                                      fontWeight:
+                                          Styles.primaryFontSemiboldWeight,
+                                    ),
+                                  ),
+                                  Text(registration.date),
+                                  Text(
+                                    registration.value,
+                                    style: TextStyle(
+                                      fontWeight:
+                                          Styles.primaryFontSemiboldWeight,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            const SizedBox(height: 8),
+                            Center(
+                              child: RaisedButton(
+                                onPressed: () =>
+                                    __openRegistrationSite(congress.link),
+                                color: Styles.primaryColor,
+                                textColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(100))),
+                                child: Text("Fazer inscrição no site"),
                               ),
                             ),
                             const SizedBox(height: 16),

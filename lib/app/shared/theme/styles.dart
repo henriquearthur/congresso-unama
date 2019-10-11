@@ -69,5 +69,6 @@ abstract class Styles {
   static TextStyle mainScreenDescriptionText = TextStyle(
     color: primaryColorDark,
     fontSize: 16.0,
+    letterSpacing: -0.5,
   );
 }

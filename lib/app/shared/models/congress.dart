@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:congresso_unama/app/shared/models/congress_registration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,7 @@ class Congress {
   final DateTime dateEnd;
   final LatLng latLng;
   final String address;
+  final List<CongressRegistration> registrations;
 
   Congress({
     this.id,
@@ -27,6 +29,7 @@ class Congress {
     this.dateEnd,
     this.latLng,
     this.address,
+    this.registrations,
   });
 
   String getFullDateStart() =>
@@ -59,6 +62,18 @@ class Congress {
       dateEnd = DateTime(dateEndYear, dateEndMonth, dateEndDay);
     }
 
+    List<CongressRegistration> registrationsList = List<CongressRegistration>();
+
+    if (data['registration'] != null) {
+      data['registration'].forEach((v) {
+        registrationsList.add(CongressRegistration(
+          type: v['type'],
+          date: v['date'],
+          value: v['value'],
+        ));
+      });
+    }
+
     return Congress(
       id: doc.documentID,
       title: data['title'],
@@ -73,6 +88,7 @@ class Congress {
       dateEnd: dateEnd ?? null,
       latLng: LatLng(data['location_lat'], data['location_lng']),
       address: data['location_address'] ?? '',
+      registrations: registrationsList,
     );
   }
 }

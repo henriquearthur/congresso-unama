@@ -1,9 +1,9 @@
 import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
-import 'package:congresso_unama/app/shared/components/header_curve_painter.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 import 'author_info_button.dart';
 
@@ -12,13 +12,16 @@ class ExploreHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: ExploreHeaderCurve(),
+    return ClipPath(
+      clipper: WaveClipperOne(),
       child: Container(
+        decoration: BoxDecoration(
+          color: Styles.primaryColor,
+        ),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
-                top: 16.0, left: 16.0, right: 16.0, bottom: 148.0),
+                top: 16.0, left: 16.0, right: 16.0, bottom: 32.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
