@@ -1,11 +1,11 @@
 import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
+import 'package:congresso_unama/app/shared/components/header_curve_painter.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 import 'author_info_button.dart';
-import 'curve_painter.dart';
 
 class ExploreHeader extends StatelessWidget {
   final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
@@ -13,11 +13,12 @@ class ExploreHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
+      painter: ExploreHeaderCurve(),
       child: Container(
-        height: 330.0,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(
+                top: 16.0, left: 16.0, right: 16.0, bottom: 148.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -101,7 +102,6 @@ class ExploreHeader extends StatelessWidget {
           ),
         ),
       ),
-      painter: CurvePainter(),
     );
   }
 }

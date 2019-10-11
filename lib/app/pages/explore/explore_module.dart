@@ -1,5 +1,6 @@
 import 'package:congresso_unama/app/pages/explore/explore_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:congresso_unama/app/shared/repositories/speaker_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:congresso_unama/app/pages/explore/explore_page.dart';
 
@@ -10,7 +11,9 @@ class ExploreModule extends ModuleWidget {
       ];
 
   @override
-  List<Dependency> get dependencies => [];
+  List<Dependency> get dependencies => [
+        Dependency((i) => SpeakerRepository()),
+      ];
 
   @override
   Widget get view => ExplorePage();

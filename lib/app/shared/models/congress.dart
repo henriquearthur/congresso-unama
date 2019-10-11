@@ -14,6 +14,7 @@ class Congress {
   final DateTime dateStart;
   final DateTime dateEnd;
   final LatLng latLng;
+  final String address;
 
   Congress({
     this.id,
@@ -25,6 +26,7 @@ class Congress {
     this.dateStart,
     this.dateEnd,
     this.latLng,
+    this.address,
   });
 
   String getFullDateStart() =>
@@ -70,6 +72,7 @@ class Congress {
       dateStart: dateStart ?? null,
       dateEnd: dateEnd ?? null,
       latLng: LatLng(data['location_lat'], data['location_lng']),
+      address: data['location_address'] ?? '',
     );
   }
 }

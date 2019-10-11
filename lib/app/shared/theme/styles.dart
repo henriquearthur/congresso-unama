@@ -60,9 +60,9 @@ abstract class Styles {
 
   static TextStyle mainScreenTitleText = TextStyle(
     color: primaryColorDark,
-    fontSize: 32.0,
+    fontSize: 22.0,
     fontWeight: primaryFontMediumWeight,
-    letterSpacing: -2.0,
+    letterSpacing: -1.0,
   );
 
   static TextStyle mainScreenDescriptionText = TextStyle(

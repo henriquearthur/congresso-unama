@@ -13,7 +13,7 @@ class Speaker {
 
     return Speaker(
       id: doc.documentID,
-      name: data['speaker'] ?? '',
+      name: data['speaker_name'] ?? '',
       image: data['speaker_img'] ?? '',
       details: data['speaker_details'] ?? '',
     );

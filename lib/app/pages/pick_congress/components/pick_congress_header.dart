@@ -1,4 +1,4 @@
-import 'package:congresso_unama/app/pages/explore/components/curve_painter.dart';
+import 'package:congresso_unama/app/shared/components/header_curve_painter.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,7 @@ class PickCongressHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
+      painter: ExploreHeaderCurve(),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 220.0,
@@ -38,7 +39,6 @@ class PickCongressHeader extends StatelessWidget {
           ),
         ),
       ),
-      painter: CurvePainter(),
     );
   }
 }

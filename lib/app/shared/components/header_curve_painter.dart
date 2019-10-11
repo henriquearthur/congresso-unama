@@ -1,7 +1,7 @@
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
 
-class CurvePainter extends CustomPainter {
+class ExploreHeaderCurve extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Path path = Path();
