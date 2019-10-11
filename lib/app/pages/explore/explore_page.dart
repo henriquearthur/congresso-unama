@@ -6,12 +6,14 @@ import 'package:congresso_unama/app/pages/explore/components/section_title.dart'
 import 'package:congresso_unama/app/pages/explore/components/speaker_box.dart';
 import 'package:congresso_unama/app/pages/explore/explore_bloc.dart';
 import 'package:congresso_unama/app/pages/explore/explore_module.dart';
+import 'package:congresso_unama/app/pages/location/location_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
 import 'package:congresso_unama/app/shared/components/scroll_no_glow_behavior.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/models/speaker.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'components/explore_header.dart';
 
@@ -38,8 +40,15 @@ class _ExplorePageState extends State<ExplorePage> {
     super.dispose();
   }
 
-  void _openLocationScreen(BuildContext context) {
-    Navigator.of(context).pushNamed("/view-location");
+  void _openLocationScreen(String address, LatLng latLng) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => LocationModule(
+          address: address,
+          latLng: latLng,
+        ),
+      ),
+    );
   }
 
   @override
@@ -91,7 +100,8 @@ class _ExplorePageState extends State<ExplorePage> {
                             Center(
                               child: RaisedButton(
                                 color: Styles.primaryColor,
-                                onPressed: () => _openLocationScreen(context),
+                                onPressed: () => _openLocationScreen(
+                                    congress.address, congress.latLng),
                                 child: Text(
                                   "Ver no mapa",
                                   style: TextStyle(
