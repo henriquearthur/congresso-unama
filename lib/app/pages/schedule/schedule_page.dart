@@ -1,8 +1,9 @@
 import 'package:congresso_unama/app/app_module.dart';
-import 'package:congresso_unama/app/pages/schedule/components/lectures_list.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
+
+import 'lectures_list/lectures_list_page.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -77,7 +78,7 @@ class _SchedulePageState extends State<SchedulePage>
                       .map((date) => SafeArea(
                             top: false,
                             bottom: false,
-                            child: LecturesList(date: date),
+                            child: LecturesListPage(date: date),
                           ))
                       .toList(),
                 ),

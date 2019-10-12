@@ -1,45 +1,46 @@
 import 'dart:async';
 
 import 'package:congresso_unama/app/app_module.dart';
-import 'package:congresso_unama/app/pages/schedule/schedule_bloc.dart';
-import 'package:congresso_unama/app/pages/schedule/schedule_module.dart';
+import 'package:congresso_unama/app/pages/schedule/lectures_list/lectures_list_bloc.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
 import 'package:congresso_unama/app/shared/models/lecture.dart';
 import 'package:flutter/material.dart';
 
-import 'lecture_box.dart';
+import 'components/lecture_box.dart';
 
-class LecturesList extends StatefulWidget {
+class LecturesListPage extends StatefulWidget {
   final DateTime date;
 
-  LecturesList({Key key, this.date}) : super(key: key);
+  const LecturesListPage({Key key, this.date}) : super(key: key);
 
   @override
-  _LecturesListState createState() => _LecturesListState();
+  _LecturesListPageState createState() => _LecturesListPageState();
 }
 
-class _LecturesListState extends State<LecturesList> {
+class _LecturesListPageState extends State<LecturesListPage> {
   final _congressBloc = AppModule.to.getBloc<CongressBloc>();
-  final ScheduleBloc _scheduleBloc = ScheduleModule.to.getBloc<ScheduleBloc>();
+  final LecturesListBloc _lecturesListBloc = LecturesListBloc();
   StreamSubscription _congressSubscription;
 
   @override
   void initState() {
     super.initState();
-    _congressSubscription = _congressBloc.congressOut
-        .listen((congress) => _scheduleBloc.getLectures(congress, widget.date));
+    _congressSubscription = _congressBloc.congressOut.listen(
+        (congress) => _lecturesListBloc.getLectures(congress, widget.date));
   }
 
   @override
   void dispose() {
+    _lecturesListBloc.dispose();
     _congressSubscription?.cancel();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _scheduleBloc.lecturesListOut,
+      stream: _lecturesListBloc.lecturesListOut,
       builder: (BuildContext context, AsyncSnapshot<List<Lecture>> snapshot) {
         if (snapshot.hasData) {
           var lectures = snapshot.data;

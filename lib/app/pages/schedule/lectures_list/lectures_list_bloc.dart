@@ -6,9 +6,8 @@ import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/models/lecture.dart';
 import 'package:congresso_unama/app/shared/repositories/lecture_repository.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:rxdart/subjects.dart';
 
-class ScheduleBloc extends BlocBase {
+class LecturesListBloc extends BlocBase {
   LectureRepository _lectureRepository =
       ScheduleModule.to.getDependency<LectureRepository>();
 
