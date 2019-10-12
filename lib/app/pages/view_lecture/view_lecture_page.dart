@@ -57,6 +57,16 @@ class ViewLecturePage extends StatelessWidget {
                 fontSize: 16.0,
               ),
             ),
+            if (lecture.description.isNotEmpty) ...[
+              const SizedBox(height: 10.0),
+              Text(
+                "${lecture.description}",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
             SizedBox(height: 20.0),
             Text(
               lecture.getFullDate(),
