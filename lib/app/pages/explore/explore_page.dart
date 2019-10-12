@@ -24,8 +24,8 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
-  final ExploreBloc _exploreBloc = ExploreModule.to.bloc<ExploreBloc>();
+  final CongressBloc _congressBloc = AppModule.to.getBloc<CongressBloc>();
+  final ExploreBloc _exploreBloc = ExploreModule.to.getBloc<ExploreBloc>();
   StreamSubscription _congressSubscription;
 
   @override

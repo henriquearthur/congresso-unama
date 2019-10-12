@@ -6,9 +6,9 @@ import 'congress.dart';
 class Lecture {
   final String id;
   final String title;
+  final String description;
   final String type;
-  final String local;
-  final String speaker;
+  final String speakerName;
   final String speakerImg;
   final String speakerDetails;
   final String hourStart;
@@ -20,9 +20,9 @@ class Lecture {
   Lecture(
       {this.id,
       this.title,
+      this.description,
       this.type,
-      this.local,
-      this.speaker,
+      this.speakerName,
       this.speakerImg,
       this.speakerDetails,
       this.hourStart,
@@ -51,9 +51,9 @@ class Lecture {
     return Lecture(
       id: doc.documentID,
       title: data['title'] ?? '',
+      description: data['description'] ?? '',
       type: data['type'] ?? '',
-      local: data['local'] ?? '',
-      speaker: data['speaker'] ?? '',
+      speakerName: data['speaker_name'] ?? '',
       speakerImg: data['speaker_img'] ?? '',
       speakerDetails: data['speaker_details'] ?? '',
       hourStart: data['hour_start'] ?? '',

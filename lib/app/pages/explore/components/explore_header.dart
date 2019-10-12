@@ -8,7 +8,7 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'author_info_button.dart';
 
 class ExploreHeader extends StatelessWidget {
-  final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
+  final CongressBloc _congressBloc = AppModule.to.getBloc<CongressBloc>();
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,8 @@ class ExploreBloc extends BlocBase {
 
   BehaviorSubject<List<Speaker>> _speakersListController =
       BehaviorSubject<List<Speaker>>();
-  Stream<List<Speaker>> get speakersListOut => _speakersListController.stream;
+  Observable<List<Speaker>> get speakersListOut =>
+      _speakersListController.stream;
   Sink<List<Speaker>> get speakersListIn => _speakersListController.sink;
 
   StreamSubscription _congressSubscription;

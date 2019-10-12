@@ -16,7 +16,7 @@ class CongressBloc extends BlocBase {
   Sink<Congress> get congressIn => _congressController.sink;
 
   BehaviorSubject<bool> _mustSelectCongressController = BehaviorSubject<bool>();
-  Stream<bool> get mustSelectCongressOut =>
+  Observable<bool> get mustSelectCongressOut =>
       _mustSelectCongressController.stream;
   Sink<bool> get mustSelectCongressIn => _mustSelectCongressController.sink;
 

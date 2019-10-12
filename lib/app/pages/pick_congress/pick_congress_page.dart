@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'components/pick_congress_header.dart';
 
 class PickCongressPage extends StatelessWidget {
-  final _congressBloc = AppModule.to.bloc<CongressBloc>();
+  final _congressBloc = AppModule.to.getBloc<CongressBloc>();
 
   @override
   Widget build(BuildContext context) {

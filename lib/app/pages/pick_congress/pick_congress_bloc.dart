@@ -10,7 +10,8 @@ class PickCongressBloc extends BlocBase {
 
   BehaviorSubject<List<Congress>> _congressListController =
       BehaviorSubject<List<Congress>>();
-  Stream<List<Congress>> get congressListOut => _congressListController.stream;
+  Observable<List<Congress>> get congressListOut =>
+      _congressListController.stream;
   Sink<List<Congress>> get _congressListIn => _congressListController.sink;
 
   PickCongressBloc() {

@@ -10,10 +10,14 @@ class LectureRepository {
 
   final String _collection = '2019_v1.1_palestras';
 
-  Stream<List<Lecture>> getLectures(String date) {
+  Stream<List<Lecture>> getLectures(Congress congress, DateTime date) {
+    var dateString =
+        '${date.day.toString().padLeft(2, "0")}-${date.month.toString().padLeft(2, "0")}-${date.year}';
+
     return _db
         .collection(_collection)
-        .where('date', isEqualTo: date)
+        .where('congress', isEqualTo: congress.id)
+        .where('date', isEqualTo: dateString)
         .orderBy("hour_start")
         .snapshots()
         .asyncMap((list) async {
@@ -23,7 +27,7 @@ class LectureRepository {
         Lecture lecture = Lecture.fromFirestore(doc);
         Congress congress = congresses
             .where((congress) => congress.id == lecture.congressId)
-            .last;
+            .single;
 
         lecture.congress = congress;
 

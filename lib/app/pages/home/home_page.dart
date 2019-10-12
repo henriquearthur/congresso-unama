@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final CongressBloc _congressBloc = AppModule.to.bloc<CongressBloc>();
+  final CongressBloc _congressBloc = AppModule.to.getBloc<CongressBloc>();
   StreamSubscription _mustSelectCongressOutSubscription;
 
   int _selectedIndex = 0;
