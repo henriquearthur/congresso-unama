@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:congresso_unama/app/pages/view_lecture/view_lecture_module.dart';
 import 'package:congresso_unama/app/shared/models/lecture.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,13 @@ class LectureBox extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onTap: () {
-            Navigator.of(context)
-                .pushNamed("/view-lecture", arguments: {'lecture': lecture});
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ViewLectureModule(
+                  lecture: lecture,
+                ),
+              ),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
@@ -14,13 +16,17 @@ class PickCongressBloc extends BlocBase {
       _congressListController.stream;
   Sink<List<Congress>> get _congressListIn => _congressListController.sink;
 
+  StreamSubscription _congressSubscription;
+
   PickCongressBloc() {
-    _congressRepository.getCongresses().listen(_congressListIn.add);
+    _congressSubscription =
+        _congressRepository.getCongresses().listen(_congressListIn.add);
   }
 
   @override
   void dispose() {
     _congressListController.close();
+    _congressSubscription?.cancel();
     super.dispose();
   }
 }

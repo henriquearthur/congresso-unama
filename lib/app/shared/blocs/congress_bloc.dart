@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:congresso_unama/app/app_module.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
@@ -20,6 +22,8 @@ class CongressBloc extends BlocBase {
       _mustSelectCongressController.stream;
   Sink<bool> get mustSelectCongressIn => _mustSelectCongressController.sink;
 
+  StreamSubscription _congressSubscription;
+
   CongressBloc() {
     configureCurrent();
   }
@@ -29,7 +33,8 @@ class CongressBloc extends BlocBase {
     //prefs.clear();
 
     if (prefs.containsKey(currentCongressKey)) {
-      _congressRepository.getCongresses().listen((congresses) async {
+      _congressSubscription =
+          _congressRepository.getCongresses().listen((congresses) async {
         String congressId = prefs.getString(currentCongressKey);
 
         congresses
@@ -55,6 +60,7 @@ class CongressBloc extends BlocBase {
   void dispose() {
     _congressController.close();
     _mustSelectCongressController.close();
+    _congressSubscription?.cancel();
     super.dispose();
   }
 }
