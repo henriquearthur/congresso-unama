@@ -1,6 +1,5 @@
 import 'package:congresso_unama/app/pages/explore/explore_module.dart';
 import 'package:congresso_unama/app/pages/schedule/schedule_module.dart';
-import 'package:congresso_unama/app/pages/undergrads/undergrads_module.dart';
 import 'package:flutter/material.dart';
 
 class Destination {
@@ -21,10 +20,5 @@ List<Destination> allDestinations = <Destination>[
     title: 'Programação',
     icon: Icons.calendar_today,
     screen: (context) => ScheduleModule(),
-  ),
-  Destination(
-    title: 'Trabalhos',
-    icon: Icons.school,
-    screen: (context) => UndergradsModule(),
   ),
 ];
