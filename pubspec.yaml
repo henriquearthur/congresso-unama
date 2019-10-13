@@ -15,7 +15,7 @@ description: Aplicativo desenvolvido com Flutter para exibir a programação dos
 # https://stackoverflow.com/a/56970752/2457045
 # Version Number, Build Name: 1.0.0
 # Version Code, Build Number: +1
-version: 1.0.2+3
+version: 1.1.0+5
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -23,23 +23,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   flutter_localizations:
     sdk: flutter
-
-  cupertino_icons: ^0.1.2
+    
+  rxdart: ^0.22.3
+  bloc_pattern: ^2.3.4
   
   firebase_core: ^0.4.0+7
   cloud_firestore: ^0.12.7
-  provider: ^3.0.0+1
+  firebase_crashlytics: ^0.1.0+3
+  
   shared_preferences: ^0.5.3+4
   share: ^0.6.2+1
   cached_network_image: ^1.1.1
-  flutter_bloc: ^0.20.1
-  equatable: ^0.4.0
-  url_launcher: ^5.1.2
+  url_launcher: ^5.1.6
   package_info: ^0.4.0+6
   google_maps_flutter: ^0.5.20+6
+  flutter_custom_clippers: ^1.1.0
+  admob_flutter: "^0.3.1"
 
 
 dev_dependencies:

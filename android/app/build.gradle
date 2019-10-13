@@ -60,6 +60,11 @@ android {
    buildTypes {
        release {
            signingConfig signingConfigs.release
+           
+           minifyEnabled true
+           shrinkResources false
+           useProguard true
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
        }
    }
 }
@@ -77,3 +82,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
