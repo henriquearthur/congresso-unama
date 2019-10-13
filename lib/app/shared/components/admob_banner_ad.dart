@@ -2,7 +2,9 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 
 class AdmobBannerAd extends StatefulWidget {
-  const AdmobBannerAd({Key key}) : super(key: key);
+  final String adUnit;
+
+  const AdmobBannerAd({Key key, @required this.adUnit}) : super(key: key);
 
   @override
   _AdmobBannerAdState createState() => _AdmobBannerAdState();
@@ -18,7 +20,7 @@ class _AdmobBannerAdState extends State<AdmobBannerAd>
     super.build(context);
 
     return AdmobBanner(
-      adUnitId: 'ca-app-pub-6254443832700241/4073187785',
+      adUnitId: widget.adUnit,
       adSize: AdmobBannerSize.BANNER,
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {
         switch (event) {

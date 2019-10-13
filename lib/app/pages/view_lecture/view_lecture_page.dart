@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:congresso_unama/app/shared/components/admob_banner_ad.dart';
 import 'package:congresso_unama/app/shared/models/lecture.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -164,6 +165,11 @@ class ViewLecturePage extends StatelessWidget {
                 ),
               )
             ],
+            Center(
+              child: const AdmobBannerAd(
+                adUnit: 'ca-app-pub-6254443832700241/3634347279',
+              ),
+            )
           ],
         ),
       ),

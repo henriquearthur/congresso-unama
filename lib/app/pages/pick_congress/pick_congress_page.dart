@@ -43,7 +43,8 @@ class PickCongressPage extends StatelessWidget {
                 ),
               ),
             ),
-            const AdmobBannerAd(),
+            const AdmobBannerAd(
+                adUnit: 'ca-app-pub-6254443832700241/4073187785'),
             StreamBuilder(
               stream: PickCongressModule.to
                   .bloc<PickCongressBloc>()

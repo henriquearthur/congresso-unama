@@ -8,6 +8,7 @@ import 'package:congresso_unama/app/pages/explore/explore_bloc.dart';
 import 'package:congresso_unama/app/pages/explore/explore_module.dart';
 import 'package:congresso_unama/app/pages/location/location_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
+import 'package:congresso_unama/app/shared/components/admob_banner_ad.dart';
 import 'package:congresso_unama/app/shared/components/scroll_no_glow_behavior.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/models/speaker.dart';
@@ -194,6 +195,13 @@ class _ExplorePageState extends State<ExplorePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
+                                        const SizedBox(height: 16),
+                                        Center(
+                                          child: const AdmobBannerAd(
+                                            adUnit:
+                                                'ca-app-pub-6254443832700241/5144522458',
+                                          ),
+                                        ),
                                         const SizedBox(height: 16),
                                         const SectionTitle(
                                           title: 'Palestrantes',
