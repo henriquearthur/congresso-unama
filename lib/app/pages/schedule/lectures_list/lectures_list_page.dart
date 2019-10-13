@@ -17,10 +17,14 @@ class LecturesListPage extends StatefulWidget {
   _LecturesListPageState createState() => _LecturesListPageState();
 }
 
-class _LecturesListPageState extends State<LecturesListPage> {
+class _LecturesListPageState extends State<LecturesListPage>
+    with AutomaticKeepAliveClientMixin {
   final _congressBloc = AppModule.to.getBloc<CongressBloc>();
   final LecturesListBloc _lecturesListBloc = LecturesListBloc();
   StreamSubscription _congressSubscription;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -39,6 +43,8 @@ class _LecturesListPageState extends State<LecturesListPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return StreamBuilder(
       stream: _lecturesListBloc.lecturesListOut,
       builder: (BuildContext context, AsyncSnapshot<List<Lecture>> snapshot) {
