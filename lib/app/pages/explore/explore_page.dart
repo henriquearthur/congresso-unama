@@ -84,14 +84,25 @@ class _ExplorePageState extends State<ExplorePage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
-                              child: Image(
-                                fit: BoxFit.fill,
-                                width: MediaQuery.of(context).size.width,
-                                image:
-                                    CachedNetworkImageProvider(congress.image),
+                            AspectRatio(
+                              aspectRatio: 20 / 9,
+                              child: CachedNetworkImage(
+                                imageUrl: congress.image,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16.0)),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Center(child: Icon(Icons.error)),
                               ),
                             ),
                             const SizedBox(height: 16),
