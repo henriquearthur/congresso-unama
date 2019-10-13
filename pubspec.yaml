@@ -15,7 +15,7 @@ description: Aplicativo desenvolvido com Flutter para exibir a programação dos
 # https://stackoverflow.com/a/56970752/2457045
 # Version Number, Build Name: 1.0.0
 # Version Code, Build Number: +1
-version: 1.0.2+3
+version: 1.1.0+4
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
