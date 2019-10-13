@@ -4,6 +4,7 @@ import 'package:congresso_unama/app/pages/pick_congress/components/congress_box.
 import 'package:congresso_unama/app/pages/pick_congress/pick_congress_bloc.dart';
 import 'package:congresso_unama/app/pages/pick_congress/pick_congress_module.dart';
 import 'package:congresso_unama/app/shared/blocs/congress_bloc.dart';
+import 'package:congresso_unama/app/shared/components/admob_banner_ad.dart';
 import 'package:congresso_unama/app/shared/models/congress.dart';
 import 'package:congresso_unama/app/shared/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class PickCongressPage extends StatelessWidget {
                 ),
               ),
             ),
+            const AdmobBannerAd(),
             StreamBuilder(
               stream: PickCongressModule.to
                   .bloc<PickCongressBloc>()
