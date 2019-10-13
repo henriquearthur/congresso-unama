@@ -6,9 +6,9 @@ class CongressRepository {
   final String _collection = '2019_v1.1_congressos';
 
   Stream<List<Congress>> getCongresses() {
-    // TODO: order by date and where date
     return _db
         .collection(_collection)
+        .orderBy('date_start')
         .snapshots()
         .map((QuerySnapshot snapshot) {
       return snapshot.documents
