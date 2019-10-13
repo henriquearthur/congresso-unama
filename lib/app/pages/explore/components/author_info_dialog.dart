@@ -11,15 +11,25 @@ class AuthorInfoDialog extends StatefulWidget {
 class _AuthorInfoDialogState extends State<AuthorInfoDialog> {
   Future<String> _appVersion;
 
-  _launchMailTo() async {
+  _launchPlayStore() async {
     const url =
-        'mailto:eu@henriquearthur.com.br?subject=Aplicativo%20Congresso%20Unama';
+        'https://play.google.com/store/apps/details?id=br.com.henriquearthur.congressos_unama';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
   }
+
+  // _launchMailTo() async {
+  //   const url =
+  //       'mailto:eu@henriquearthur.com.br?subject=Aplicativo%20Congresso%20Unama';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   void _closeDialog(context) {
     Navigator.of(context).pop();
@@ -100,9 +110,13 @@ class _AuthorInfoDialogState extends State<AuthorInfoDialog> {
       ),
       actions: [
         FlatButton(
-          child: Text("Entrar em contato"),
-          onPressed: _launchMailTo,
+          child: Text("Avaliar na Play Store"),
+          onPressed: _launchPlayStore,
         ),
+        // FlatButton(
+        //   child: Text("Entrar em contato"),
+        //   onPressed: _launchMailTo,
+        // ),
         FlatButton(
           child: Text("Fechar"),
           onPressed: () => _closeDialog(context),
