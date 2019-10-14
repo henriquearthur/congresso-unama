@@ -1,4 +1,5 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AdmobBannerAd extends StatefulWidget {
@@ -18,6 +19,10 @@ class _AdmobBannerAdState extends State<AdmobBannerAd>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    if (kDebugMode) {
+      return SizedBox.shrink();
+    }
 
     return AdmobBanner(
       adUnitId: widget.adUnit,

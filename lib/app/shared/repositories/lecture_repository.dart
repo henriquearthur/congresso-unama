@@ -10,14 +10,10 @@ class LectureRepository {
 
   final String _collection = '2019_v1.1_palestras';
 
-  Stream<List<Lecture>> getLectures(Congress congress, DateTime date) {
-    var dateString =
-        '${date.day.toString().padLeft(2, "0")}-${date.month.toString().padLeft(2, "0")}-${date.year}';
-
+  Stream<List<Lecture>> getLectures(Congress congress) {
     return _db
         .collection(_collection)
         .where('congress', isEqualTo: congress.id)
-        .where('date', isEqualTo: dateString)
         .orderBy("hour_start")
         .snapshots()
         .asyncMap((list) async {

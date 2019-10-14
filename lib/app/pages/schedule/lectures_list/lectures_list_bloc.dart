@@ -19,10 +19,9 @@ class LecturesListBloc extends BlocBase {
 
   StreamSubscription _lecturesSubscription;
 
-  void getLectures(Congress congress, DateTime date) {
-    _lecturesSubscription = _lectureRepository
-        .getLectures(congress, date)
-        .listen(_lecturesListIn.add);
+  void fetchLectures(Congress congress) {
+    _lecturesSubscription =
+        _lectureRepository.getLectures(congress).listen(_lecturesListIn.add);
   }
 
   @override
