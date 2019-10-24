@@ -21,6 +21,15 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def apiKeyGeocode =  localProperties.getProperty('apikeys.geocode')
+if (apiKeyGeocode == null) {
+    apiKeyGeocode = System.getenv('API_KEY_GEOCODE')
+
+    if (apiKeyGeocode == null) {
+        throw new GradleException("Not able to detemine apiKeyGeocode.")
+    }
+}
+
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -47,6 +56,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+        manifestPlaceholders = [apiKeyGeocode: apiKeyGeocode]
     }
 
     signingConfigs {

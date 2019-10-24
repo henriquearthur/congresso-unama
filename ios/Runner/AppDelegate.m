@@ -6,7 +6,6 @@
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-      [GMSServices provideAPIKey:@"AIzaSyDG4IHDx29bO1jyyvrJzq5hoVAHK730wXw"];
     UIApplication.sharedApplication.statusBarHidden = false;
 
     int flutter_native_splash = 1;

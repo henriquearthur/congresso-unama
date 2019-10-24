@@ -15,13 +15,21 @@
       },
       "oauth_client": [
         {
+          "client_id": "864917267221-pt7tq00v42klqe9fd4i1m5u1ks05vhss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.henriquearthur.congressos_unama",
+            "certificate_hash": "deabf54143ef0a72fc81429782d04f2603e7967a"
+          }
+        },
+        {
           "client_id": "864917267221-vivdgilasjl1sv7vuco5prnl24u3cba4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDG4IHDx29bO1jyyvrJzq5hoVAHK730wXw"
+          "current_key": "AIzaSyD3exx8isC4vMT_1YBS5qkXvApG_Igx0Qc"
         }
       ],
       "services": {
