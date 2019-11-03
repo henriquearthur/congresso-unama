@@ -62,6 +62,7 @@ class Congress {
       dateEnd = DateTime(dateEndYear, dateEndMonth, dateEndDay);
     }
 
+    // Process registration
     List<CongressRegistration> registrationsList = List<CongressRegistration>();
 
     if (data['registration'] != null) {
@@ -72,6 +73,12 @@ class Congress {
           value: v['value'],
         ));
       });
+    }
+
+    // Process location
+    LatLng latLng;
+    if (data['location_lat'] != null && data['location_lng'] != null) {
+      latLng = LatLng(data['location_lat'], data['location_lng']);
     }
 
     return Congress(
@@ -86,7 +93,7 @@ class Congress {
       link: data['link'],
       dateStart: dateStart ?? null,
       dateEnd: dateEnd ?? null,
-      latLng: LatLng(data['location_lat'], data['location_lng']),
+      latLng: latLng,
       address: data['location_address'] ?? '',
       registrations: registrationsList,
     );

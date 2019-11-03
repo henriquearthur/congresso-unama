@@ -107,82 +107,87 @@ class _ExplorePageState extends State<ExplorePage> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const SectionTitle(
-                              title: 'Inscrições',
-                              description:
-                                  'Datas e valores para se inscrever no congresso',
-                            ),
-                            for (var registration in congress.registrations)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    registration.type,
-                                    style: TextStyle(
-                                      fontWeight:
-                                          Styles.primaryFontSemiboldWeight,
-                                    ),
-                                  ),
-                                  Text(registration.date),
-                                  Text(
-                                    registration.value,
-                                    style: TextStyle(
-                                      fontWeight:
-                                          Styles.primaryFontSemiboldWeight,
-                                    ),
-                                  ),
-                                ],
+                            if (congress.registrations != null &&
+                                congress.registrations.isNotEmpty) ...[
+                              const SectionTitle(
+                                title: 'Inscrições',
+                                description:
+                                    'Datas e valores para se inscrever no congresso',
                               ),
-                            const SizedBox(height: 8),
-                            Center(
-                              child: RaisedButton(
-                                onPressed: () =>
-                                    __openRegistrationSite(congress.link),
-                                color: Styles.primaryColor,
-                                textColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(100))),
-                                child: Text(
-                                  "Fazer inscrição no site",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
+                              for (var registration in congress.registrations)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      registration.type,
+                                      style: TextStyle(
+                                        fontWeight:
+                                            Styles.primaryFontSemiboldWeight,
+                                      ),
+                                    ),
+                                    Text(registration.date),
+                                    Text(
+                                      registration.value,
+                                      style: TextStyle(
+                                        fontWeight:
+                                            Styles.primaryFontSemiboldWeight,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              const SizedBox(height: 8),
+                              Center(
+                                child: RaisedButton(
+                                  onPressed: () =>
+                                      __openRegistrationSite(congress.link),
+                                  color: Styles.primaryColor,
+                                  textColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(100))),
+                                  child: Text(
+                                    "Fazer inscrição no site",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
+                              const SizedBox(height: 16),
+                            ],
                             const SectionTitle(
                               title: 'Conheça o congresso',
                               description: 'Informações gerais sobre o evento',
                             ),
                             Text(congress.description),
                             const SizedBox(height: 16),
-                            const SectionTitle(
-                              title: 'Localização',
-                              description: 'Endereço e localização do evento',
-                            ),
-                            Text(congress.address),
-                            Center(
-                              child: RaisedButton(
-                                onPressed: () => _openLocationScreen(
-                                    congress.address, congress.latLng),
-                                color: Styles.primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100.0)),
-                                ),
-                                child: Text(
-                                  "Ver no mapa",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
+                            if (congress.latLng != null) ...[
+                              const SectionTitle(
+                                title: 'Localização',
+                                description: 'Endereço e localização do evento',
+                              ),
+                              Text(congress.address),
+                              Center(
+                                child: RaisedButton(
+                                  onPressed: () => _openLocationScreen(
+                                      congress.address, congress.latLng),
+                                  color: Styles.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(100.0)),
+                                  ),
+                                  child: Text(
+                                    "Ver no mapa",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                             StreamBuilder(
                               stream: _exploreBloc.speakersListOut,
                               builder: (BuildContext context,
