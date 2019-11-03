@@ -126,7 +126,12 @@ class _SchedulePageState extends State<SchedulePage>
                                           date: date,
                                           lectures: snapshot.data
                                               .where((lecture) =>
-                                                  lecture.date == date &&
+                                                  lecture.date.day ==
+                                                      date.day &&
+                                                  lecture.date.month ==
+                                                      date.month &&
+                                                  lecture.date.year ==
+                                                      date.year &&
                                                   (lecture.tag == null ||
                                                       tags.contains(
                                                           lecture.tag)))

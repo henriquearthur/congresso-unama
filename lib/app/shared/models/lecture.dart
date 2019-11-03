@@ -12,8 +12,8 @@ class Lecture {
   final String speakerName;
   final String speakerImg;
   final String speakerDetails;
-  final String hourStart;
-  final String hourEnd;
+  final DateTime hourStart;
+  final DateTime hourEnd;
   final String congressId;
   final DateTime date;
   Congress congress;
@@ -39,7 +39,7 @@ class Lecture {
   factory Lecture.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
 
-    DateTime date;
+    DateTime date, dateEnd;
 
     if (data['date'] != null) {
       List<String> dateArr = data['date'].split('-');
@@ -47,7 +47,17 @@ class Lecture {
       int dateMonth = int.parse(dateArr[1]);
       int dateYear = int.parse(dateArr[2]);
 
-      date = DateTime(dateYear, dateMonth, dateDay);
+      List<String> timeStartArr = data['hour_start'].split('h');
+      int hourStart = int.parse(timeStartArr[0]);
+      int minutesStart = int.parse(timeStartArr[1]);
+
+      date = DateTime(dateYear, dateMonth, dateDay, hourStart, minutesStart);
+
+      List<String> timeEndArr = data['hour_end'].split('h');
+      int hourEnd = int.parse(timeEndArr[0]);
+      int minutesEnd = int.parse(timeEndArr[1]);
+
+      dateEnd = DateTime(dateYear, dateMonth, dateDay, hourEnd, minutesEnd);
     }
 
     return Lecture(
@@ -59,8 +69,8 @@ class Lecture {
       speakerName: data['speaker_name'] ?? '',
       speakerImg: data['speaker_img'] ?? '',
       speakerDetails: data['speaker_details'] ?? '',
-      hourStart: data['hour_start'] ?? '',
-      hourEnd: data['hour_end'] ?? '',
+      hourStart: date,
+      hourEnd: dateEnd,
       date: date ?? '',
       congressId: data['congress'] ?? '',
     );

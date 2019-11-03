@@ -17,17 +17,27 @@ class LecturesListPage extends StatelessWidget {
           // This is the flip side of the SliverOverlapAbsorber above.
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return LectureBox(
-                lecture: lectures[index],
-                separator: (index < lectures.length - 1),
-              );
-            },
-            childCount: lectures.length,
+        if (lectures.isNotEmpty)
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return LectureBox(
+                  lecture: lectures[index],
+                  separator: (index < lectures.length - 1),
+                );
+              },
+              childCount: lectures.length,
+            ),
           ),
-        )
+        if (lectures.isEmpty)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: Text("Não há palestras neste dia."),
+              ),
+            ),
+          ),
       ],
     );
   }

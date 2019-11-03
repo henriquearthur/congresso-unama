@@ -24,10 +24,10 @@ class ViewLecturePage extends StatelessWidget {
             onPressed: () {
               if (lecture.speakerName.isNotEmpty) {
                 Share.share(
-                    "Confira ${lecture.title} no ${lecture.congress.title} de ${lecture.hourStart} até ${lecture.hourEnd} com ${lecture.speakerName}! Saiba mais em ${lecture.congress.link}");
+                    "Confira ${lecture.title} no ${lecture.congress.title} de ${lecture.hourStart.hour.toString().padLeft(2, '0')}h${lecture.hourStart.minute.toString().padLeft(2, '0')} até ${lecture.hourEnd.hour.toString().padLeft(2, '0')}h${lecture.hourEnd.minute.toString().padLeft(2, '0')} com ${lecture.speakerName}! Saiba mais em ${lecture.congress.link}");
               } else {
                 Share.share(
-                    "Confira ${lecture.title} no ${lecture.congress.title} de ${lecture.hourStart} até ${lecture.hourEnd}! Saiba mais em ${lecture.congress.link}");
+                    "Confira ${lecture.title} no ${lecture.congress.title} de ${lecture.hourStart.hour.toString().padLeft(2, '0')}h${lecture.hourStart.minute.toString().padLeft(2, '0')} até ${lecture.hourEnd.hour.toString().padLeft(2, '0')}h${lecture.hourEnd.minute.toString().padLeft(2, '0')}! Saiba mais em ${lecture.congress.link}");
               }
             },
             icon: Icon(Icons.share),
@@ -80,7 +80,7 @@ class ViewLecturePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  lecture.hourStart,
+                  "${lecture.hourStart.hour.toString().padLeft(2, '0')}h${lecture.hourStart.minute.toString().padLeft(2, '0')}",
                   style: TextStyle(color: Styles.primaryColor, fontSize: 24.0),
                 ),
                 SizedBox(width: 8.0),
@@ -93,7 +93,7 @@ class ViewLecturePage extends StatelessWidget {
                 ),
                 SizedBox(width: 8.0),
                 Text(
-                  lecture.hourEnd,
+                  "${lecture.hourEnd.hour.toString().padLeft(2, '0')}h${lecture.hourEnd.minute.toString().padLeft(2, '0')}",
                   style: TextStyle(color: Styles.primaryColor, fontSize: 24.0),
                 ),
               ],
