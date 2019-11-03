@@ -27,6 +27,7 @@ class LecturesListBloc extends BlocBase {
   @override
   void dispose() {
     _lecturesListController.close();
+
     _lecturesSubscription?.cancel();
     super.dispose();
   }

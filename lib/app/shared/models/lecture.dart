@@ -8,6 +8,7 @@ class Lecture {
   final String title;
   final String description;
   final String type;
+  final String tag;
   final String speakerName;
   final String speakerImg;
   final String speakerDetails;
@@ -22,6 +23,7 @@ class Lecture {
       this.title,
       this.description,
       this.type,
+      this.tag,
       this.speakerName,
       this.speakerImg,
       this.speakerDetails,
@@ -53,6 +55,7 @@ class Lecture {
       title: data['title'] ?? '',
       description: data['description'] ?? '',
       type: data['type'] ?? '',
+      tag: data['tag'] ?? null,
       speakerName: data['speaker_name'] ?? '',
       speakerImg: data['speaker_img'] ?? '',
       speakerDetails: data['speaker_details'] ?? '',

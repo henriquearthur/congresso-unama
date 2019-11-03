@@ -96,6 +96,18 @@ class LectureBox extends StatelessWidget {
                         ),
                         const SizedBox(height: 5.0),
                       ],
+                      if (lecture.tag != null)
+                        Chip(
+                          label: Text(
+                            lecture.tag,
+                            style: TextStyle(
+                              fontSize: 13.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          backgroundColor: Styles.primaryColor,
+                        ),
                     ],
                   ),
                 )

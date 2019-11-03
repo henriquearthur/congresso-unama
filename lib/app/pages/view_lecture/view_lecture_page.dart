@@ -113,6 +113,21 @@ class ViewLecturePage extends StatelessWidget {
                 backgroundColor: Styles.primaryColor,
               ),
             ),
+            if (lecture.tag != null)
+              Align(
+                alignment: Alignment.topLeft,
+                child: Chip(
+                  label: Text(
+                    lecture.tag,
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  backgroundColor: Styles.primaryColor,
+                ),
+              ),
             Divider(),
             if (lecture.speakerImg != "") ...[
               SizedBox(height: 10.0),
