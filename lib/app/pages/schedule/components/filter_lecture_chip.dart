@@ -22,6 +22,7 @@ class FilterLectureChip extends StatelessWidget {
             label: Text(
               tag,
               style: TextStyle(
+                fontSize: 13.0,
                 color: Colors.white,
               ),
             ),

@@ -45,7 +45,7 @@ abstract class Styles {
 
   static TextStyle bottomSheetTitleText = TextStyle(
     color: bottomSheetTitleColor,
-    fontSize: 22.0,
+    fontSize: 18.0,
     letterSpacing: -1.0,
     fontWeight: primaryFontSemiboldWeight,
   );

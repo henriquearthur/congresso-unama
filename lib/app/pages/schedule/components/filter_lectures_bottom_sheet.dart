@@ -35,7 +35,12 @@ class FilterLecturesBottomSheet extends StatelessWidget {
             style: Styles.bottomSheetDescriptionText,
           ),
           SizedBox(height: 20.0),
-          for (var tag in tags) FilterLectureChip(tag: tag),
+          Wrap(
+            spacing: 10.0,
+            children: <Widget>[
+              for (var tag in tags) FilterLectureChip(tag: tag),
+            ],
+          )
         ],
       ),
     );
