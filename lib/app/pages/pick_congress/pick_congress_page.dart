@@ -54,23 +54,30 @@ class PickCongressPage extends StatelessWidget {
                 if (snapshot.hasData) {
                   var congresses = snapshot.data;
 
-                  return ListView.builder(
-                    primary: false,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(16.0),
-                    itemCount: congresses.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CongressBox(
-                        congress: congresses[index],
-                        onTap: () {
-                          _congressBloc.pick(congresses[index]);
+                  if (congresses.isEmpty) {
+                    return Container(
+                      child: Text("Não há congressos acontecendo em breve."),
+                    );
+                  } else {
+                    return ListView.builder(
+                      primary: false,
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(16.0),
+                      itemCount: congresses.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CongressBox(
+                          congress: congresses[index],
+                          onTap: () {
+                            _congressBloc.pick(congresses[index]);
 
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (_) => HomeModule()));
-                        },
-                      );
-                    },
-                  );
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (_) => HomeModule()));
+                          },
+                        );
+                      },
+                    );
+                  }
                 }
 
                 return Center(

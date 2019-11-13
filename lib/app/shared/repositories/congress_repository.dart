@@ -13,6 +13,8 @@ class CongressRepository {
         .map((QuerySnapshot snapshot) {
       return snapshot.documents
           .map((congress) => Congress.fromFirestore(congress))
+          .where((congress) =>
+              DateTime.now().isBefore(congress.dateEnd.add(Duration(days: 1))))
           .toList();
     });
   }
