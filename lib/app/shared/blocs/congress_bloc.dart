@@ -37,9 +37,13 @@ class CongressBloc extends BlocBase {
           _congressRepository.getCongresses().listen((congresses) async {
         String congressId = prefs.getString(currentCongressKey);
 
-        congresses
-            .where((congress) => congress.id == congressId)
-            .forEach(congressIn.add);
+        var congressAsList =
+            congresses.where((congress) => congress.id == congressId);
+        if (congressAsList.length > 0) {
+          congressAsList.forEach(congressIn.add);
+        } else {
+          mustSelectCongressIn.add(true);
+        }
 
         mustSelectCongressIn.add(false);
       });
